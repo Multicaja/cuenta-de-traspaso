@@ -17,11 +17,16 @@
 -- // create_table_cdt_limite
 -- Migration SQL that makes the change goes here.
 
+  CREATE SEQUENCE ${schema}.cdt_limite_id_s1
+    INCREMENT 1
+    MINVALUE 1
+    START 1;
 
-  CREATE SCHEMA IF NOT EXISTS ${schema};
+  COMMENT ON SEQUENCE ${schema}.cdt_limite_id_s1 IS 'ID del limite';
+
 
   CREATE TABLE ${schema}.cdt_limite(
-      id                    BIGSERIAL NOT NULL,
+      id                    BIGSERIAL nextval(${schema}+'.cdt_limite_id_s1') NOT NULL,
       id_movimiento         BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGSERIAL,
       descripcion           VARCHAR(100) NOT NULL,
@@ -37,5 +42,3 @@
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS  ${schema}.cdt_limite;
-
-  DROP SCHEMA  IF EXISTS ${schema};

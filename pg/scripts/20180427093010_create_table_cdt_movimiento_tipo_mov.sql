@@ -16,8 +16,6 @@
 
 -- // create_table_cdt_movimiento_tipo_mov
 -- Migration SQL that makes the change goes here.
-CREATE SCHEMA IF NOT EXISTS ${schema};
-
   CREATE TABLE ${schema}.cdt_movimiento_tipo_mov(
       id_movimiento         BIGSERIAL NOT NULL,
       id_tipo_movimiento    BIGSERIAL NOT NULL,
@@ -27,5 +25,3 @@ CREATE SCHEMA IF NOT EXISTS ${schema};
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS ${schema}.cdt_movimiento_tipo_mov;
-
-  DROP SCHEMA IF EXISTS ${schema};

@@ -17,10 +17,16 @@
 -- // create_table_cdt_movimiento
 -- Migration SQL that makes the change goes here.
 
-CREATE SCHEMA IF NOT EXISTS ${schema};
+  CREATE SEQUENCE ${schema}.cdt_movimiento_id_s1
+    INCREMENT 1
+    MINVALUE 1
+    START 1;
+
+  COMMENT ON SEQUENCE ${schema}.cdt_movimiento_id_s1 IS 'ID del Movimiento';
+
 
   CREATE TABLE ${schema}.cdt_movimiento(
-      id                    BIGSERIAL NOT NULL,
+      id                    BIGSERIAL nextval(${schema}+'.cdt_movimiento_id_s1') NOT NULL,
       nombre                VARCHAR(20) NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
       signo                 NUMERIC NOT NULL,
@@ -34,5 +40,4 @@ CREATE SCHEMA IF NOT EXISTS ${schema};
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS ${schema}.cdt_movimiento;
-
-  DROP SCHEMA IF EXISTS ${schema};
+  DROP SEQUENCE IF EXISTS  ${schema}.cdt_movimiento_id_s1;

@@ -16,7 +16,13 @@
 
 -- // create_table_cdt_tipo_movimiento
 -- Migration SQL that makes the change goes here.
-  CREATE SCHEMA IF NOT EXISTS ${schema};
+
+ CREATE SEQUENCE ${schema}.cdt_tipo_movimiento_id_s1
+    INCREMENT 1
+    MINVALUE 1
+    START 1;
+
+  COMMENT ON SEQUENCE ${schema}.cdt_tipo_movimiento_id_s1 IS 'ID Tipo de  Movimiento';
 
   CREATE TABLE ${schema}.cdt_tipo_movimiento(
       id                 BIGSERIAL NOT NULL,
@@ -32,6 +38,6 @@
   CREATE INDEX cdt_tipo_movimiento_i1 ON ${schema}.cdt_tipo_movimiento (estado);
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_tipo_movimiento;
 
-  DROP SCHEMA IF EXISTS ${schema};
+  DROP TABLE IF EXISTS ${schema}.cdt_tipo_movimiento;
+  DROP SEQUENCE IF EXISTS ${schema}.cdt_tipo_movimiento_id_s1;

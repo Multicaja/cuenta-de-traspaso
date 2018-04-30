@@ -18,9 +18,16 @@
 -- Migration SQL that makes the change goes here.
   CREATE SCHEMA IF NOT EXISTS ${schema};
 
+  CREATE SEQUENCE ${schema}.cdt_cuenta_id_s1
+    INCREMENT 1
+    MINVALUE 1
+    START 1;
+
+  COMMENT ON SEQUENCE ${schema}.cdt_cuenta_id_s1 IS 'ID de la cuenta (Nº Cta)';
+
   CREATE TABLE ${schema}.cdt_cuenta (
-      id              BIGSERIAL NOT NULL,
-      id_externo      BIGSERIAL NOT NULL,
+      id              BIGSERIAL DEFAULT nextval(${schema}+'.cdt_cuenta_id_s1') NOT NULL,
+      id_externo      VARCHAR(100) NOT NULL,
       descripcion     VARCHAR(100) NOT NULL,
       estado          VARCHAR(5) NOT NULL,
       fecha_estado    TIMESTAMP NOT NULL,
@@ -31,6 +38,9 @@
 
 -- //@UNDO
 -- SQL to undo the change goes here.
+
+
+
   DROP TABLE IF EXISTS ${schema}.cdt_cuenta;
 
   DROP SCHEMA IF EXISTS ${schema};

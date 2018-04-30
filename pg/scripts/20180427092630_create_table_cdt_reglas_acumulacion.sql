@@ -16,10 +16,14 @@
 
 -- // create_table_cdt_reglas_acumulacion
 -- Migration SQL that makes the change goes here.
+CREATE SEQUENCE ${schema}.cdt_regla_acumulacion_id_s1
+    INCREMENT 1
+    MINVALUE 1
+    START 1;
 
-CREATE SCHEMA IF NOT EXISTS ${schema};
+  COMMENT ON SEQUENCE ${schema}.cdt_regla_acumulacion_id_s1 IS 'ID  Regla Acumulacion';
 
-  CREATE TABLE ${schema}.cdt_regla_acumulacion(
+  CREATE TABLE ${schema}.cdt_regla_acumulacion (
       id                    BIGSERIAL NOT NULL,
       id_tipo_movimiento    BIGSERIAL NOT NULL,
       periocidad            VARCHAR(10) NOT NULL,
@@ -35,5 +39,4 @@ CREATE SCHEMA IF NOT EXISTS ${schema};
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS ${schema}.cdt_regla_acumulacion;
-
-  DROP SCHEMA IF EXISTS ${schema};
+  DROP SEQUENCE IF EXISTS  ${schema}.cdt_regla_acumulacion_id_s1;
