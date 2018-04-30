@@ -1,0 +1,18 @@
+package cl.multicaja.cuentatraspaso.test.db;
+
+import cl.multicaja.prepago.test.TestDbBase;
+import cl.multicaja.prepago.utils.db.ColumnInfo;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class Test_20180402193618_create_changelog extends TestDbBase {
+
+  @Test
+  public void checkTableChangelog() {
+    boolean exists = dbUtils.tableExists("public", "HANGELOG_CUENTA_DE_TRASPASO", true,
+      new ColumnInfo("id", "numeric", 20),
+      new ColumnInfo("applied_at", "varchar", 25),
+      new ColumnInfo("description", "varchar", 255));
+    Assert.assertEquals("Existe tabla changelog", true, exists);
+  }
+}
