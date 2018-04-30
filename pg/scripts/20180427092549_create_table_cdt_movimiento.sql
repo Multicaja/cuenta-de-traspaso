@@ -26,11 +26,11 @@
 
 
   CREATE TABLE ${schema}.cdt_movimiento(
-      id                    BIGSERIAL nextval(${schema}+'.cdt_movimiento_id_s1') NOT NULL,
+      id                    BIGSERIAL  NOT NULL,
       nombre                VARCHAR(20) NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
       signo                 NUMERIC NOT NULL,
-      estado                VARCHAR(5) NOT NULL,
+      estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,
       fecha_creacion        TIMESTAMP NOT NULL,
       CONSTRAINT cdt_movimiento_pk PRIMARY KEY(id)

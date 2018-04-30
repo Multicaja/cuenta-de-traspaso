@@ -26,10 +26,10 @@
   COMMENT ON SEQUENCE ${schema}.cdt_cuenta_id_s1 IS 'ID de la cuenta (Nº Cta)';
 
   CREATE TABLE ${schema}.cdt_cuenta (
-      id              BIGSERIAL DEFAULT nextval(${schema}+'.cdt_cuenta_id_s1') NOT NULL,
+      id              BIGSERIAL NOT NULL,
       id_externo      VARCHAR(100) NOT NULL,
       descripcion     VARCHAR(100) NOT NULL,
-      estado          VARCHAR(5) NOT NULL,
+      estado          VARCHAR(10) NOT NULL,
       fecha_estado    TIMESTAMP NOT NULL,
       fecha_creacion  TIMESTAMP NOT NULL,
       CONSTRAINT cdt_cuenta_pk PRIMARY KEY(id,id_externo)

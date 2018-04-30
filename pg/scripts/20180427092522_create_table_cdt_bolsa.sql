@@ -26,10 +26,10 @@
   COMMENT ON SEQUENCE ${schema}.cdt_bolsa_id_s1 IS 'ID de la bolsa';
 
   CREATE TABLE ${schema}.cdt_bolsa (
-      id              BIGSERIAL DEFAULT nextval(${schema}+'.cdt_bolsa_id_s1') NOT NULL,
+      id              BIGSERIAL NOT NULL,
       nombre          VARCHAR(20) NOT NULL,
       descripcion     VARCHAR(100) NOT NULL,
-      estado          VARCHAR(5) NOT NULL,
+      estado          VARCHAR(10) NOT NULL,
       fecha_estado    TIMESTAMP NOT NULL,
       fecha_creacion  TIMESTAMP NOT NULL,
       CONSTRAINT cdt_bolsa_pk PRIMARY KEY(id)

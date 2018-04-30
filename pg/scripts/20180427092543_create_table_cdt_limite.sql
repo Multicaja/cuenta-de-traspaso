@@ -26,13 +26,13 @@
 
 
   CREATE TABLE ${schema}.cdt_limite(
-      id                    BIGSERIAL nextval(${schema}+'.cdt_limite_id_s1') NOT NULL,
+      id                    BIGSERIAL NOT NULL,
       id_movimiento         BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGSERIAL,
       descripcion           VARCHAR(100) NOT NULL,
       valor                 DECIMAL NOT NULL,
       cod_operacion         VARCHAR(10) NOT NULL,
-      estado                VARCHAR(5) NOT NULL,
+      estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,
       fecha_creacion        TIMESTAMP NOT NULL,
       CONSTRAINT cdt_limite_pk PRIMARY KEY(id)

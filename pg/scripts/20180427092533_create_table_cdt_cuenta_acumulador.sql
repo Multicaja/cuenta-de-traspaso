@@ -26,7 +26,7 @@
   COMMENT ON SEQUENCE ${schema}.cdt_cuenta_acumulador_id_s1 IS 'ID del acumulador cuenta';
 
   CREATE TABLE ${schema}.cdt_cuenta_acumulador (
-      id                    BIGSERIAL DEFAULT nextval(${schema}+'.cdt_cuenta_acumulador_id_s1') NOT NULL,
+      id                    BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGSERIAL NOT NULL,
       id_cuenta             BIGSERIAL NOT NULL,
       monto                 DECIMAL NOT NULL,

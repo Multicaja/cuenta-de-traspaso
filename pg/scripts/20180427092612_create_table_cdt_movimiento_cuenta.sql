@@ -34,7 +34,7 @@
       glosa              VARCHAR(100) NOT NULL,
       monto              DECIMAL NOT NULL,
       fecha_registro     TIMESTAMP NOT NULL,
-      estado             VARCHAR(5) NOT NULL,
+      estado             VARCHAR(10) NOT NULL,
       fecha_estado       TIMESTAMP NOT NULL,
       CONSTRAINT cdt_movimiento_cuenta_pk PRIMARY KEY(id)
   );

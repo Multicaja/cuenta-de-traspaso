@@ -28,7 +28,7 @@ CREATE SEQUENCE ${schema}.cdt_regla_acumulacion_id_s1
       id_tipo_movimiento    BIGSERIAL NOT NULL,
       periocidad            VARCHAR(10) NOT NULL,
       codigo_operacion      VARCHAR(10) NOT NULL,
-      estado                VARCHAR(5) NOT NULL,
+      estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,
       fecha_creacion        TIMESTAMP NOT NULL,
       CONSTRAINT cdt_regla_acumulacion_pk PRIMARY KEY(id)

@@ -12,83 +12,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="20180427092612_create_table_cdt_movimiento_cuenta.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092612_create_table_cdt_movimiento_cuenta.sql">
+      <file leaf-file-name="20180430170419_create_sp_mc_cdt_crea_tipo_movimiento.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/20180430170419_create_sp_mc_cdt_crea_tipo_movimiento.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
+            <state relative-caret-position="651">
+              <caret line="92" column="57" selection-start-line="92" selection-start-column="57" selection-end-line="92" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="20180427091825_create_table_cdt_cuenta.sql" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427091825_create_table_cdt_cuenta.sql">
+      <file leaf-file-name="20180430170307_create_sp_mc_cdt_crea_regla_acumulacion.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/20180430170307_create_sp_mc_cdt_crea_regla_acumulacion.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427093010_create_table_cdt_movimiento_tipo_mov.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427093010_create_table_cdt_movimiento_tipo_mov.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427092558_create_table_cdt_tipo_movimiento.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092558_create_table_cdt_tipo_movimiento.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427092549_create_table_cdt_movimiento.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092549_create_table_cdt_movimiento.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427092543_create_table_cdt_limite.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092543_create_table_cdt_limite.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427092533_create_table_cdt_cuenta_acumulador.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092533_create_table_cdt_cuenta_acumulador.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="81" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427092630_create_table_cdt_reglas_acumulacion.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="85" selection-start-line="23" selection-start-column="85" selection-end-line="23" selection-end-column="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="20180427092522_create_table_cdt_bolsa.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/20180427092522_create_table_cdt_bolsa.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="77" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="77" />
+            <state relative-caret-position="657">
+              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="95" />
             </state>
           </provider>
         </entry>
@@ -122,15 +59,22 @@
         <option value="$PROJECT_DIR$/src/test/java/cl/multicaja/cuentatraspaso/test/db/Test_20180427092612_create_table_cdt_movimiento_cuenta.java" />
         <option value="$PROJECT_DIR$/src/test/java/cl/multicaja/cuentatraspaso/test/db/Test_20180427093010_create_table_cdt_movimiento_tipo_mov.java" />
         <option value="$PROJECT_DIR$/src/test/java/cl/multicaja/cuentatraspaso/test/db/Test_20180427092630_create_table_cdt_reglas_acumulacion.java" />
-        <option value="$PROJECT_DIR$/scripts/20180427092522_create_table_cdt_bolsa.sql" />
-        <option value="$PROJECT_DIR$/scripts/20180427092533_create_table_cdt_cuenta_acumulador.sql" />
         <option value="$PROJECT_DIR$/scripts/20180427093010_create_table_cdt_movimiento_tipo_mov.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180427092533_create_table_cdt_cuenta_acumulador.sql" />
         <option value="$PROJECT_DIR$/scripts/20180427091825_create_table_cdt_cuenta.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180427092522_create_table_cdt_bolsa.sql" />
         <option value="$PROJECT_DIR$/scripts/20180427092543_create_table_cdt_limite.sql" />
         <option value="$PROJECT_DIR$/scripts/20180427092549_create_table_cdt_movimiento.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180427092558_create_table_cdt_tipo_movimiento.sql" />
         <option value="$PROJECT_DIR$/scripts/20180427092612_create_table_cdt_movimiento_cuenta.sql" />
         <option value="$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql" />
-        <option value="$PROJECT_DIR$/scripts/20180427092558_create_table_cdt_tipo_movimiento.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430164905_create_sp_mc_cdt_crea_bolsa.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430165508_create_sp_mc_cdt_crea_limite.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430165322_create_sp_mc_cdt_crea_cuenta.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430170003_create_sp_mc_cdt_crea_movimiento.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430170126_create_sp_mc_cdt_crea_movimiento_tipomov.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430170307_create_sp_mc_cdt_crea_regla_acumulacion.sql" />
+        <option value="$PROJECT_DIR$/scripts/20180430170419_create_sp_mc_cdt_crea_tipo_movimiento.sql" />
       </list>
     </option>
   </component>
@@ -230,7 +174,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <frame x="0" y="27" width="1920" height="923" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -284,71 +228,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/cl/multicaja/cuentatraspaso/test/db/Test_20180427092630_create_table_cdt_reglas_acumulacion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/cl/multicaja/cuentatraspaso/test/db/Test_20180427091825_create_table_cdt_cuenta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="26" column="10" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427091825_create_table_cdt_cuenta.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="41" selection-start-line="21" selection-start-column="5" selection-end-line="26" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/cl/multicaja/cuentatraspaso/test/db/Test_20180427091825_create_table_cdt_cuenta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="10" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427091825_create_table_cdt_cuenta.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="41" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="26" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -457,13 +336,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -605,52 +477,31 @@
     <entry file="file://$PROJECT_DIR$/scripts/20180402193618_create_changelog.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql">
+    <entry file="file://$PROJECT_DIR$/scripts/20180427092522_create_table_cdt_bolsa.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="85" selection-start-line="23" selection-start-column="85" selection-end-line="23" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092612_create_table_cdt_movimiento_cuenta.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092558_create_table_cdt_tipo_movimiento.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="73" selection-start-line="24" selection-start-column="73" selection-end-line="24" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092549_create_table_cdt_movimiento.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092543_create_table_cdt_limite.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+        <state relative-caret-position="465">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/20180427092533_create_table_cdt_cuenta_acumulador.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="81" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="81" />
+        <state relative-caret-position="480">
+          <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/20180427092522_create_table_cdt_bolsa.sql">
+    <entry file="file://$PROJECT_DIR$/scripts/20180427092543_create_table_cdt_limite.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="77" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="77" />
+        <state relative-caret-position="510">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180427092549_create_table_cdt_movimiento.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -661,10 +512,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180427092630_create_table_cdt_reglas_acumulacion.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/20180427091825_create_table_cdt_cuenta.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="465">
+          <caret line="31" column="30" lean-forward="true" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180427092558_create_table_cdt_tipo_movimiento.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180427092612_create_table_cdt_movimiento_cuenta.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430165253_mc_cdt_crea_cuenta.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430165508_create_sp_mc_cdt_crea_limite.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="636">
+          <caret line="97" column="54" selection-start-line="97" selection-start-column="54" selection-end-line="97" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430165322_create_sp_mc_cdt_crea_cuenta.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="71" column="1" lean-forward="true" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430164905_create_sp_mc_cdt_crea_bolsa.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="636">
+          <caret line="68" column="47" selection-start-line="68" selection-end-line="68" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430170003_create_sp_mc_cdt_crea_movimiento.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="636">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430170126_create_sp_mc_cdt_crea_movimiento_tipomov.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="68" column="65" lean-forward="true" selection-start-line="67" selection-end-line="68" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430170307_create_sp_mc_cdt_crea_regla_acumulacion.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/20180430170419_create_sp_mc_cdt_crea_tipo_movimiento.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="92" column="57" selection-start-line="92" selection-start-column="57" selection-end-line="92" selection-end-column="57" />
         </state>
       </provider>
     </entry>
