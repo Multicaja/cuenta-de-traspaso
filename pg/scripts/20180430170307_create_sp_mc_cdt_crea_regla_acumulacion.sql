@@ -17,19 +17,9 @@
 -- // create_sp_mc_cdt_crea_regla_acumulacion
 -- Migration SQL that makes the change goes here.
 
-/* ************************************************** */
-/* NOMBRE             : mc_cdt_crea_regla_acumulacion */
-/* DESCRIPCIÓN        : 							  */
-/* Fecha Creación     : 30 - ABRIL - 2018             */
-/* Fecha Actualización:                               */
-/* Versión            : V1.0.0                        */
-/* Responsable        :                               */
-/* Actualizado por    : JOG                           */
-/* ************************************************** */
-
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_regla_acumulacion
 (
-    IN _id_tipo_movimiento  BIGSERIAL,
+    IN _id_tipo_movimiento  NUMERIC,
     IN _periocidad          VARCHAR,
     IN _codigo_operacion    VARCHAR,
     OUT _NumError           VARCHAR,
@@ -42,7 +32,7 @@ $BODY$
 	        _NumError := '0';
 	        _MsjError := '';
 
-		    IF COALESCE(_id_tipo_movimiento, 0)) = 0 THEN
+		    IF COALESCE(_id_tipo_movimiento, 0) = 0 THEN
 	            _NumError := '1001';
 	        	_MsjError := '[mc_cdt_crea_regla_acumulacion] El Id Tipo Movimiento no puede ser 0';
 	        	RETURN;
@@ -72,7 +62,7 @@ $BODY$
 	    		)
         	VALUES
         		(
-        			nextval(${schema}'.cdt_regla_acumulacion_id_s1'),
+        			nextval('${schema}.cdt_regla_acumulacion_id_s1'),
                     _id_tipo_movimiento,
                     _periocidad,
                     _codigo_operacion,

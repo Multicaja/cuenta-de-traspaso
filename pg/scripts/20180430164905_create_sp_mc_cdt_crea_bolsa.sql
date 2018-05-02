@@ -20,7 +20,7 @@
   CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_bolsa
   (
       IN _nombre             VARCHAR,
-      IN _descripcion		   VARCHAR,
+      IN _descripcion		     VARCHAR,
       OUT _NumError          VARCHAR,
       OUT _MsjError          VARCHAR
   ) RETURNS record AS
@@ -48,7 +48,7 @@
             )
             VALUES
               (
-                 nextval( ${schema}'.cdt_bolsa_id_s1'),
+                 nextval('${schema}.cdt_bolsa_id_s1'),
                  _nombre,
                  COALESCE(_descripcion,''),
                  'ACTIVO',

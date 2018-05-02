@@ -24,9 +24,9 @@ public class Test_20180427092522_create_table_cdt_bolsa extends TestDbBase {
       new ColumnInfo("id", "BIGSERIAL",19),
       new ColumnInfo("nombre", "VARCHAR", 20),
       new ColumnInfo("descripcion", "VARCHAR", 100),
-      new ColumnInfo("estado", "VARCHAR", 5),
-      new ColumnInfo("fecha_estado", "VARCHAR", 20),
-      new ColumnInfo("fecha_creacion", "VARCHAR", 20));
+      new ColumnInfo("estado", "VARCHAR", 10),
+      new ColumnInfo("fecha_estado", "TIMESTAMP", 29),
+      new ColumnInfo("fecha_creacion", "TIMESTAMP", 29));
       Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.BOLSA.getName(), true, exists);
   }
 

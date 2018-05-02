@@ -20,8 +20,8 @@
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta
 (
     IN _id_externo         VARCHAR,
-    IN _descripcion		   VARCHAR,
-    OUT _id_cuenta         BIGSERIAL,
+    IN _descripcion		     VARCHAR,
+    OUT _id_cuenta         NUMERIC,
     OUT _NumError          VARCHAR,
     OUT _MsjError          VARCHAR
 ) RETURNS record AS
@@ -38,7 +38,7 @@ $BODY$
 	        	RETURN;
 	        END IF;
 
-            _id_cuenta := nextval(${schema}'.cdt_cuenta_id_s1');
+            _id_cuenta := nextval('${schema}.cdt_cuenta_id_s1');
 
             INSERT INTO ${schema}.cdt_cuenta
 	    		(

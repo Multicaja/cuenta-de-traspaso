@@ -27,7 +27,7 @@
 
   CREATE TABLE ${schema}.cdt_cuenta (
       id              BIGSERIAL NOT NULL,
-      id_externo      VARCHAR(100) NOT NULL,
+      id_externo      VARCHAR(50) NOT NULL,
       descripcion     VARCHAR(100) NOT NULL,
       estado          VARCHAR(10) NOT NULL,
       fecha_estado    TIMESTAMP NOT NULL,

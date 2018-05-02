@@ -32,7 +32,7 @@
       id_mov_referencia  BIGSERIAL NOT NULL,
       id_tx_externo      VARCHAR(50) NOT NULL,
       glosa              VARCHAR(100) NOT NULL,
-      monto              DECIMAL NOT NULL,
+      monto              NUMERIC NOT NULL,
       fecha_registro     TIMESTAMP NOT NULL,
       estado             VARCHAR(10) NOT NULL,
       fecha_estado       TIMESTAMP NOT NULL,

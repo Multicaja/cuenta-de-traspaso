@@ -27,11 +27,11 @@ public class Test_20180427092543_create_table_cdt_limite extends TestDbBase {
       new ColumnInfo("id_movimiento", "BIGSERIAL", 19),
       new ColumnInfo("id_regla_acumulacion", "BIGSERIAL", 19),
       new ColumnInfo("descripcion", "VARCHAR", 100),
-      new ColumnInfo("valor", "DECIMAL", 20),
+      new ColumnInfo("valor", "NUMERIC", 131089),
       new ColumnInfo("cod_operacion", "VARCHAR", 10),
-      new ColumnInfo("estado", "VARCHAR", 5),
-      new ColumnInfo("fecha_estado", "TIMESTAMP", 20),
-      new ColumnInfo("fecha_creacion", "TIMESTAMP", 20));
+      new ColumnInfo("estado", "VARCHAR", 10),
+      new ColumnInfo("fecha_estado", "TIMESTAMP", 29),
+      new ColumnInfo("fecha_creacion", "TIMESTAMP", 29));
       Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.LIMITE.getName(), true, exists);
   }
 

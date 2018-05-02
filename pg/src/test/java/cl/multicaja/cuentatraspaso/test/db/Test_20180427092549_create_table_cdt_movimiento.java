@@ -21,10 +21,10 @@ public class Test_20180427092549_create_table_cdt_movimiento extends TestDbBase 
       new ColumnInfo("id", "BIGSERIAL",19),
       new ColumnInfo("nombre", "VARCHAR", 20),
       new ColumnInfo("descripcion", "VARCHAR", 100),
-      new ColumnInfo("signo", "NUMERIC", 10),
-      new ColumnInfo("estado", "VARCHAR", 5),
-      new ColumnInfo("fecha_estado", "TIMESTAMP",20),
-      new ColumnInfo("fecha_creacion", "TIMEPSTAMP", 20));
+      new ColumnInfo("signo", "NUMERIC", 131089),
+      new ColumnInfo("estado", "VARCHAR", 10),
+      new ColumnInfo("fecha_estado", "TIMESTAMP",29),
+      new ColumnInfo("fecha_creacion", "TIMESTAMP", 29));
     Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.MOVIMIENTO.getName(), true, exists);
   }
 }

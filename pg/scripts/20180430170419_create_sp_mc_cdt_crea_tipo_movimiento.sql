@@ -18,19 +18,9 @@
 -- Migration SQL that makes the change goes here.
 
 
-/* ************************************************** */
-/* NOMBRE             : mc_cdt_crea_tipo_movimiento   */
-/* DESCRIPCIÓN        : 							  */
-/* Fecha Creación     : 30 - ABRIL - 2018             */
-/* Fecha Actualización:                               */
-/* Versión            : V1.0.0                        */
-/* Responsable        :                               */
-/* Actualizado por    : JOG                           */
-/* ************************************************** */
-
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_tipo_movimiento
 (
-    IN _id_bolsa        BIGSERIAL,
+    IN _id_bolsa        NUMERIC,
     IN _nombre          VARCHAR,
     IN _descripcion     VARCHAR,
     OUT _NumError       VARCHAR,
@@ -43,7 +33,7 @@ $BODY$
 	        _NumError := '0';
 	        _MsjError := '';
 
-		    IF COALESCE(_id_bolsa, 0)) = 0 THEN
+		    IF COALESCE(_id_bolsa, 0) = 0 THEN
 	            _NumError := '1001';
 	        	_MsjError := '[mc_cdt_crea_tipo_movimiento] El Id Bolsa no puede ser 0';
 	        	RETURN;
@@ -68,11 +58,11 @@ $BODY$
 	    		)
         	VALUES
         		(
-        			nextval(${schema}'.cdt_tipo_movimiento_id_s1'),
-                    _id_bolsa,
-                    _nombre,
-                    COALESCE(_descripcion,''),
-                    'ACTIVO',
+              nextval('${schema}.cdt_tipo_movimiento_id_s1'),
+              _id_bolsa,
+              _nombre,
+              COALESCE(_descripcion,''),
+              'ACTIVO',
         			LOCALTIMESTAMP,
         			LOCALTIMESTAMP
         		);

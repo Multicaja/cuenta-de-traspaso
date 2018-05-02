@@ -20,8 +20,8 @@
 
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento_tipomov
 (
-    IN _id_movimiento       BIGSERIAL,
-    IN _id_tipo_movimiento  BIGSERIAL,
+    IN _id_movimiento       NUMERIC,
+    IN _id_tipo_movimiento  NUMERIC,
     OUT _NumError           VARCHAR,
     OUT _MsjError           VARCHAR
 ) RETURNS record AS
@@ -32,13 +32,13 @@ $BODY$
 	        _NumError := '0';
 	        _MsjError := '';
 
-		    IF COALESCE(_id_movimiento, 0)) = 0 THEN
+		    IF COALESCE(_id_movimiento, 0) = 0 THEN
 	            _NumError := '1001';
 	        	_MsjError := '[mc_cdt_crea_movimiento_tipomov] El Id  Movimiento no puede ser 0';
 	        	RETURN;
 	        END IF;
 
-            IF COALESCE(_id_tipo_movimiento, 0)) = 0 THEN
+            IF COALESCE(_id_tipo_movimiento, 0) = 0 THEN
                 _NumError := '1002';
                 _MsjError := '[mc_cdt_crea_movimiento_tipomov] El Id Tipo Movimiento no puede ser 0';
                 RETURN;

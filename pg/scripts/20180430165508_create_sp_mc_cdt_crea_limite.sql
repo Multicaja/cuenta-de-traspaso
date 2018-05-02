@@ -19,10 +19,10 @@
 
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite
 (
-    IN _id_movimiento           BIGSERIAL,
-    IN _id_regla_acumulacion    BIGSERIAL,
+    IN _id_movimiento           NUMERIC,
+    IN _id_regla_acumulacion    NUMERIC,
     IN _descripcion             VARCHAR,
-    IN _valor    		        VARCHAR,
+    IN _valor    		            VARCHAR,
     IN _cod_operacion           VARCHAR,
     OUT _NumError               VARCHAR,
     OUT _MsjError               VARCHAR
@@ -72,7 +72,7 @@ $BODY$
         )
         VALUES
           (
-            nextval(${schema}'.cdt_limite_id_s1'),
+            nextval('${schema}.cdt_limite_id_s1'),
             id_movimiento,
                   id_regla_acumulacion,
                   descripcion,

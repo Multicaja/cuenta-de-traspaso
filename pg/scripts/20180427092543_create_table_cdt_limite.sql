@@ -30,7 +30,7 @@
       id_movimiento         BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGSERIAL,
       descripcion           VARCHAR(100) NOT NULL,
-      valor                 DECIMAL NOT NULL,
+      valor                 NUMERIC NOT NULL,
       cod_operacion         VARCHAR(10) NOT NULL,
       estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,

@@ -57,7 +57,7 @@ $BODY$
 	    		)
         	VALUES
         		(
-        			nextval(${schema}'.cdt_movimiento_id_s1'),
+        			nextval('${schema}.cdt_movimiento_id_s1'),
                     _nombre,
                     _descripcion,
                     _signo,

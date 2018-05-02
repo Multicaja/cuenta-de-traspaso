@@ -29,7 +29,7 @@
       id                    BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGSERIAL NOT NULL,
       id_cuenta             BIGSERIAL NOT NULL,
-      monto                 DECIMAL NOT NULL,
+      monto                 NUMERIC   NOT NULL,
       fecha_inicio          TIMESTAMP NOT NULL,
       fecha_fin             TIMESTAMP NOT NULL,
       fecha_creacion        TIMESTAMP NOT NULL,
