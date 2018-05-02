@@ -9,7 +9,7 @@ public class Test_20180402193618_create_changelog extends TestDbBase {
 
   @Test
   public void checkTableChangelog() {
-    boolean exists = dbUtils.tableExists("public", "HANGELOG_CUENTA_DE_TRASPASO", true,
+    boolean exists = dbUtils.tableExists("public", "changelog_cuenta_de_traspaso", true,
       new ColumnInfo("id", "numeric", 20),
       new ColumnInfo("applied_at", "varchar", 25),
       new ColumnInfo("description", "varchar", 255));

@@ -17,17 +17,22 @@
 -- // create_table_cdt_limite
 -- Migration SQL that makes the change goes here.
 
+  CREATE SEQUENCE ${schema}.cdt_limite_id_s1
+    INCREMENT 1
+    MINVALUE 1
+    START 1;
 
-  CREATE SCHEMA IF NOT EXISTS ${schema};
+  COMMENT ON SEQUENCE ${schema}.cdt_limite_id_s1 IS 'ID del limite';
+
 
   CREATE TABLE ${schema}.cdt_limite(
       id                    BIGSERIAL NOT NULL,
       id_movimiento         BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGSERIAL,
       descripcion           VARCHAR(100) NOT NULL,
-      valor                 DECIMAL NOT NULL,
+      valor                 NUMERIC NOT NULL,
       cod_operacion         VARCHAR(10) NOT NULL,
-      estado                VARCHAR(5) NOT NULL,
+      estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,
       fecha_creacion        TIMESTAMP NOT NULL,
       CONSTRAINT cdt_limite_pk PRIMARY KEY(id)
@@ -37,5 +42,3 @@
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS  ${schema}.cdt_limite;
-
-  DROP SCHEMA  IF EXISTS ${schema};
