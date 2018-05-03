@@ -1,6 +1,6 @@
 package cl.multicaja.cuentatraspaso.test.db;
 
-import cl.multicaja.prepago.test.TestSuiteBase;
+import cl.multicaja.core.test.TestSuiteBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.AfterClass;

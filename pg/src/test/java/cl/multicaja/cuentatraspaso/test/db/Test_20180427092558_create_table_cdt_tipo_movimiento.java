@@ -1,7 +1,7 @@
 package cl.multicaja.cuentatraspaso.test.db;
 
-import cl.multicaja.prepago.test.TestDbBase;
-import cl.multicaja.prepago.utils.db.ColumnInfo;
+import cl.multicaja.core.test.TestDbBase;
+import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
