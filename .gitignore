@@ -6,7 +6,7 @@
 .project
 .idea
 .settings
-
+pg/.idea/**
 target/
 
 db-id.txt
