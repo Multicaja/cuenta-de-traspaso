@@ -80,5 +80,5 @@ LANGUAGE 'plpgsql';
 -- SQL to undo the change goes here.
 
 
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_movimiento
+ DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_movimiento;
 
