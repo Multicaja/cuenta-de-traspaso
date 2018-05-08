@@ -19,7 +19,7 @@
 
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento_cuenta
 (
-    IN _id_cuenta               NUMERIC,
+    IN _id_cuenta               VARCHAR,
     IN _id_movimiento           NUMERIC,
     IN _id_mov_referencia       NUMERIC,
     IN _id_tx_externo           VARCHAR,
@@ -33,15 +33,16 @@ $BODY$
 DECLARE
     _fecha_ini    TIMESTAMP;
     _fecha_fin    TIMESTAMP;
+    _id_cuenta_interno NUMERIC;
     _current_date DATE;
 BEGIN
     _NumError := '0';
     _MsjError := '';
     _current_date:= current_date;
 
-    IF COALESCE(_id_cuenta, 0) = 0 THEN
-        _NumError := '1001';
-    	_MsjError := '[mc_cdt_crea_movimiento_cuenta] El Id Cuenta no puede ser 0';
+    IF TRIM(COALESCE(_id_cuenta, '')) = '' THEN
+      _NumError := '1001';
+    	_MsjError := '[mc_cdt_crea_movimiento_cuenta] El Id Cuenta no puede ser vacio';
     	RETURN;
     END IF;
 
@@ -57,20 +58,22 @@ BEGIN
         RETURN;
     END IF;
 
-    -- LLAMADA
-    SELECT
-        ${schema}.in_cdt_procesa_acumuladores
-        (
-            _id_movimiento,
-            _id_cuenta,
-            _monto,
-            _NumError,
-            _MsjError
-        );
+        BEGIN
+          SELECT
+            id
+          INTO
+            _id_cuenta_interno
+          FROM
+            ${schema}.cdt_cuenta
+          WHERE
+            id_externo = _id_cuenta;
+        EXCEPTION
+        WHEN OTHERS THEN
+            _NumError := SQLSTATE;
+            _MsjError := '[mc_cdt_crea_movimiento_cuenta] Error al buscar cuenta  CAUSA ('|| SQLERRM ||')';
+            RETURN;
+        END;
 
-    IF(_NumError != '0') THEN
-        RETURN; -- RETORNA ERROR SI EXISTE ERROR EN SP in_cdt_procesa_acumuladores
-    ELSE
         BEGIN
             _id_movimiento_cuenta :=  nextval('${schema}.cdt_movimiento_cuenta_id_s1');
             INSERT INTO
@@ -90,29 +93,55 @@ BEGIN
             VALUES
                 (
                     _id_movimiento_cuenta,
-                    _id_cuenta,
+                    _id_cuenta_interno,
                     _id_movimiento,
                     _id_mov_referencia,
                     _id_tx_externo,
                     _glosa,
                     _monto,
-                    localtimestamp,
+                    timezone('utc', now()),
                     'PEND',
-                    localtimestamp
+                    timezone('utc', now())
                 );
-        -- LLAMADA A SP QUE VERIFICA QUE EL MOVIMIENTO CUMPLA CON LOS LIMITES ESTABLECIDOS PARA EL TIPO DE MOVIMIENTO
-        SELECT
-            ${schema}.in_cdt_verifica_limites
-            (
-                _id_movimiento,
-                _id_cuenta,
-                _monto,
-                _NumError,
-                _MsjError
-            );
-        IF  _NumError != '0' THEN
-            RETURN;
-        END IF;
+
+            -- LLAMADA
+            SELECT
+                PAC._NumError,
+                PAC._MsjError
+            INTO
+              _NumError,
+              _MsjError
+            FROM
+                ${schema}.in_cdt_procesa_acumuladores
+                (
+                    _id_movimiento,
+                    _id_cuenta_interno,
+                    _monto
+                ) PAC;
+
+            IF(_NumError != '0') THEN
+                RETURN; -- RETORNA ERROR SI EXISTE ERROR EN SP in_cdt_procesa_acumuladores
+            END IF;
+
+
+            -- LLAMADA A SP QUE VERIFICA QUE EL MOVIMIENTO CUMPLA CON LOS LIMITES ESTABLECIDOS PARA EL TIPO DE MOVIMIENTO
+            SELECT
+              VLI._NumError,
+              VLI._MsjError
+            INTO
+              _NumError,
+              _MsjError
+            FROM
+                ${schema}.in_cdt_verifica_limites
+                (
+
+                    _id_cuenta_interno,
+                    _id_movimiento,
+                    _monto
+                )VLI;
+            IF  _NumError != '0' THEN
+                RETURN;
+            END IF;
 
         EXCEPTION
         WHEN OTHERS THEN
@@ -120,7 +149,7 @@ BEGIN
             _MsjError := '[mc_cdt_crea_movimiento_cuenta] Error al insertar movimiento cuenta CAUSA ('|| SQLERRM ||')';
             RETURN;
         END;
-    END IF;
+
 EXCEPTION
     WHEN OTHERS THEN
         _NumError := SQLSTATE;

@@ -19,7 +19,7 @@ public class Test_20180427092549_create_table_cdt_movimiento extends TestDbBase 
   public void CheckTableMovimiento() {
     boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.MOVIMIENTO.getName(), true,
       new ColumnInfo("id", "BIGSERIAL",19),
-      new ColumnInfo("nombre", "VARCHAR", 20),
+      new ColumnInfo("nombre", "VARCHAR", 50),
       new ColumnInfo("descripcion", "VARCHAR", 100),
       new ColumnInfo("signo", "NUMERIC", 131089),
       new ColumnInfo("estado", "VARCHAR", 10),

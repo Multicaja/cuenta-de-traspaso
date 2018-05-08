@@ -22,7 +22,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite
     IN _id_movimiento           NUMERIC,
     IN _id_regla_acumulacion    NUMERIC,
     IN _descripcion             VARCHAR,
-    IN _valor    		            VARCHAR,
+    IN _valor    		            DECIMAL,
     IN _cod_operacion           VARCHAR,
     OUT _NumError               VARCHAR,
     OUT _MsjError               VARCHAR
@@ -35,24 +35,25 @@ $BODY$
 	        _MsjError := '';
 
 		    IF COALESCE(_id_movimiento, 0) = 0 THEN
-	            _NumError := '1001';
-	        	_MsjError := '[mc_cdt_crea_limite] El Id Movimiento puede ser 0';
+	          _NumError := '1001';
+	        	_MsjError := '[mc_cdt_crea_limite] El Id Movimiento no puede ser 0';
 	        	RETURN;
-	        END IF;
+	      END IF;
 
-        IF COALESCE(descripcion, '') = 0 THEN
-            _NumError := '1002';
+        IF COALESCE(_id_regla_acumulacion, 0) = 0 THEN
+	          _NumError := '1002';
+	        	_MsjError := '[mc_cdt_crea_limite] El Id Regla Acumulacion no puede ser 0';
+	        	RETURN;
+	      END IF;
+
+        IF COALESCE(_descripcion, '') = '' THEN
+            _NumError := '1003';
             _MsjError := '[mc_cdt_crea_limite] La descripcion no puede estar vacia';
             RETURN;
         END IF;
 
-        IF _valor IS NULL THEN
-            _NumError := '1003';
-            _MsjError := '[mc_cdt_crea_limite] El Valor de un limite no puede ser Nulo';
-            RETURN;
-        END IF;
 
-          IF COALESCE(_cod_operacion, '') = '' THEN
+        IF COALESCE(_cod_operacion, '') = '' THEN
             _NumError := '1004';
             _MsjError := '[mc_cdt_crea_limite] El Codigo de operacion no puede estar vacio';
             RETURN;
@@ -64,23 +65,23 @@ $BODY$
           id_movimiento,
           id_regla_acumulacion,
           descripcion,
-                  valor,
-                  cod_operacion,
-                  estado,
+          valor,
+          cod_operacion,
+          estado,
           fecha_estado,
           fecha_creacion
         )
         VALUES
           (
             nextval('${schema}.cdt_limite_id_s1'),
-            id_movimiento,
-                  id_regla_acumulacion,
-                  descripcion,
-                  valor,
-                  cod_operacion,
+            _id_movimiento,
+            _id_regla_acumulacion,
+            _descripcion,
+            _valor,
+            _cod_operacion,
             'ACTIVO',
-            LOCALTIMESTAMP,
-            LOCALTIMESTAMP
+            timezone('utc', now()),
+            timezone('utc', now())
           );
       EXCEPTION
           WHEN OTHERS THEN

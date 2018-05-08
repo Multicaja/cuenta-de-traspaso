@@ -27,7 +27,7 @@
 
   CREATE TABLE ${schema}.cdt_movimiento(
       id                    BIGSERIAL  NOT NULL,
-      nombre                VARCHAR(20) NOT NULL,
+      nombre                VARCHAR(50) NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
       signo                 NUMERIC NOT NULL,
       estado                VARCHAR(10) NOT NULL,

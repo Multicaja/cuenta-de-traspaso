@@ -61,7 +61,7 @@ $BODY$
                 SELECT
                     MOV.id                  AS id_movimiento,
                     MOV.nombre              AS nombre_movimiento,
-                    MOV._signo              AS movimiento_signo,
+                    MOV.signo              AS movimiento_signo,
                     MTM.id_tipo_movimiento  AS id_tipo_movimiento,
                     TMO.nombre              AS nombre_tipo_moviniento
                 FROM

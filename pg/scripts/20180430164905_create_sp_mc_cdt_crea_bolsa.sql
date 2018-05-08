@@ -1,3 +1,4 @@
+
 --
 --    Copyright 2010-2016 the original author or authors.
 --
@@ -52,8 +53,8 @@
                  _nombre,
                  COALESCE(_descripcion,''),
                  'ACTIVO',
-                 LOCALTIMESTAMP,
-                 LOCALTIMESTAMP
+                 timezone('utc', now()),
+                 timezone('utc', now())
               );
           EXCEPTION
               WHEN OTHERS THEN

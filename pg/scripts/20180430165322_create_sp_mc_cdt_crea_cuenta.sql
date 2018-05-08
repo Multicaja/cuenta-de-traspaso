@@ -52,11 +52,11 @@ $BODY$
         	VALUES
         		(
         			_id_cuenta,
-        			 _nombre,
+        			 _id_externo,
         			 COALESCE(_descripcion,''),
         			 'ACTIVO',
-        			 LOCALTIMESTAMP,
-        			 LOCALTIMESTAMP
+        			 timezone('utc', now()),
+        			 timezone('utc', now())
         		);
         EXCEPTION
             WHEN OTHERS THEN

@@ -27,25 +27,25 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_verifica_limites
 ) RETURNS record AS
 $BODY$
     	DECLARE
-             _limite RECORD;
-             _monto_acumulado   NUMERIC;
-             _current_date      DATE;
+         _limite RECORD;
+         _monto_acumulado   NUMERIC;
+         _current_date      DATE;
     	BEGIN
 	        _NumError := '0';
 	        _MsjError := '';
             _current_date:= current_date;
 
-		    IF COALESCE(_id_movimiento, 0) = 0 THEN
+		      IF COALESCE(_id_movimiento, 0) = 0 THEN
 	            _NumError := '1001';
 	        	_MsjError := '[in_cdt_verifica_limites] El Id Movimiento no puede ser 0';
 	        	RETURN;
 	        END IF;
 
-            IF COALESCE(_monto, 0) = 0 THEN
-                _NumError := '1002';
-                _MsjError := '[in_cdt_verifica_limites] El monto no puede ser 0';
-                RETURN;
-            END IF;
+          IF COALESCE(_monto, 0) = 0 THEN
+              _NumError := '1002';
+              _MsjError := '[in_cdt_verifica_limites] El monto no puede ser 0';
+              RETURN;
+          END IF;
             BEGIN
                 FOR _limite IN
                     SELECT
@@ -67,21 +67,21 @@ $BODY$
                             BEGIN
                                 CASE
                                     WHEN _limite.cod_operacion = 'MAYORQIG' THEN
-                                        IF (_monto < _limite._valor) THEN
+                                        IF (_monto < _limite.valor) THEN
                                             _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion;
+                                            _MsjError := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'MENORQIG' THEN
-                                        IF (_monto > _limite._valor) THEN
+                                        IF (_monto > _limite.valor) THEN
                                             _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion;
+                                            _MsjError := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'IGUAL' THEN
-                                        IF (_monto != _limite._valor) THEN
-                                            _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion;
+                                        IF (_monto != _limite.valor) THEN
+                                           _NumError := _limite.id;
+                                           _MsjError := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                 END CASE;
@@ -107,19 +107,19 @@ $BODY$
                                 CASE
 
                                     WHEN _limite.cod_operacion = 'MAYORQIG' THEN
-                                        IF (_monto < _limite._valor) THEN
+                                        IF (_monto < _limite.valor) THEN
                                             _NumError := _limite.id;
                                             _MsjError := _limite.descripcion;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'MENORQIG' THEN
-                                        IF (_monto > _limite._valor) THEN
+                                        IF (_monto > _limite.valor) THEN
                                             _NumError := _limite.id;
                                             _MsjError := _limite.descripcion;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'IGUAL' THEN
-                                        IF (_monto != _limite._valor) THEN
+                                        IF (_monto != _limite.valor) THEN
                                             _NumError := _limite.id;
                                             _MsjError := _limite.descripcion;
                                             RETURN;

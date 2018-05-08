@@ -67,8 +67,8 @@ $BODY$
                     _periocidad,
                     _codigo_operacion,
                     'ACTIVO',
-        			LOCALTIMESTAMP,
-        			LOCALTIMESTAMP
+        			timezone('utc', now()),
+        			timezone('utc', now())
         		);
         EXCEPTION
             WHEN OTHERS THEN

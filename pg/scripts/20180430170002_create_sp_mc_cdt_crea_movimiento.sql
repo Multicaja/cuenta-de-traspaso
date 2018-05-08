@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_movimiento
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento
 (
     IN _nombre          VARCHAR,
     IN _descripcion     VARCHAR,
@@ -38,11 +38,11 @@ $BODY$
 	        	RETURN;
 	        END IF;
 
-            IF COALESCE(_signo, 0) != -1 OR  COALESCE(_signo, 0) != 1 THEN
-                _NumError := '1002';
-                _MsjError := '[mc_cdt_crea_movimiento] El Signo del movimiento debe ser 1 o -1';
-                RETURN;
-            END IF;
+          IF COALESCE(_signo, 0) != -1 AND  COALESCE(_signo, 0) != 1 THEN
+              _NumError := '1002';
+              _MsjError := '[mc_cdt_crea_movimiento] El Signo del movimiento debe ser 1 o -1';
+              RETURN;
+          END IF;
 
 
         	INSERT INTO ${schema}.cdt_movimiento
@@ -50,20 +50,20 @@ $BODY$
 	    			id,
 	    			nombre,
 	    			descripcion,
-                    signo,
-                    estado,
+            signo,
+            estado,
 	    			fecha_estado,
 	    			fecha_creacion
 	    		)
         	VALUES
         		(
         			nextval('${schema}.cdt_movimiento_id_s1'),
-                    _nombre,
-                    _descripcion,
-                    _signo,
+              _nombre,
+              _descripcion,
+              _signo,
         			'ACTIVO',
-        			LOCALTIMESTAMP,
-        			LOCALTIMESTAMP
+        			timezone('utc', now()),
+        			timezone('utc', now())
         		);
         EXCEPTION
             WHEN OTHERS THEN
