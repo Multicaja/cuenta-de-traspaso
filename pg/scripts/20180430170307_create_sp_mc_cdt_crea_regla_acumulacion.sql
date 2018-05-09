@@ -54,19 +54,19 @@ $BODY$
 	    		(
 	    			id,
 	    			id_tipo_movimiento,
-                    periocidad,
+            periocidad,
 	    			codigo_operacion,
-                    estado,
+            estado,
 	    			fecha_estado,
 	    			fecha_creacion
 	    		)
         	VALUES
         		(
         			nextval('${schema}.cdt_regla_acumulacion_id_s1'),
-                    _id_tipo_movimiento,
-                    _periocidad,
-                    _codigo_operacion,
-                    'ACTIVO',
+              _id_tipo_movimiento,
+              _periocidad,
+              _codigo_operacion,
+              'ACTIVO',
         			timezone('utc', now()),
         			timezone('utc', now())
         		);

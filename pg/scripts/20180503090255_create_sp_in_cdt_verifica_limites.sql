@@ -107,21 +107,21 @@ $BODY$
                                 CASE
 
                                     WHEN _limite.cod_operacion = 'MAYORQIG' THEN
-                                        IF (_monto < _limite.valor) THEN
+                                        IF (_monto_acumulado < _limite.valor) THEN
                                             _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion;
+                                             _MsjError := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'MENORQIG' THEN
-                                        IF (_monto > _limite.valor) THEN
+                                        IF (_monto_acumulado > _limite.valor) THEN
                                             _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion;
+                                            _MsjError := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'IGUAL' THEN
-                                        IF (_monto != _limite.valor) THEN
+                                        IF (_monto_acumulado != _limite.valor) THEN
                                             _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion;
+                                            _MsjError := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                 END CASE;

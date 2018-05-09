@@ -27,7 +27,7 @@ public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa extends TestDbBase 
       Object[] params = {"Bolsa Test","Bolsta para casos Prueba",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
       Map<String,Object>  outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
       String numError = (String) outputData.get("_numerror");
-      String msjError= (String) outputData.get("_msjerror");
+      String msjError = (String) outputData.get("_msjerror");
       Assert.assertEquals("Numero de error 0 creacion correcta",true,numError.equals("0"));
       Assert.assertEquals("Msj de error vacio creacion correcta",true,StringUtils.isBlank(msjError));
       System.out.println("NumError: "+numError +"MsjError"+msjError);
@@ -38,7 +38,7 @@ public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa extends TestDbBase 
     Object[] params = {""," ",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object>  outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
     Assert.assertEquals("Error en SP NumError != 0",true,!numError.equals("0"));
     Assert.assertEquals("Error en SP MsjError Not Blank",true,!StringUtils.isBlank(msjError));
     System.out.println("NumError: "+numError +"MsjError"+msjError);

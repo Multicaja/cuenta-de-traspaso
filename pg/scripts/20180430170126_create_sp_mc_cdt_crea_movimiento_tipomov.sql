@@ -46,15 +46,15 @@ $BODY$
 
         	INSERT INTO ${schema}.cdt_movimiento_tipo_mov
 	    		(
-                    id_movimiento,
-	    			id_tipo_movimiento
+            id_movimiento,
+	    		  id_tipo_movimiento
 	    		)
         	VALUES
-        		(
-        			_id_movimiento,
-                    id_tipo_movimiento
-        		);
-        EXCEPTION
+        	(
+            _id_movimiento,
+            _id_tipo_movimiento
+        	);
+      EXCEPTION
             WHEN OTHERS THEN
                 _NumError := SQLSTATE;
                 _MsjError := '[mc_cdt_crea_movimiento_tipomov] Error al registrar movimiento tipo movimiento. CAUSA ('|| SQLERRM ||')';

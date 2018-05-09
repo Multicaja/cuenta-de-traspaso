@@ -16,9 +16,9 @@
 
 -- // create_table_cdt_movimiento_tipo_mov
 -- Migration SQL that makes the change goes here.
-  CREATE TABLE ${schema}.cdt_movimiento_tipo_mov(
-      id_movimiento         BIGSERIAL NOT NULL,
-      id_tipo_movimiento    BIGSERIAL NOT NULL,
+  CREATE TABLE ${schema}.cdt_movimiento_tipo_mov (
+      id_movimiento         BIGSERIAL REFERENCES ${schema}.cdt_movimiento(id) ,
+      id_tipo_movimiento    BIGSERIAL REFERENCES ${schema}.cdt_tipo_movimiento(id),
       CONSTRAINT cdt_movimiento_tipo_mov_pk PRIMARY KEY(id_movimiento,id_tipo_movimiento)
   );
 

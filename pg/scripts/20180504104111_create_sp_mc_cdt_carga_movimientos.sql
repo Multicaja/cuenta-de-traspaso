@@ -30,6 +30,7 @@ DECLARE
 BEGIN
     _NumError = '0';
     _MsjError = '';
+
     OPEN _movimientos FOR
         SELECT
             id,
@@ -40,7 +41,7 @@ BEGIN
              ${schema}.cdt_movimiento
         WHERE
             estado = 'ACTIVO' AND
-            ( COALESCE(_NOMBRE,'') = '' OR lOWER(nombre) LIKE '%'||LOWER(_NOMBRE)||'%');
+            (TRIM(COALESCE(_NOMBRE,'')) = '' OR LOWER(nombre) LIKE '%'||LOWER(_NOMBRE)||'%');
 
 EXCEPTION
     WHEN OTHERS THEN

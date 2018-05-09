@@ -32,7 +32,7 @@ public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta extends TestDbBase
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertTrue("Numero de cuenta debe ser < 0", idCuenta.intValue() > 0);
     Assert.assertTrue("Numero de error 0 creacion correcta", numError.equals("0"));
@@ -50,7 +50,7 @@ public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta extends TestDbBase
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertTrue("NNumero de cuenta debe ser != 0", idCuenta == null || idCuenta.intValue() == 0 );
     Assert.assertFalse("Numero de error != 0 ", numError.equals("0"));

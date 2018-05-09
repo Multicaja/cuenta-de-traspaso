@@ -29,7 +29,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertTrue("Numero de error 0 creacion correcta", numError.equals("0"));
     Assert.assertTrue("Msj de error vacio creacion correcta", StringUtils.isBlank(msjError));
@@ -44,7 +44,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertFalse("Num Error != 0", numError.equals("0"));
     Assert.assertTrue("El Msj Error no es Vacio ", msjError.equals("[mc_cdt_crea_limite] El Id Movimiento no puede ser 0"));
@@ -59,10 +59,10 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertFalse("Num Error != 0", numError.equals("0"));
-    Assert.assertTrue("El Msj Error no es Vacio", msjError.equals("[mc_cdt_crea_limite] El Regla Acumulacion no puede ser 0"));
+    Assert.assertTrue("El Msj Error no es Vacio", msjError.equals("[mc_cdt_crea_limite] El Id Regla Acumulacion no puede ser 0"));
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
@@ -75,7 +75,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertFalse("Num Error != 0", numError.equals("0"));
     Assert.assertTrue("El Msj Error no es Vacio", msjError.equals("[mc_cdt_crea_limite] La descripcion no puede estar vacia"));
@@ -90,7 +90,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
-    String msjError= (String) outputData.get("_msjerror");
+    String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertFalse("Num Error != 0", numError.equals("0"));
     Assert.assertTrue("El Msj Error no es Vacio", msjError.equals("[mc_cdt_crea_limite] El Codigo de operacion no puede estar vacio"));

@@ -31,8 +31,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento_cuenta
 ) RETURNS record AS
 $BODY$
 DECLARE
-    _fecha_ini    TIMESTAMP;
-    _fecha_fin    TIMESTAMP;
+
     _id_cuenta_interno NUMERIC;
     _current_date DATE;
 BEGIN

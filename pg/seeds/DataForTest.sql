@@ -979,7 +979,7 @@ INSERT INTO
         nextval('${schema}.cdt_limite_id_s1'),
         1,
         2,
-        'Contador Primera carga debe ser = 0',
+        'Contador Primera carga debe ser = a',
         1,
         'IGUAL',
         'ACTIVO',
