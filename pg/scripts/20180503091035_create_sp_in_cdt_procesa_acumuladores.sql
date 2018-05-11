@@ -19,57 +19,56 @@
 
 CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
 (
-    IN _id_movimiento           NUMERIC,
+    IN _id_fase_movimiento      NUMERIC,
     IN _id_cuenta               NUMERIC,
     IN _monto                   NUMERIC,
-    OUT _NumError               VARCHAR,
-    OUT _MsjError               VARCHAR
-) RETURNS record AS
-$BODY$
+    OUT _num_error              VARCHAR,
+    OUT _msj_error               VARCHAR
+)AS $$
         DECLARE
-            _rec_tipo_mov RECORD;
+            _rec_cat_mov RECORD;
             _rec_regla_acum RECORD;
             _current_date DATE;
             _fecha_ini TIMESTAMP;
             _fecha_fin TIMESTAMP;
         BEGIN
 
-            _NumError := '0';
-            _MsjError := '';
+            _num_error := '0';
+            _msj_error := '';
             _current_date:= current_date;
 
 
             IF COALESCE(_id_cuenta, 0) = 0 THEN
-                _NumError := '1001';
-                _MsjError := '[in_cdt_procesa_acumuladores] El Id Cuenta no puede ser 0';
+                _num_error := '1001';
+                _msj_error := '[in_cdt_procesa_acumuladores] El Id Cuenta no puede ser 0';
                 RETURN;
             END IF;
 
-            IF COALESCE(_id_movimiento, 0) = 0 THEN
-                _NumError := '1002';
-                _MsjError := '[in_cdt_procesa_acumuladores] El Id Movimiento no puede ser 0';
+            IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
+                _num_error := '1002';
+                _msj_error := '[in_cdt_procesa_acumuladores] El Id Movimiento no puede ser 0';
                 RETURN;
             END IF;
 
             IF COALESCE(_monto, 0) = 0 THEN
-                _NumError := '1003';
-                _MsjError := '[in_cdt_procesa_acumuladores] El Monto no puede ser 0';
+                _num_error := '1003';
+                _msj_error := '[in_cdt_procesa_acumuladores] El Monto no puede ser 0';
                 RETURN;
             END IF;
 
-            FOR _rec_tipo_mov IN
+            FOR _rec_cat_mov IN
                 SELECT
-                    MOV.id                  AS id_movimiento,
-                    MOV.nombre              AS nombre_movimiento,
-                    MOV.signo              AS movimiento_signo,
-                    MTM.id_tipo_movimiento  AS id_tipo_movimiento,
-                    TMO.nombre              AS nombre_tipo_moviniento
+                    MOV.id                       AS id_fase_movimiento,
+                    MOV.nombre                   AS nombre_movimiento,
+                    MOV.signo                    AS movimiento_signo,
+                    CMF.id_categoria_movimiento  AS id_categoria_movimiento,
+                    CMO.nombre                   AS nombre_tipo_moviniento
                 FROM
-                    ${schema}.cdt_movimiento MOV
-                INNER JOIN ${schema}.cdt_movimiento_tipo_mov MTM ON MTM.id_movimiento = _id_movimiento
-                INNER JOIN ${schema}.cdt_tipo_movimiento TMO ON TMO.id = MTM.id_tipo_movimiento
+                    ${schema}.cdt_fase_movimiento MOV
+                INNER JOIN ${schema}.cdt_categoria_mov_fase CMF ON CMF.id_fase_movimiento = _id_fase_movimiento
+                INNER JOIN ${schema}.cdt_categoria_movimiento CMO ON CMO.id = CMF.id_categoria_movimiento
                 WHERE
-                    MOV.id = _id_movimiento
+                    MOV.id = _id_fase_movimiento
             LOOP -- RECORRO Y VERIFICO ACUMULADORES
                 FOR _rec_regla_acum IN
                     SELECT
@@ -79,7 +78,7 @@ $BODY$
                     FROM
                         ${schema}.cdt_regla_acumulacion
                     WHERE
-                        id_tipo_movimiento = _rec_tipo_mov.id_tipo_movimiento AND
+                        id_categoria_movimiento = _rec_cat_mov.id_categoria_movimiento AND
                         estado = 'ACTIVO'
                 LOOP
                     BEGIN
@@ -101,7 +100,7 @@ $BODY$
                             SET
                                 monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                               (monto+(_monto*_rec_tipo_mov.movimiento_signo))
+                                               (monto+(_monto*_rec_cat_mov.movimiento_signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
                                                (monto + 1)
                                         END,
@@ -115,7 +114,6 @@ $BODY$
                                 INSERT INTO
                                     ${schema}.cdt_cuenta_acumulador
                                         (
-                                            id,
                                             id_regla_acumulacion,
                                             id_cuenta,
                                             monto,
@@ -126,12 +124,11 @@ $BODY$
                                         )
                                     VALUES
                                         (
-                                            nextval('${schema}.cdt_cuenta_acumulador_id_s1'),
                                             _rec_regla_acum.id,
                                             _id_cuenta,
                                             CASE
                                                 WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                                    (_monto*_rec_tipo_mov.movimiento_signo)
+                                                    (_monto*_rec_cat_mov.movimiento_signo)
                                                 WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
                                                     1
                                             END,
@@ -147,7 +144,7 @@ $BODY$
                             SET
                                 monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                               (monto+(_monto*_rec_tipo_mov.movimiento_signo))
+                                               (monto+(_monto*_rec_cat_mov.movimiento_signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
                                                (monto + 1)
                                         END,
@@ -159,7 +156,6 @@ $BODY$
                                 INSERT INTO
                                     ${schema}.cdt_cuenta_acumulador
                                     (
-                                        id,
                                         id_regla_acumulacion,
                                         id_cuenta,
                                         monto,
@@ -170,12 +166,11 @@ $BODY$
                                     )
                                 VALUES
                                     (
-                                        nextval('${schema}.cdt_cuenta_acumulador_id_s1'),
                                         _rec_regla_acum.id,
                                         _id_cuenta,
                                         CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                                (_monto*_rec_tipo_mov.movimiento_signo)
+                                                (_monto*_rec_cat_mov.movimiento_signo)
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
                                                 1
                                         END,
@@ -188,8 +183,8 @@ $BODY$
                         END IF;-- EN IF PERIOCIDAD
                     EXCEPTION
                         WHEN OTHERS THEN
-                            _NumError := SQLSTATE;
-                            _MsjError := '[in_cdt_procesa_acumuladores] Error al insertar o actualizar acumulacion. CAUSA ('|| SQLERRM ||')';
+                            _num_error := SQLSTATE;
+                            _msj_error := '[in_cdt_procesa_acumuladores] Error al insertar o actualizar acumulacion. CAUSA ('|| SQLERRM ||')';
                         RETURN;
                     END;
                 END LOOP;-- END LOOP REGLA ACUMULACION
@@ -197,15 +192,15 @@ $BODY$
 
     EXCEPTION
         WHEN OTHERS THEN
-            _NumError := SQLSTATE;
-            _MsjError := '[in_cdt_procesa_acumuladores] Error desconocido en crea cuenta acumulacion. CAUSA ('|| SQLERRM ||')';
+            _num_error := SQLSTATE;
+            _msj_error := '[in_cdt_procesa_acumuladores] Error desconocido en crea cuenta acumulacion. CAUSA ('|| SQLERRM ||')';
         RETURN;
     END;
-$BODY$
+$$
 LANGUAGE 'plpgsql';
+
 -- //@UNDO
 -- SQL to undo the change goes here.
-
 
  DROP FUNCTION IF EXISTS  ${schema}.in_cdt_procesa_acumuladores;
 

@@ -22,49 +22,45 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta
     IN _id_externo         VARCHAR,
     IN _descripcion		     VARCHAR,
     OUT _id_cuenta         NUMERIC,
-    OUT _NumError          VARCHAR,
-    OUT _MsjError          VARCHAR
-) RETURNS record AS
-$BODY$
-    	DECLARE
+    OUT _num_error          VARCHAR,
+    OUT _msj_error          VARCHAR
+)AS $$
+    DECLARE
 
-    	BEGIN
-	        _NumError := '0';
-	        _MsjError := '';
+    BEGIN
 
-		    IF TRIM(COALESCE(_id_externo, '')) = '' THEN
-	            _NumError := '1000';
-	        	_MsjError := '[mc_cdt_crea_cuenta] El Id Externo de la cuenta no puede ser vacio';
-	        	RETURN;
-	        END IF;
+        _num_error := '0';
+        _msj_error := '';
+        _id_cuenta:= 0;
 
-            _id_cuenta := nextval('${schema}.cdt_cuenta_id_s1');
+      IF TRIM(COALESCE(_id_externo, '')) = '' THEN
+          _num_error := '1000';
+          _msj_error := '[mc_cdt_crea_cuenta] El Id Externo de la cuenta no puede ser vacio';
+          RETURN;
+        END IF;
 
-            INSERT INTO ${schema}.cdt_cuenta
-	    		(
-	    			id,
-	    			id_externo,
-	    			descripcion,
-	    			estado,
-	    			fecha_estado,
-	    			fecha_creacion
-	    		)
-        	VALUES
-        		(
-        			_id_cuenta,
-        			 _id_externo,
-        			 COALESCE(_descripcion,''),
-        			 'ACTIVO',
-        			 timezone('utc', now()),
-        			 timezone('utc', now())
-        		);
-        EXCEPTION
-            WHEN OTHERS THEN
-                _NumError := SQLSTATE;
-                _MsjError := '[mc_cdt_crea_cuenta] Error al Insertar Nueva Cuenta. CAUSA ('|| SQLERRM ||')';
-            RETURN;
-    	END;
-$BODY$
+        INSERT INTO ${schema}.cdt_cuenta (
+          id_externo,
+          descripcion,
+          estado,
+          fecha_estado,
+          fecha_creacion
+        )
+        VALUES (
+           _id_externo,
+           COALESCE(_descripcion,''),
+           'ACTIVO',
+           timezone('utc', now()),
+           timezone('utc', now())
+        );
+      SELECT currval('${schema}.cdt_cuenta_id_seq') INTO _id_cuenta;
+      EXCEPTION
+          WHEN OTHERS THEN
+              _num_error := SQLSTATE;
+              _msj_error := '[mc_cdt_crea_cuenta] Error al Insertar Nueva Cuenta. CAUSA ('|| SQLERRM ||')';
+          RETURN;
+    END;
+$$
 LANGUAGE 'plpgsql';
 
 -- //@UNDO

@@ -14,31 +14,16 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
-public class Test_20180504104111_create_sp_mc_cdt_carga_movimientos extends TestDbBase {
+public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
-  /*
-    int i = 1;
-    for(Object data : lstMovimientos)
-    {
-      Map<String,Object> aData = (Map<String, Object>) data;
-      System.out.println("Fila================ "+i++);
-      for (String key : aData.keySet() )
-      {
-        System.out.println(aData.get(key));
-      }
-    }
-    IN  _NOMBRE         VARCHAR,
-    OUT _movimientos    REFCURSOR,
-    OUT _NumError       VARCHAR,
-    OUT _MsjError       VARCHAR
-   */
+
 
   @Test
-  public void spCargaMovimiento() throws SQLException {
+  public void spCargaFasesMovimiento() throws SQLException {
 
-    Object[] params = {"Primera Carga" ,new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_MOVIMIENTOS.getName(),params);
+    Object[] params = {"Primera Carga" ,new NullParam(Types.NUMERIC),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
     List lstMovimientos = (List) outputData.get("_movimientos");
 
@@ -52,10 +37,10 @@ public class Test_20180504104111_create_sp_mc_cdt_carga_movimientos extends Test
 
   }
   @Test
-  public void spCargaMovimientoParamInNull() throws SQLException {
+  public void spCargaFasesMovimientoParamInNull() throws SQLException {
 
-    Object[] params = {new NullParam(Types.VARCHAR),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_MOVIMIENTOS.getName(),params);
+    Object[] params = {new NullParam(Types.VARCHAR),new NullParam(Types.NUMERIC),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
     List lstMovimientos = (List) outputData.get("_movimientos");
 
@@ -69,10 +54,10 @@ public class Test_20180504104111_create_sp_mc_cdt_carga_movimientos extends Test
 
   }
   @Test
-  public void spCargaMovimientoParamInVacio() throws SQLException {
+  public void spCargaFasesMovimientoParamInVacio() throws SQLException {
 
-    Object[] params = {" ",new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_MOVIMIENTOS.getName(),params);
+    Object[] params = {"",0,new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
     List lstMovimientos = (List) outputData.get("_movimientos");
 

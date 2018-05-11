@@ -18,29 +18,23 @@
 -- Migration SQL that makes the change goes here.
 
 
- CREATE SEQUENCE ${schema}.cdt_movimiento_cuenta_id_s1
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
 
- COMMENT ON SEQUENCE ${schema}.cdt_movimiento_cuenta_id_s1 IS 'ID del movimiento cuenta';
 
   CREATE TABLE ${schema}.cdt_movimiento_cuenta(
-      id                 BIGSERIAL NOT NULL,
-      id_cuenta          BIGSERIAL NOT NULL,
-      id_movimiento      BIGSERIAL NOT NULL,
-      id_mov_referencia  BIGSERIAL NOT NULL,
-      id_tx_externo      VARCHAR(50) NOT NULL,
-      glosa              VARCHAR(100) NOT NULL,
-      monto              NUMERIC NOT NULL,
-      fecha_registro     TIMESTAMP NOT NULL,
-      estado             VARCHAR(10) NOT NULL,
-      fecha_estado       TIMESTAMP NOT NULL,
+      id                  BIGSERIAL NOT NULL,
+      id_cuenta           BIGINT NOT NULL,
+      id_fase_movimiento  BIGINT NOT NULL,
+      id_mov_referencia   BIGINT NOT NULL,
+      id_tx_externo       VARCHAR(50) NOT NULL,
+      glosa               VARCHAR(100) NOT NULL,
+      monto               NUMERIC NOT NULL,
+      fecha_registro      TIMESTAMP NOT NULL,
+      estado              VARCHAR(10) NOT NULL,
+      fecha_estado        TIMESTAMP NOT NULL,
       CONSTRAINT cdt_movimiento_cuenta_pk PRIMARY KEY(id)
   );
 
-  CREATE INDEX cdt_movimiento_cuenta_i1 ON ${schema}.cdt_movimiento_cuenta (id_movimiento);
+  CREATE INDEX cdt_movimiento_cuenta_i1 ON ${schema}.cdt_movimiento_cuenta (id_fase_movimiento);
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS ${schema}.cdt_movimiento_cuenta;
-  DROP SEQUENCE IF EXISTS ${schema}.cdt_movimiento_cuenta_id_s1;

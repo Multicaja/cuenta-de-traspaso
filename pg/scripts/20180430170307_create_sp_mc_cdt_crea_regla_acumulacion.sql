@@ -19,41 +19,40 @@
 
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_regla_acumulacion
 (
-    IN _id_tipo_movimiento  NUMERIC,
-    IN _periocidad          VARCHAR,
-    IN _codigo_operacion    VARCHAR,
-    OUT _NumError           VARCHAR,
-    OUT _MsjError           VARCHAR
-) RETURNS record AS
-$BODY$
+    IN _id_categoria_movimiento  NUMERIC,
+    IN _periocidad               VARCHAR,
+    IN _codigo_operacion         VARCHAR,
+    OUT _num_error               VARCHAR,
+    OUT _msj_error               VARCHAR
+)AS $$
+
     	DECLARE
 
     	BEGIN
-	        _NumError := '0';
-	        _MsjError := '';
+	        _num_error := '0';
+	        _msj_error := '';
 
-		    IF COALESCE(_id_tipo_movimiento, 0) = 0 THEN
-	            _NumError := '1001';
-	        	_MsjError := '[mc_cdt_crea_regla_acumulacion] El Id Tipo Movimiento no puede ser 0';
-	        	RETURN;
-	        END IF;
+		    IF COALESCE(_id_categoria_movimiento, 0) = 0 THEN
+          _num_error := '1001';
+          _msj_error := '[mc_cdt_crea_regla_acumulacion] El Id Tipo Movimiento no puede ser 0';
+          RETURN;
+	      END IF;
 
-            IF TRIM(COALESCE(_periocidad, '')) = '' THEN
-                _NumError := '1002';
-                _MsjError := '[mc_cdt_crea_regla_acumulacion] La Periocidad no puede ser vacia';
-                RETURN;
-            END IF;
+        IF TRIM(COALESCE(_periocidad, '')) = '' THEN
+          _num_error := '1002';
+          _msj_error := '[mc_cdt_crea_regla_acumulacion] La Periocidad no puede ser vacia';
+          RETURN;
+        END IF;
 
-             IF TRIM(COALESCE(_codigo_operacion, '')) = '' THEN
-                _NumError := '1002';
-                _MsjError := '[mc_cdt_crea_regla_acumulacion] El Codigo Operacion no puede ser vacio';
-                RETURN;
-            END IF;
+         IF TRIM(COALESCE(_codigo_operacion, '')) = '' THEN
+            _num_error := '1002';
+            _msj_error := '[mc_cdt_crea_regla_acumulacion] El Codigo Operacion no puede ser vacio';
+            RETURN;
+         END IF;
 
         	INSERT INTO ${schema}.cdt_regla_acumulacion
 	    		(
-	    			id,
-	    			id_tipo_movimiento,
+	    			id_categoria_movimiento,
             periocidad,
 	    			codigo_operacion,
             estado,
@@ -62,8 +61,7 @@ $BODY$
 	    		)
         	VALUES
         		(
-        			nextval('${schema}.cdt_regla_acumulacion_id_s1'),
-              _id_tipo_movimiento,
+              _id_categoria_movimiento,
               _periocidad,
               _codigo_operacion,
               'ACTIVO',
@@ -72,14 +70,13 @@ $BODY$
         		);
         EXCEPTION
             WHEN OTHERS THEN
-                _NumError := SQLSTATE;
-                _MsjError := '[mc_cdt_crea_regla_acumulacion] Error al crear Regla acumulacion. CAUSA ('|| SQLERRM ||')';
+                _num_error := SQLSTATE;
+                _msj_error := '[mc_cdt_crea_regla_acumulacion] Error al crear Regla acumulacion. CAUSA ('|| SQLERRM ||')';
             RETURN;
     	END;
-$BODY$
+$$
 LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-
  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_regla_acumulacion

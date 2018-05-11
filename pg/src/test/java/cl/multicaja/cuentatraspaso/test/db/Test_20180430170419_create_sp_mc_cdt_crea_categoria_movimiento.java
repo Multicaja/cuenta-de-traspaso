@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430170419_create_sp_mc_cdt_crea_tipo_movimiento extends TestDbBase {
+public class Test_20180430170419_create_sp_mc_cdt_crea_categoria_movimiento extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
   /*
@@ -24,10 +24,10 @@ public class Test_20180430170419_create_sp_mc_cdt_crea_tipo_movimiento extends T
    */
 
   @Test
-  public void spCreaTipoMovimiento() throws SQLException {
+  public void spCreaCategoriaMovimiento() throws SQLException {
 
     Object[] params = {1 ,"Recarga Test","Recarga test (Pruebas)" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_TIPO_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_CATEGORIA_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -40,10 +40,10 @@ public class Test_20180430170419_create_sp_mc_cdt_crea_tipo_movimiento extends T
   }
 
   @Test
-  public void spCreaTipoMovimientoErrorBolsa() throws SQLException {
+  public void spCreaCategoriaMovimientoErrorBolsa() throws SQLException {
 
     Object[] params = {new NullParam(Types.NUMERIC),"Recarga Test","Recarga test (Pruebas)" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_TIPO_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_CATEGORIA_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -56,10 +56,10 @@ public class Test_20180430170419_create_sp_mc_cdt_crea_tipo_movimiento extends T
   }
 
   @Test
-  public void spCreaTipoMovimientoErrorNombre() throws SQLException {
+  public void spCreaCategoriaMovimientoErrorNombre() throws SQLException {
 
     Object[] params = {1,"","Recarga test (Pruebas)" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_TIPO_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_CATEGORIA_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");

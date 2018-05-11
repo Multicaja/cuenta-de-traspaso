@@ -18,12 +18,6 @@
 -- Migration SQL that makes the change goes here.
 
 
-  CREATE SEQUENCE ${schema}.cdt_bolsa_id_s1
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
-
-  COMMENT ON SEQUENCE ${schema}.cdt_bolsa_id_s1 IS 'ID de la bolsa';
 
   CREATE TABLE ${schema}.cdt_bolsa (
       id              BIGSERIAL NOT NULL,

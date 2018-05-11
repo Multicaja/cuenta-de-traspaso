@@ -8,11 +8,12 @@ public class Constants {
     BOLSA("cdt_bolsa"),
     CUENTA_ACUMULADOR("cdt_cuenta_acumulador"),
     LIMITE("cdt_limite"),
-    MOVIMIENTO("cdt_movimiento"),
-    TIPO_MOVIMIENTO("cdt_tipo_movimiento"),
+    FASE_MOVIMIENTO("cdt_fase_movimiento"),
+    CATEGORIA_MOVIMIENTO("cdt_categoria_movimiento"),
     MOVIMIENTO_CUENTA("cdt_movimiento_cuenta"),
     REGLA_ACUMULACION("cdt_regla_acumulacion"),
-    MOVIMIENTO_TIPO_MOV("cdt_movimiento_tipo_mov");
+    CATEGORIA_MOV_FASE("cdt_categoria_mov_fase"),
+    CONFIRMACION_MOV("cdt_confirmacion_movimiento");
 
     private String name;
 
@@ -29,12 +30,12 @@ public class Constants {
     SP_CREA_BOLSA(".mc_cdt_crea_bolsa"),
     SP_CREA_CUENTA(".mc_cdt_crea_cuenta"),
     SP_CREA_LIMITE(".mc_cdt_crea_limite"),
-    SP_CREA_MOVIMIENTO(".mc_cdt_crea_movimiento"),
-    SP_CREA_TIPO_MOVIMIENTO(".mc_cdt_crea_tipo_movimiento"),
-    SP_CREA_MOV_TIPO_MOV(".mc_cdt_crea_movimiento_tipomov"),
+    SP_CREA_FASE_MOVIMIENTO(".mc_cdt_crea_fase_movimiento"),
+    SP_CREA_CATEGORIA_MOVIMIENTO(".mc_cdt_crea_categoria_movimiento"),
+    SP_CREA_MOV_TIPO_MOV(".mc_cdt_crea_categoria_mov_fase"),
     SP_CREA_MOVIMIENTO_CUENTA(".mc_cdt_crea_movimiento_cuenta"),
     SP_CREA_REGLA_ACUMULACION(".mc_cdt_crea_regla_acumulacion"),
-    SP_CARGA_MOVIMIENTOS(".mc_cdt_carga_movimientos");
+    SP_CARGA_FASES_MOVIMIENTOS(".mc_cdt_carga_fases_movimientos");
 
     private String name;
     Procedures(String name) {

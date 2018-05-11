@@ -14,30 +14,24 @@
 --    limitations under the License.
 --
 
--- // create_table_cdt_movimiento
+-- // create_table_ccdt_fases_movimiento
 -- Migration SQL that makes the change goes here.
 
-  CREATE SEQUENCE ${schema}.cdt_movimiento_id_s1
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
-
-  COMMENT ON SEQUENCE ${schema}.cdt_movimiento_id_s1 IS 'ID del Movimiento';
 
 
-  CREATE TABLE ${schema}.cdt_movimiento(
+  CREATE TABLE ${schema}.cdt_fase_movimiento (
       id                    BIGSERIAL  NOT NULL,
       nombre                VARCHAR(50) NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
       signo                 NUMERIC NOT NULL,
+      ind_confirmacion      VARCHAR(1) NOT NULL,
       estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,
       fecha_creacion        TIMESTAMP NOT NULL,
-      CONSTRAINT cdt_movimiento_pk PRIMARY KEY(id)
+      CONSTRAINT cdt_fase_movimiento_pk PRIMARY KEY(id)
   );
 
-  CREATE INDEX cdt_movimiento_i1 ON ${schema}.cdt_movimiento (estado);
+  CREATE INDEX cdt_fase_movimiento_i1 ON ${schema}.cdt_fase_movimiento (estado);
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_movimiento;
-  DROP SEQUENCE IF EXISTS  ${schema}.cdt_movimiento_id_s1;
+  DROP TABLE IF EXISTS ${schema}.cdt_fase_movimiento;

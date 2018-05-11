@@ -2,7 +2,6 @@
 
 INSERT INTO ${schema}.cdt_bolsa
 (
-    id,
     nombre,
     descripcion,
     estado,
@@ -11,8 +10,7 @@ INSERT INTO ${schema}.cdt_bolsa
 )
 VALUES
 (
-  nextval('${schema}.cdt_bolsa_id_s1'),
-	'Cargas',
+ 	'Cargas',
 	'Saco de cargas',
 	'ACTIVO',
 	LOCALTIMESTAMP,
@@ -23,7 +21,6 @@ VALUES
 
 INSERT INTO ${schema}.cdt_bolsa
 (
-    id,
     nombre,
     descripcion,
     estado,
@@ -32,7 +29,6 @@ INSERT INTO ${schema}.cdt_bolsa
 )
 VALUES
 (
-    nextval('${schema}.cdt_bolsa_id_s1'),
     'Retiros',
     'Saco de retiros',
     'ACTIVO',
@@ -44,7 +40,6 @@ VALUES
 
 INSERT INTO ${schema}.cdt_bolsa
 (
-    id,
     nombre,
     descripcion,
     estado,
@@ -53,7 +48,6 @@ INSERT INTO ${schema}.cdt_bolsa
 )
 VALUES
 (
-    nextval('${schema}.cdt_bolsa_id_s1'),
     'Total',
     'Saldo',
     'ACTIVO',
@@ -66,7 +60,6 @@ VALUES
 INSERT INTO
 	${schema}.cdt_cuenta
 	(
-    	id,
     	id_externo,
     	descripcion,
     	estado,
@@ -75,7 +68,6 @@ INSERT INTO
     )
     VALUES
     (
-    	nextval('${schema}.cdt_cuenta_id_s1'),
     	'PREPAGO_166168813',
     	'Cliente de Prepago Multicaja',
     	'ACTIVO',
@@ -85,132 +77,132 @@ INSERT INTO
 
 --INSERT TIPO MOVIMIENTO
 INSERT INTO
-	${schema}.cdt_movimiento
+	${schema}.cdt_fase_movimiento
 	(
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
     	'Solicitud Primera Carga',
     	'Solicitud Primera Carga',
     	1,
+    	'N',
     	'ACTIVO',
     	LOCALTIMESTAMP,
     	LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Confirmación Primera Carga',
         'Confirmación Primera Carga',
         -1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Solicitud Carga Web',
         'Solicitud Carga Web',
         1,
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Confirmación Carga Web',
         'Confirmación Carga Web',
         1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Solicitud Carga POS',
         'Solicitud Carga POS',
         1,
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Confirmación Carga POS',
         'Confirmación Carga POS',
         1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -218,22 +210,22 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Reversa de Carga',
         'Reversa de Carga',
         1,
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -241,22 +233,22 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Solicitud Retiro Web',
         'Solicitud Retiro Web',
         1,
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -264,22 +256,22 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Solicitud Retiro POS',
         'Solicitud Retiro POS',
         1,
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -287,66 +279,66 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Confirmación Retiro POS',
         'Confirmación Retiro POS',
         1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Solicitud Reversa de Retiro',
         'Solicitud Reversa de Retiro',
         1,
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento
+    ${schema}.cdt_fase_movimiento
     (
-        id,
         nombre,
         descripcion,
         signo,
+        ind_confirmacion,
         estado,
         fecha_estado,
         fecha_creacion
     )
     VALUES
     (
-        nextval('${schema}.cdt_movimiento_id_s1'),
         'Confirmación Reversa de Retiro',
         'Confirmación Reversa de Retiro',
         1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -355,9 +347,8 @@ INSERT INTO
 
 -- INSERT TIPO MOVIMIENTO
 INSERT INTO
-	${schema}.cdt_tipo_movimiento
+	${schema}.cdt_categoria_movimiento
 	(
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -367,7 +358,6 @@ INSERT INTO
     )
     VALUES
     (
-    	nextval('${schema}.cdt_tipo_movimiento_id_s1'),
     	1,
     	'Solicitud de Carga',
     	'Solicitud de Carga',
@@ -377,9 +367,8 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_tipo_movimiento
+    ${schema}.cdt_categoria_movimiento
     (
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -389,7 +378,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_tipo_movimiento_id_s1'),
         1,
         'Confirmación de Carga',
         'Confirmación de Carga',
@@ -399,9 +387,8 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_tipo_movimiento
+    ${schema}.cdt_categoria_movimiento
     (
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -411,7 +398,6 @@ INSERT INTO
     )
 VALUES
     (
-        nextval('${schema}.cdt_tipo_movimiento_id_s1'),
         1,
         'Reversa de Carga',
         'Reversa de Carga',
@@ -421,9 +407,8 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_tipo_movimiento
+    ${schema}.cdt_categoria_movimiento
     (
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -433,7 +418,6 @@ INSERT INTO
     )
 VALUES
     (
-        nextval('${schema}.cdt_tipo_movimiento_id_s1'),
         2,
         'Solicitud de Retiro',
         'Solicitud de Retiro',
@@ -443,9 +427,8 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_tipo_movimiento
+    ${schema}.cdt_categoria_movimiento
     (
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -455,7 +438,6 @@ INSERT INTO
     )
 VALUES
     (
-        nextval('${schema}.cdt_tipo_movimiento_id_s1'),
         2,
         'Confirmación de Retiro',
         'Confirmación de Retiro',
@@ -466,9 +448,8 @@ VALUES
 
 
 INSERT INTO
-    ${schema}.cdt_tipo_movimiento
+    ${schema}.cdt_categoria_movimiento
     (
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -478,7 +459,6 @@ INSERT INTO
     )
 VALUES
     (
-        nextval('${schema}.cdt_tipo_movimiento_id_s1'),
         2,
         'Reversa de Retiro',
         'Reversa de Retiro',
@@ -489,9 +469,8 @@ VALUES
 
 
 INSERT INTO
-    ${schema}.cdt_tipo_movimiento
+    ${schema}.cdt_categoria_movimiento
     (
-        id,
         id_bolsa,
         nombre,
         descripcion,
@@ -501,7 +480,6 @@ INSERT INTO
     )
 VALUES
     (
-        nextval('${schema}.cdt_tipo_movimiento_id_s1'),
         3,
         'Transacción',
         'Transacción',
@@ -512,10 +490,10 @@ VALUES
 
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -524,10 +502,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -536,10 +514,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -548,10 +526,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -560,10 +538,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -572,10 +550,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -584,10 +562,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -596,10 +574,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -608,10 +586,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -620,10 +598,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -632,10 +610,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -644,10 +622,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -656,10 +634,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -668,10 +646,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -680,10 +658,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -692,10 +670,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -704,10 +682,10 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_movimiento_tipo_mov
+    ${schema}.cdt_categoria_mov_fase
     (
-        id_movimiento,
-        id_tipo_movimiento
+        id_fase_movimiento,
+        id_categoria_movimiento
     )
 VALUES
     (
@@ -720,8 +698,7 @@ VALUES
 INSERT INTO
 	${schema}.cdt_regla_acumulacion
 	(
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -730,7 +707,6 @@ INSERT INTO
     )
     VALUES
     (
-    	nextval('${schema}.cdt_regla_acumulacion_id_s1'),
     	1,
     	'MEN',
     	'SUM',
@@ -743,8 +719,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
     (
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -753,7 +728,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_regla_acumulacion_id_s1'),
         1,
         'MEN',
         'COUNT',
@@ -767,8 +741,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
     (
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -777,7 +750,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_regla_acumulacion_id_s1'),
         3,
         'MEN',
         'SUM',
@@ -791,8 +763,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
     (
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -801,7 +772,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_regla_acumulacion_id_s1'),
         4,
         'MEN',
         'SUM',
@@ -814,8 +784,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
     (
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -824,7 +793,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_regla_acumulacion_id_s1'),
         4,
         'MEN',
         'COUNT',
@@ -837,8 +805,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
     (
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -847,7 +814,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_regla_acumulacion_id_s1'),
         6,
         'MEN',
         'SUM',
@@ -860,8 +826,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
     (
-        id,
-        id_tipo_movimiento,
+        id_categoria_movimiento,
         periocidad,
         codigo_operacion,
         estado,
@@ -870,7 +835,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_regla_acumulacion_id_s1'),
         7,
         'VIDA',
         'SUM',
@@ -885,8 +849,7 @@ INSERT INTO
 INSERT INTO
 	${schema}.cdt_limite
 	(
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -897,22 +860,20 @@ INSERT INTO
     )
     VALUES
     (
-    	nextval('${schema}.cdt_limite_id_s1'),
     	1,
     	-1,
     	'Primera carga debe ser menor o igual a ',
     	50000,
-        'MENORQIG',
-        'ACTIVO',
-        LOCALTIMESTAMP,
-        LOCALTIMESTAMP
+      'MENORQIG',
+      'ACTIVO',
+      LOCALTIMESTAMP,
+      LOCALTIMESTAMP
     );
 
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -923,7 +884,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         1,
         -1,
         'Primera carga debe ser mayor o igual a ',
@@ -938,8 +898,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -950,7 +909,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         1,
         1,
         'Carga debe ser menor o igual a ',
@@ -964,8 +922,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -976,7 +933,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         1,
         2,
         'Contador Primera carga debe ser = a',
@@ -990,8 +946,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1002,7 +957,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         3,
         -1,
         'DEBE SER MENOR O IGUAL QUE',
@@ -1016,8 +970,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1028,7 +981,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         3,
         -1,
         'DEBE SER MAYOR O IGUAL QUE',
@@ -1042,8 +994,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1054,7 +1005,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         3,
         1,
         'DEBE SER MENOR O IGUAL QUE',
@@ -1068,8 +1018,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1080,7 +1029,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         5,
         -1,
         'DEBE SER MENOR O IGUAL QUE',
@@ -1094,8 +1042,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1106,7 +1053,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         5,
         -1,
         'DEBE SER MAYOR O IGUAL QUE',
@@ -1120,8 +1066,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1132,7 +1077,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         5,
         1,
         'DEBE SER MENOR O IGUAL QUE',
@@ -1146,8 +1090,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1158,7 +1101,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         8,
         -1,
         'Primera carga debe ser menor o igual a ',
@@ -1172,8 +1114,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1184,7 +1125,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         8,
         -1,
         'DEBE SER MAYOR O IGUAL QUE',
@@ -1199,8 +1139,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1211,7 +1150,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         8,
         4,
         'DEBE SER MENOR O IGUAL QUE',
@@ -1226,8 +1164,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1238,7 +1175,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         8,
         -1,
         'DEBE SER MENOR O IGUAL QUE',
@@ -1252,8 +1188,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1264,7 +1199,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         10,
         -1,
         'DEBE SER MAYOR O IGUAL QUE',
@@ -1279,8 +1213,7 @@ INSERT INTO
 INSERT INTO
     ${schema}.cdt_limite
     (
-        id,
-        id_movimiento,
+        id_fase_movimiento,
         id_regla_acumulacion,
         descripcion,
         valor,
@@ -1291,7 +1224,6 @@ INSERT INTO
     )
     VALUES
     (
-        nextval('${schema}.cdt_limite_id_s1'),
         10,
         4,
         'DEBE SER MENOR O IGUAL QUE',

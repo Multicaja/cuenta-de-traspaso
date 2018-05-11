@@ -16,27 +16,21 @@
 
 -- // create_table_cdt_reglas_acumulacion
 -- Migration SQL that makes the change goes here.
-CREATE SEQUENCE ${schema}.cdt_regla_acumulacion_id_s1
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
 
-  COMMENT ON SEQUENCE ${schema}.cdt_regla_acumulacion_id_s1 IS 'ID  Regla Acumulacion';
 
   CREATE TABLE ${schema}.cdt_regla_acumulacion (
-      id                    BIGSERIAL NOT NULL,
-      id_tipo_movimiento    BIGSERIAL NOT NULL,
-      periocidad            VARCHAR(10) NOT NULL,
-      codigo_operacion      VARCHAR(10) NOT NULL,
-      estado                VARCHAR(10) NOT NULL,
-      fecha_estado          TIMESTAMP NOT NULL,
-      fecha_creacion        TIMESTAMP NOT NULL,
+      id                        BIGSERIAL NOT NULL,
+      id_categoria_movimiento   BIGINT  NOT NULL,
+      periocidad                VARCHAR(10) NOT NULL,
+      codigo_operacion          VARCHAR(10) NOT NULL,
+      estado                    VARCHAR(10) NOT NULL,
+      fecha_estado              TIMESTAMP NOT NULL,
+      fecha_creacion            TIMESTAMP NOT NULL,
       CONSTRAINT cdt_regla_acumulacion_pk PRIMARY KEY(id)
   );
 
   CREATE INDEX cdt_regla_acumulacion_i1 ON ${schema}.cdt_regla_acumulacion (estado);
-  CREATE INDEX cdt_regla_acumulacion_i2 ON ${schema}.cdt_regla_acumulacion (estado,id_tipo_movimiento);
+  CREATE INDEX cdt_regla_acumulacion_i2 ON ${schema}.cdt_regla_acumulacion (estado,id_categoria_movimiento);
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS ${schema}.cdt_regla_acumulacion;
-  DROP SEQUENCE IF EXISTS  ${schema}.cdt_regla_acumulacion_id_s1;

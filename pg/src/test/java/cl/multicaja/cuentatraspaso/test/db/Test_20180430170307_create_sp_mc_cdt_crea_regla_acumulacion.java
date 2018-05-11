@@ -16,7 +16,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion  extend
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
   /*
-    IN _id_tipo_movimiento  NUMERIC,
+    IN _id_categoria_movimiento  NUMERIC,
     IN _periocidad          VARCHAR,
     IN _codigo_operacion    VARCHAR,
     OUT _NumError           VARCHAR,

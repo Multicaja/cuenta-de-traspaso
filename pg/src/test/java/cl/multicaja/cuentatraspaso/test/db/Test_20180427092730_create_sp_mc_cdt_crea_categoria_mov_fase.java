@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180427092730_create_sp_mc_cdt_crea_movimiento_tipomov extends TestDbBase {
+public class Test_20180427092730_create_sp_mc_cdt_crea_categoria_mov_fase extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
 

@@ -14,7 +14,7 @@ import java.util.Map;
 public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase {
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
   /*
-      IN _id_movimiento           NUMERIC,
+      IN _id_fase_movimiento      NUMERIC,
       IN _id_regla_acumulacion    NUMERIC,
       IN _descripcion             VARCHAR,
       IN _valor    		            DECIMAL,
@@ -47,7 +47,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertFalse("Num Error != 0", numError.equals("0"));
-    Assert.assertTrue("El Msj Error no es Vacio ", msjError.equals("[mc_cdt_crea_limite] El Id Movimiento no puede ser 0"));
+    Assert.assertFalse("El Msj Error no es Vacio ", StringUtils.isBlank(msjError));
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 

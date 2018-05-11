@@ -22,25 +22,24 @@
   (
       IN _nombre             VARCHAR,
       IN _descripcion		     VARCHAR,
-      OUT _NumError          VARCHAR,
-      OUT _MsjError          VARCHAR
-  ) RETURNS record AS
-  $BODY$
+      OUT _num_error          VARCHAR,
+      OUT _msj_error          VARCHAR
+  )AS $$
+
         DECLARE
 
         BEGIN
-            _NumError := '0';
-            _MsjError := '';
+            _num_error := '0';
+            _msj_error := '';
 
           IF TRIM(COALESCE(_nombre, '')) = '' THEN
-                _NumError := '1000';
-              _MsjError := '[mc_cdt_crea_bolsa] El nombre de la Bolsa no puede ser vacio';
+                _num_error := '1000';
+              _msj_error := '[mc_cdt_crea_bolsa] El nombre de la Bolsa no puede ser vacio';
               RETURN;
             END IF;
 
             INSERT INTO ${schema}.cdt_bolsa
             (
-              id,
               nombre,
               descripcion,
               estado,
@@ -49,7 +48,6 @@
             )
             VALUES
               (
-                 nextval('${schema}.cdt_bolsa_id_s1'),
                  _nombre,
                  COALESCE(_descripcion,''),
                  'ACTIVO',
@@ -58,11 +56,11 @@
               );
           EXCEPTION
               WHEN OTHERS THEN
-                  _NumError := SQLSTATE;
-                  _MsjError := '[mc_cdt_crea_bolsa] Error al Insertar Bolsa. CAUSA ('|| SQLERRM ||')';
+                  _num_error := SQLSTATE;
+                  _msj_error := '[mc_cdt_crea_bolsa] Error al Insertar Bolsa. CAUSA ('|| SQLERRM ||')';
               RETURN;
         END;
-  $BODY$
+  $$
   LANGUAGE 'plpgsql';
 
 -- //@UNDO

@@ -17,18 +17,11 @@
 -- // create_table_cdt_limite
 -- Migration SQL that makes the change goes here.
 
-  CREATE SEQUENCE ${schema}.cdt_limite_id_s1
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
-
-  COMMENT ON SEQUENCE ${schema}.cdt_limite_id_s1 IS 'ID del limite';
-
 
   CREATE TABLE ${schema}.cdt_limite(
       id                    BIGSERIAL NOT NULL,
-      id_movimiento         BIGSERIAL NOT NULL,
-      id_regla_acumulacion  BIGSERIAL,
+      id_fase_movimiento    BIGINT NOT NULL,
+      id_regla_acumulacion  BIGINT NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
       valor                 NUMERIC NOT NULL,
       cod_operacion         VARCHAR(10) NOT NULL,
