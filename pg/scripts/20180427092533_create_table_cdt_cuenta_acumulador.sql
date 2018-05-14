@@ -18,17 +18,11 @@
 -- Migration SQL that makes the change goes here.
 
 
-  CREATE SEQUENCE ${schema}.cdt_cuenta_acumulador_id_s1
-    INCREMENT 1
-    MINVALUE 1
-    START 1;
-
-  COMMENT ON SEQUENCE ${schema}.cdt_cuenta_acumulador_id_s1 IS 'ID del acumulador cuenta';
 
   CREATE TABLE ${schema}.cdt_cuenta_acumulador (
       id                    BIGSERIAL NOT NULL,
-      id_regla_acumulacion  BIGSERIAL NOT NULL,
-      id_cuenta             BIGSERIAL NOT NULL,
+      id_regla_acumulacion  BIGINT    NOT NULL,
+      id_cuenta             BIGINT   NOT NULL,
       monto                 NUMERIC   NOT NULL,
       fecha_inicio          TIMESTAMP NOT NULL,
       fecha_fin             TIMESTAMP NOT NULL,

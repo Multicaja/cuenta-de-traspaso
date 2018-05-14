@@ -30,8 +30,10 @@ public class TestSuite extends TestSuiteBase {
   private static Log log = LogFactory.getLog(TestSuite.class);
   private static DBUtils mDbutils = DBUtils.getInstance();
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
+
   @BeforeClass
   public static void setUp() throws Exception {
+
     deleteAllFromDB();
     String sData = Utils.readFile(new File("./seeds/DataForTest.sql"));
     sData = sData.replaceAll("\\$\\{schema}",schema);
@@ -44,47 +46,51 @@ public class TestSuite extends TestSuiteBase {
   public static void tearDown() {
       deleteAllFromDB();
   }
-  private static void deleteAllFromDB(){
+
+  private static void deleteAllFromDB() {
     JdbcTemplate template = mDbutils.getJdbcTemplate();
 
     // DROP TABLE MOVIMIENTO TIPO MOVIMIENTO
-    template.execute("delete from "+schema+"."+Constants.Tables.MOVIMIENTO_TIPO_MOV.getName());
+    template.execute("delete from "+schema+"."+Constants.Tables.CATEGORIA_MOV_FASE.getName());
+
+    //DROP TABLE CONFIRMACION_MOVIMIENTO_CUENTA
+    template.execute("delete from  "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName());
 
     // DROP TABLE MOVIMIENTO CUENTA
-    template.execute("TRUNCATE TABLE "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_movimiento_cuenta_id_s1 RESTART WITH 1;");
+    template.execute("delete from  "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName());
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE CUENTA ACUMULADOR
-    template.execute("TRUNCATE TABLE "+schema+".cdt_cuenta_acumulador;");
-    template.execute("ALTER SEQUENCE "+schema+".cdt_cuenta_acumulador_id_s1 RESTART WITH 1;");
+    template.execute("TRUNCATE TABLE "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName());
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE BOLSA
     template.execute("TRUNCATE TABLE "+schema+"."+Constants.Tables.BOLSA.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_bolsa_id_s1 RESTART WITH 1;");
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.BOLSA.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE LIMITE
     template.execute("TRUNCATE TABLE "+schema+"."+Constants.Tables.LIMITE.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_limite_id_s1 RESTART WITH 1;");
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.LIMITE.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE MOVIMIENTO
-    template.execute("DELETE FROM  "+schema+"."+Constants.Tables.MOVIMIENTO.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_movimiento_id_s1 RESTART WITH 1;");
+    template.execute("DELETE FROM  "+schema+"."+Constants.Tables.FASE_MOVIMIENTO.getName());
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.FASE_MOVIMIENTO.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE TIPO MOVIMIENTO
-    template.execute("DELETE FROM  "+schema+"."+Constants.Tables.TIPO_MOVIMIENTO.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_tipo_movimiento_id_s1 RESTART WITH 1;");
+    template.execute("DELETE FROM  "+schema+"."+Constants.Tables.CATEGORIA_MOVIMIENTO.getName());
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.CATEGORIA_MOVIMIENTO.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE REGLA ACUMULACION
     template.execute("TRUNCATE TABLE "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_regla_acumulacion_id_s1 RESTART WITH 1;");
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+"_id_seq RESTART WITH 1;");
 
     // DROP TABLE CUENTA
     template.execute("TRUNCATE TABLE "+schema+"."+Constants.Tables.CUENTA.getName());
-    template.execute("ALTER SEQUENCE "+schema+".cdt_cuenta_id_s1 RESTART WITH 1;");
-
+    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.CUENTA.getName()+"_id_seq RESTART WITH 1;");
 
   }
   public static Class<?>[] suite() throws Exception {
+
     String packageName = new TestSuite().getClass().getPackage().getName();
     log.info("packageName: " + packageName);
     Class[] classList = getClasses(packageName);
@@ -93,6 +99,7 @@ public class TestSuite extends TestSuiteBase {
       log.info(cls.getSimpleName());
     }
     return  classList;
+
   }
 
   public static void main(String[] args) throws Exception{

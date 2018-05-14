@@ -14,67 +14,69 @@
 --    limitations under the License.
 --
 
--- // create_sp_mc_cdt_crea_movimiento
+-- // create_sp_mc_cdt_crea_tipo_movimiento
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento
+
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_movimiento
 (
+    IN _id_bolsa        NUMERIC,
     IN _nombre          VARCHAR,
     IN _descripcion     VARCHAR,
-    IN _signo           NUMERIC,
-    OUT _NumError       VARCHAR,
-    OUT _MsjError       VARCHAR
-) RETURNS record AS
-$BODY$
+    OUT _num_error       VARCHAR,
+    OUT _msj_error       VARCHAR
+)AS $$
+
     	DECLARE
 
     	BEGIN
-	        _NumError := '0';
-	        _MsjError := '';
+	        _num_error := '0';
+	        _msj_error := '';
 
-		    IF TRIM(COALESCE(_nombre, '')) = '' THEN
-	            _NumError := '1001';
-	        	_MsjError := '[mc_cdt_crea_movimiento] El nombre del movimiento no puede ser vacio';
+		    IF COALESCE(_id_bolsa, 0) = 0 THEN
+	            _num_error := '1001';
+	        	_msj_error := '[mc_cdt_crea_categoria_movimiento] El Id Bolsa no puede ser 0';
 	        	RETURN;
 	        END IF;
 
-          IF COALESCE(_signo, 0) != -1 AND  COALESCE(_signo, 0) != 1 THEN
-              _NumError := '1002';
-              _MsjError := '[mc_cdt_crea_movimiento] El Signo del movimiento debe ser 1 o -1';
-              RETURN;
-          END IF;
+            IF TRIM(COALESCE(_nombre, '')) = '' THEN
+                _num_error := '1002';
+                _msj_error := '[mc_cdt_crea_categoria_movimiento] El Nombre del tipo de movimiento no puede ser vacio';
+                RETURN;
+            END IF;
 
 
-        	INSERT INTO ${schema}.cdt_movimiento
+        	INSERT INTO ${schema}.cdt_categoria_movimiento
 	    		(
-	    			id,
-	    			nombre,
+	    			id_bolsa,
+            nombre,
 	    			descripcion,
-            signo,
             estado,
 	    			fecha_estado,
 	    			fecha_creacion
 	    		)
         	VALUES
         		(
-        			nextval('${schema}.cdt_movimiento_id_s1'),
+              _id_bolsa,
               _nombre,
-              _descripcion,
-              _signo,
-        			'ACTIVO',
+              COALESCE(_descripcion,''),
+              'ACTIVO',
         			timezone('utc', now()),
         			timezone('utc', now())
         		);
         EXCEPTION
             WHEN OTHERS THEN
-                _NumError := SQLSTATE;
-                _MsjError := '[mc_cdt_crea_movimiento] Error al crear Movimiento. CAUSA ('|| SQLERRM ||')';
+                _num_error := SQLSTATE;
+                _msj_error := '[mc_cdt_crea_categoria_movimiento] Error al crear Categoria Movimiento. CAUSA ('|| SQLERRM ||')';
             RETURN;
     	END;
-$BODY$
+$$
 LANGUAGE 'plpgsql';
+
 
 -- //@UNDO
 -- SQL to undo the change goes here.
 
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_limite
+
+ DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_movimiento;
+

@@ -19,50 +19,49 @@
 
 CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite
 (
-    IN _id_movimiento           NUMERIC,
-    IN _id_regla_acumulacion    NUMERIC,
-    IN _descripcion             VARCHAR,
-    IN _valor    		            DECIMAL,
-    IN _cod_operacion           VARCHAR,
-    OUT _NumError               VARCHAR,
-    OUT _MsjError               VARCHAR
-) RETURNS record AS
-$BODY$
+    IN _id_fase_movimiento     NUMERIC,
+    IN _id_regla_acumulacion   NUMERIC,
+    IN _descripcion            VARCHAR,
+    IN _valor    		           DECIMAL,
+    IN _cod_operacion          VARCHAR,
+    OUT _num_error             VARCHAR,
+    OUT _msj_error             VARCHAR
+) AS $$
+
     	DECLARE
 
     	BEGIN
-	        _NumError := '0';
-	        _MsjError := '';
+	        _num_error := '0';
+	        _msj_error := '';
 
-		    IF COALESCE(_id_movimiento, 0) = 0 THEN
-	          _NumError := '1001';
-	        	_MsjError := '[mc_cdt_crea_limite] El Id Movimiento no puede ser 0';
+		    IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
+	          _num_error := '1001';
+	        	_msj_error := '[mc_cdt_crea_limite] El Id Fase Movimiento no puede ser 0';
 	        	RETURN;
 	      END IF;
 
         IF COALESCE(_id_regla_acumulacion, 0) = 0 THEN
-	          _NumError := '1002';
-	        	_MsjError := '[mc_cdt_crea_limite] El Id Regla Acumulacion no puede ser 0';
+	          _num_error := '1002';
+	        	_msj_error := '[mc_cdt_crea_limite] El Id Regla Acumulacion no puede ser 0';
 	        	RETURN;
 	      END IF;
 
         IF COALESCE(_descripcion, '') = '' THEN
-            _NumError := '1003';
-            _MsjError := '[mc_cdt_crea_limite] La descripcion no puede estar vacia';
+            _num_error := '1003';
+            _msj_error := '[mc_cdt_crea_limite] La descripcion no puede estar vacia';
             RETURN;
         END IF;
 
 
         IF COALESCE(_cod_operacion, '') = '' THEN
-            _NumError := '1004';
-            _MsjError := '[mc_cdt_crea_limite] El Codigo de operacion no puede estar vacio';
+            _num_error := '1004';
+            _msj_error := '[mc_cdt_crea_limite] El Codigo de operacion no puede estar vacio';
             RETURN;
         END IF;
 
         INSERT INTO ${schema}.cdt_limite
         (
-          id,
-          id_movimiento,
+          id_fase_movimiento,
           id_regla_acumulacion,
           descripcion,
           valor,
@@ -73,8 +72,7 @@ $BODY$
         )
         VALUES
           (
-            nextval('${schema}.cdt_limite_id_s1'),
-            _id_movimiento,
+            _id_fase_movimiento,
             _id_regla_acumulacion,
             _descripcion,
             _valor,
@@ -85,13 +83,12 @@ $BODY$
           );
       EXCEPTION
           WHEN OTHERS THEN
-              _NumError := SQLSTATE;
-              _MsjError := '[mc_cdt_crea_limite] Error al crear Limite. CAUSA ('|| SQLERRM ||')';
+              _num_error := SQLSTATE;
+              _msj_error := '[mc_cdt_crea_limite] Error al crear Limite. CAUSA ('|| SQLERRM ||')';
           RETURN;
     END;
-$BODY$
+$$
 LANGUAGE 'plpgsql';
-
 
 -- //@UNDO
 -- SQL to undo the change goes here.

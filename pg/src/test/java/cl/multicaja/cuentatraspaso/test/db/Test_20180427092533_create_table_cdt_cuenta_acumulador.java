@@ -25,8 +25,8 @@ public class Test_20180427092533_create_table_cdt_cuenta_acumulador extends Test
 
       boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.CUENTA_ACUMULADOR.getName(), false,
       new ColumnInfo("id", "BIGSERIAL",19),
-      new ColumnInfo("id_regla_acumulacion", "BIGSERIAL", 19),
-      new ColumnInfo("id_cuenta", "BIGSERIAL", 19),
+      new ColumnInfo("id_regla_acumulacion", "INT8", 19),
+      new ColumnInfo("id_cuenta", "INT8", 19),
       new ColumnInfo("monto", "NUMERIC", 131089),
       new ColumnInfo("fecha_inicio", "TIMESTAMP", 29),
       new ColumnInfo("fecha_fin", "TIMESTAMP", 29),

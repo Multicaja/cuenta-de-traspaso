@@ -14,14 +14,15 @@
 --    limitations under the License.
 --
 
--- // create_table_cdt_movimiento_tipo_mov
+-- // create_table_cdt_confirmacion_movimiento
 -- Migration SQL that makes the change goes here.
-  CREATE TABLE ${schema}.cdt_movimiento_tipo_mov (
-      id_movimiento         BIGSERIAL REFERENCES ${schema}.cdt_movimiento(id) ,
-      id_tipo_movimiento    BIGSERIAL REFERENCES ${schema}.cdt_tipo_movimiento(id),
-      CONSTRAINT cdt_movimiento_tipo_mov_pk PRIMARY KEY(id_movimiento,id_tipo_movimiento)
+  CREATE TABLE ${schema}.cdt_confirmacion_movimiento (
+      id_mov_cuenta_origen          BIGINT REFERENCES ${schema}.cdt_movimiento_cuenta(id) ,
+      id_mov_cuenta_confirmacion    BIGINT REFERENCES ${schema}.cdt_movimiento_cuenta(id),
+      CONSTRAINT cdt_confirmacion_movimiento_pk PRIMARY KEY(id_mov_cuenta_origen,id_mov_cuenta_confirmacion),
+      CONSTRAINT cdt_confirmacion_movimiento_u1 UNIQUE (id_mov_cuenta_origen)
   );
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_movimiento_tipo_mov;
+  DROP TABLE IF EXISTS ${schema}.cdt_confirmacion_movimiento;

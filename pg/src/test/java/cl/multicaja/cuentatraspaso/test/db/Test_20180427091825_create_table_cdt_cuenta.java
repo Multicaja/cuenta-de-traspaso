@@ -17,6 +17,7 @@ public class Test_20180427091825_create_table_cdt_cuenta extends TestDbBase {
     fecha_estado    TIMESTAMP NOT NULL,
     fecha_creacion  TIMESTAMP NOT NULL,
    ****************************************/
+
   @Test
   public void CheckTableCuenta() {
 

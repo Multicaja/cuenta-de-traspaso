@@ -20,30 +20,29 @@
 CREATE OR REPLACE FUNCTION ${schema}.in_cdt_verifica_limites
 (
     IN _id_cuenta               NUMERIC,
-    IN _id_movimiento           NUMERIC,
+    IN _id_fase_movimiento      NUMERIC,
     IN _monto                   NUMERIC,
-    OUT _NumError               VARCHAR,
-    OUT _MsjError               VARCHAR
-) RETURNS record AS
-$BODY$
+    OUT _num_error               VARCHAR,
+    OUT _msj_error               VARCHAR
+)AS $$
     	DECLARE
          _limite RECORD;
          _monto_acumulado   NUMERIC;
          _current_date      DATE;
     	BEGIN
-	        _NumError := '0';
-	        _MsjError := '';
+	        _num_error := '0';
+	        _msj_error := '';
             _current_date:= current_date;
 
-		      IF COALESCE(_id_movimiento, 0) = 0 THEN
-	            _NumError := '1001';
-	        	_MsjError := '[in_cdt_verifica_limites] El Id Movimiento no puede ser 0';
+		      IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
+	          _num_error := '1001';
+	        	_msj_error := '[in_cdt_verifica_limites] El Id Movimiento no puede ser 0';
 	        	RETURN;
 	        END IF;
 
           IF COALESCE(_monto, 0) = 0 THEN
-              _NumError := '1002';
-              _MsjError := '[in_cdt_verifica_limites] El monto no puede ser 0';
+              _num_error := '1002';
+              _msj_error := '[in_cdt_verifica_limites] El monto no puede ser 0';
               RETURN;
           END IF;
             BEGIN
@@ -57,7 +56,7 @@ $BODY$
                     FROM
                          ${schema}.cdt_limite
                     WHERE
-                        id_movimiento = _id_movimiento AND
+                        id_fase_movimiento = _id_fase_movimiento AND
                         estado = 'ACTIVO'
                     ORDER BY
                         id_regla_acumulacion asc
@@ -68,27 +67,27 @@ $BODY$
                                 CASE
                                     WHEN _limite.cod_operacion = 'MAYORQIG' THEN
                                         IF (_monto < _limite.valor) THEN
-                                            _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion||' '||_limite.valor;
+                                            _num_error := _limite.id;
+                                            _msj_error := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'MENORQIG' THEN
                                         IF (_monto > _limite.valor) THEN
-                                            _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion||' '||_limite.valor;
+                                            _num_error := _limite.id;
+                                            _msj_error := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'IGUAL' THEN
                                         IF (_monto != _limite.valor) THEN
-                                           _NumError := _limite.id;
-                                           _MsjError := _limite.descripcion||' '||_limite.valor;
+                                           _num_error := _limite.id;
+                                           _msj_error := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                 END CASE;
                             EXCEPTION
                             WHEN OTHERS THEN
-                                _NumError := SQLSTATE;
-                                _MsjError := '[in_cdt_verifica_limites] Error al verificar contra monto acumulado. CAUSA ('|| SQLERRM ||')';
+                                _num_error := SQLSTATE;
+                                _msj_error := '[in_cdt_verifica_limites] Error al verificar contra monto acumulado. CAUSA ('|| SQLERRM ||')';
                                  RETURN;
                             END;
                         ELSE -- VERIFICACION DE LIMITES CONTRA ACUMULADORES
@@ -108,27 +107,27 @@ $BODY$
 
                                     WHEN _limite.cod_operacion = 'MAYORQIG' THEN
                                         IF (_monto_acumulado < _limite.valor) THEN
-                                            _NumError := _limite.id;
-                                             _MsjError := _limite.descripcion||' '||_limite.valor;
+                                            _num_error := _limite.id;
+                                             _msj_error := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'MENORQIG' THEN
                                         IF (_monto_acumulado > _limite.valor) THEN
-                                            _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion||' '||_limite.valor;
+                                            _num_error := _limite.id;
+                                            _msj_error := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                     WHEN _limite.cod_operacion = 'IGUAL' THEN
                                         IF (_monto_acumulado != _limite.valor) THEN
-                                            _NumError := _limite.id;
-                                            _MsjError := _limite.descripcion||' '||_limite.valor;
+                                            _num_error := _limite.id;
+                                            _msj_error := _limite.descripcion||' '||_limite.valor;
                                             RETURN;
                                         END IF;
                                 END CASE;
                             EXCEPTION
                                 WHEN OTHERS THEN
-                                    _NumError := SQLSTATE;
-                                    _MsjError := '[in_cdt_verifica_limites] Error al verificar contra monto acumulado. CAUSA ('|| SQLERRM ||')';
+                                    _num_error := SQLSTATE;
+                                    _msj_error := '[in_cdt_verifica_limites] Error al verificar contra monto acumulado. CAUSA ('|| SQLERRM ||')';
                                 RETURN;
                             END;
                         END IF;
@@ -136,18 +135,18 @@ $BODY$
 
             EXCEPTION
                 WHEN OTHERS THEN
-                    _NumError := SQLSTATE;
-                    _MsjError := '[in_cdt_verifica_limites] Error desconocido al recorrer Limites. CAUSA ('|| SQLERRM ||')';
+                    _num_error := SQLSTATE;
+                    _msj_error := '[in_cdt_verifica_limites] Error desconocido al recorrer Limites. CAUSA ('|| SQLERRM ||')';
                 RETURN;
             END;
 
         EXCEPTION
             WHEN OTHERS THEN
-                _NumError := SQLSTATE;
-                _MsjError := '[in_cdt_verifica_limites] Error desconocido. CAUSA ('|| SQLERRM ||')';
+                _num_error := SQLSTATE;
+                _msj_error := '[in_cdt_verifica_limites] Error desconocido. CAUSA ('|| SQLERRM ||')';
             RETURN;
     	END;
-$BODY$
+$$
 LANGUAGE 'plpgsql';
 
 -- //@UNDO

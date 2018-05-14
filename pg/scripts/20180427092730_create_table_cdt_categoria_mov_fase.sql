@@ -14,24 +14,14 @@
 --    limitations under the License.
 --
 
--- // create_table_cdt_cuenta
+-- // create_table_cdt_categoria_mov_fase
 -- Migration SQL that makes the change goes here.
-  CREATE SCHEMA IF NOT EXISTS ${schema};
-
-
-  CREATE TABLE ${schema}.cdt_cuenta (
-      id              BIGSERIAL NOT NULL,
-      id_externo      VARCHAR(50) NOT NULL,
-      descripcion     VARCHAR(100) NOT NULL,
-      estado          VARCHAR(10) NOT NULL,
-      fecha_estado    TIMESTAMP NOT NULL,
-      fecha_creacion  TIMESTAMP NOT NULL,
-      CONSTRAINT cdt_cuenta_pk PRIMARY KEY(id,id_externo)
+  CREATE TABLE ${schema}.cdt_categoria_mov_fase(
+      id_fase_movimiento        BIGINT REFERENCES ${schema}.cdt_fase_movimiento(id) ,
+      id_categoria_movimiento   BIGINT REFERENCES ${schema}.cdt_categoria_movimiento(id),
+      CONSTRAINT cdt_categoria_mov_fase_pk PRIMARY KEY(id_fase_movimiento,id_categoria_movimiento)
   );
-  CREATE INDEX cdt_cuenta_i1 ON ${schema}.cdt_cuenta (estado);
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_cuenta;
-  DROP SCHEMA IF EXISTS ${schema};
-
+  DROP TABLE IF EXISTS ${schema}.cdt_categoria_mov_fase;
