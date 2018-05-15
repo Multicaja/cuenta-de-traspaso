@@ -33,5 +33,6 @@
 -- //@UNDO
 -- SQL to undo the change goes here.
   DROP TABLE IF EXISTS ${schema}.cdt_cuenta;
+
   DROP SCHEMA IF EXISTS ${schema};
 

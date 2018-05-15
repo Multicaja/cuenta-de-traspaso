@@ -18,7 +18,7 @@
 -- Migration SQL that makes the change goes here.
 
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_movimiento
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_movimiento_v10
 (
     IN _id_bolsa        NUMERIC,
     IN _nombre          VARCHAR,
@@ -34,13 +34,13 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_movimiento
 	        _msj_error := '';
 
 		    IF COALESCE(_id_bolsa, 0) = 0 THEN
-	            _num_error := '1001';
+	            _num_error := 'MC001';
 	        	_msj_error := '[mc_cdt_crea_categoria_movimiento] El Id Bolsa no puede ser 0';
 	        	RETURN;
 	        END IF;
 
             IF TRIM(COALESCE(_nombre, '')) = '' THEN
-                _num_error := '1002';
+                _num_error := 'MC002';
                 _msj_error := '[mc_cdt_crea_categoria_movimiento] El Nombre del tipo de movimiento no puede ser vacio';
                 RETURN;
             END IF;
@@ -78,5 +78,5 @@ LANGUAGE 'plpgsql';
 -- SQL to undo the change goes here.
 
 
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_movimiento;
+ DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_categoria_movimiento_v10(NUMERIC,VARCHAR,VARCHAR);
 

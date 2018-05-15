@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa extends TestDbBase {
+public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa_v10 extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
 
@@ -39,8 +39,8 @@ public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa extends TestDbBase 
     Map<String,Object>  outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
-    Assert.assertEquals("Error en SP NumError != 0",true,!numError.equals("0"));
-    Assert.assertEquals("Error en SP MsjError Not Blank",true,!StringUtils.isBlank(msjError));
+    Assert.assertTrue("Error en SP NumError = MC001",numError.equals("MC001"));
+    Assert.assertFalse("Error en SP MsjError Not Blank",StringUtils.isBlank(msjError));
     System.out.println("NumError: "+numError +"MsjError"+msjError);
   }
 }

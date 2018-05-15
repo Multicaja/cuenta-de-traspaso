@@ -44,7 +44,7 @@ public class TestSuite extends TestSuiteBase {
 
   @AfterClass
   public static void tearDown() {
-      deleteAllFromDB();
+     // deleteAllFromDB();
   }
 
   private static void deleteAllFromDB() {
@@ -54,7 +54,7 @@ public class TestSuite extends TestSuiteBase {
     template.execute("delete from "+schema+"."+Constants.Tables.CATEGORIA_MOV_FASE.getName());
 
     //DROP TABLE CONFIRMACION_MOVIMIENTO_CUENTA
-    template.execute("delete from  "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName());
+    template.execute("delete from  "+schema+"."+Constants.Tables.CONFIRMACION_MOV.getName());
 
     // DROP TABLE MOVIMIENTO CUENTA
     template.execute("delete from  "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName());
@@ -102,9 +102,6 @@ public class TestSuite extends TestSuiteBase {
 
   }
 
-  public static void main(String[] args) throws Exception{
-    TestSuite.setUp();
-  }
 }
 
 

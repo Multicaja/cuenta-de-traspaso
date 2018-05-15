@@ -17,7 +17,7 @@
 -- // create_sp_mc_crea_movimiento_cuenta
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento_cuenta
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento_cuenta_v10
 (
     IN _id_cuenta               VARCHAR,
     IN _id_fase_movimiento      NUMERIC,
@@ -40,19 +40,19 @@ BEGIN
     _id_movimiento_cuenta:= 0;
 
     IF TRIM(COALESCE(_id_cuenta, '')) = '' THEN
-      _num_error := '1001';
+      _num_error := 'MC001';
     	_msj_error := '[mc_cdt_crea_movimiento_cuenta] El Id Cuenta no puede ser vacio';
     	RETURN;
     END IF;
 
     IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
-        _num_error := '1002';
+        _num_error := 'MC002';
         _msj_error := '[mc_cdt_crea_movimiento_cuenta] El Id Movimiento no puede ser 0';
         RETURN;
     END IF;
 
     IF COALESCE(_id_tx_externo, '') = '' THEN
-        _num_error := '1003';
+        _num_error := 'MC003';
         _msj_error := '[mc_cdt_crea_movimiento_cuenta] EL Id Tx Externo no puede ser vacio';
         RETURN;
     END IF;
@@ -113,7 +113,7 @@ BEGIN
           _num_error,
           _msj_error
         FROM
-            ${schema}.in_cdt_procesa_acumuladores
+            ${schema}.in_cdt_procesa_acumuladores_v10
             (
                 _id_fase_movimiento,
                 _id_cuenta_interno,
@@ -133,7 +133,7 @@ BEGIN
           _num_error,
           _msj_error
         FROM
-            ${schema}.in_cdt_verifica_limites
+            ${schema}.in_cdt_verifica_limites_v10
             (
               _id_cuenta_interno,
               _id_fase_movimiento,
@@ -156,11 +156,13 @@ BEGIN
               _id_movimiento_cuenta
             );
         END IF;
+
     EXCEPTION
     WHEN OTHERS THEN
       IF  _num_error != '0' THEN
            RETURN;
        ELSE
+          _id_movimiento_cuenta:= 0;
           _num_error := SQLSTATE;
           _msj_error := '[mc_cdt_crea_movimiento_cuenta] Error al insertar movimiento cuenta CAUSA ('|| SQLERRM ||')';
           RETURN;
@@ -169,6 +171,7 @@ BEGIN
 
 EXCEPTION
     WHEN OTHERS THEN
+        _id_movimiento_cuenta:= 0;
         _num_error := SQLSTATE;
         _msj_error := '[mc_cdt_crea_movimiento_cuenta] Error desconocido al crear movimiento cuenta CAUSA ('|| SQLERRM ||')';
     RETURN;
@@ -178,5 +181,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-
- DROP FUNCTION IF EXISTS  ${schema}.mc_cdt_crea_movimiento_cuenta;
+ DROP FUNCTION IF EXISTS  ${schema}.mc_cdt_crea_movimiento_cuenta_v10(VARCHAR,NUMERIC,NUMERIC,VARCHAR,VARCHAR,NUMERIC);

@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_cuenta
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta_v10
 (
     IN _id_externo         VARCHAR,
     IN _descripcion		     VARCHAR,
@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta
         _id_cuenta:= 0;
 
       IF TRIM(COALESCE(_id_externo, '')) = '' THEN
-          _num_error := '1000';
+          _num_error := 'MC001';
           _msj_error := '[mc_cdt_crea_cuenta] El Id Externo de la cuenta no puede ser vacio';
           RETURN;
         END IF;
@@ -65,5 +65,5 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_cuenta
+  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_cuenta_v10(VARCHAR, VARCHAR);
 

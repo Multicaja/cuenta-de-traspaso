@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_carga_movimientos
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_carga_fases_movimientos
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_carga_fases_movimientos_v10
 (
     IN  _nombre         VARCHAR,
     IN  _id_fase        NUMERIC,
@@ -55,5 +55,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-
-DROP FUNCTION IF EXISTS ${schema}.mc_cdt_carga_movimientos;
+DROP FUNCTION IF EXISTS ${schema}.mc_cdt_carga_fases_movimientos_v10(VARCHAR, NUMERIC);

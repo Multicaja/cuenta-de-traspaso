@@ -18,7 +18,7 @@
 -- Migration SQL that makes the change goes here.
 
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_mov_fase
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_mov_fase_v10
 (
     IN _id_fase_movimiento       NUMERIC,
     IN _id_categoria_movimiento  NUMERIC,
@@ -33,13 +33,13 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_mov_fase
 	        _msj_error := '';
 
           IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
-            _num_error := '1001';
+            _num_error := 'MC001';
             _msj_error := '[mc_cdt_crea_categoria_mov_fase] El Id fase Movimiento no puede ser 0';
             RETURN;
           END IF;
 
           IF COALESCE(_id_categoria_movimiento, 0) = 0 THEN
-              _num_error := '1002';
+              _num_error := 'MC002';
               _msj_error := '[mc_cdt_crea_categoria_mov_fase] El Id Categoria Movimiento no puede ser 0';
               RETURN;
           END IF;
@@ -66,5 +66,5 @@ LANGUAGE 'plpgsql';
 -- //@UNDO
 -- SQL to undo the change goes here.
 
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_categoria_mov_fase
+ DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_categoria_mov_fase_v10(NUMERIC,NUMERIC);
 

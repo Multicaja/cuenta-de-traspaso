@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430170419_create_sp_mc_cdt_crea_categoria_movimiento extends TestDbBase {
+public class Test_20180430170419_create_sp_mc_cdt_crea_categoria_movimiento_v10 extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
   /*
@@ -50,7 +50,7 @@ public class Test_20180430170419_create_sp_mc_cdt_crea_categoria_movimiento exte
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
-    Assert.assertFalse("Num Error != 0", numError.equals("0"));
+    Assert.assertTrue("Num Error = MC001", numError.equals("MC001"));
     Assert.assertFalse("Msj Error no vacio", StringUtils.isBlank(msjError));
 
   }
@@ -66,7 +66,7 @@ public class Test_20180430170419_create_sp_mc_cdt_crea_categoria_movimiento exte
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
-    Assert.assertFalse("Num Error != 0", numError.equals("0"));
+    Assert.assertTrue("Num Error = MC002", numError.equals("MC002"));
     Assert.assertFalse("Msj Error no vacio", StringUtils.isBlank(msjError));
 
   }

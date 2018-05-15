@@ -22,7 +22,8 @@
   CREATE TABLE ${schema}.cdt_cuenta_acumulador (
       id                    BIGSERIAL NOT NULL,
       id_regla_acumulacion  BIGINT    NOT NULL,
-      id_cuenta             BIGINT   NOT NULL,
+      id_cuenta             BIGINT    NOT NULL,
+      codigo_operacion      VARCHAR   NOT NULL,
       monto                 NUMERIC   NOT NULL,
       fecha_inicio          TIMESTAMP NOT NULL,
       fecha_fin             TIMESTAMP NOT NULL,

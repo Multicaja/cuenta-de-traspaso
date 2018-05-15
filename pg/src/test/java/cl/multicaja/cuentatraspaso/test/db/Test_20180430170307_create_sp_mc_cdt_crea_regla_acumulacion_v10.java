@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion  extends TestDbBase {
+public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
   /*
@@ -50,7 +50,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion  extend
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
-    Assert.assertFalse("El mensaje de error debe ser != 0", numError.equals("0"));
+    Assert.assertTrue("El mensaje de error debe ser = MC001", numError.equals("MC001"));
     Assert.assertFalse("Con Msje Error", StringUtils.isBlank(msjError));
 
   }
@@ -66,7 +66,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion  extend
     String msjError = (String) outputData.get("_msjerror");
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-    Assert.assertFalse("El mensaje de error debe ser != 0", numError.equals("0"));
+    Assert.assertTrue("El mensaje de error debe ser = MC001", numError.equals("MC002"));
     Assert.assertFalse("Con Msje Error", StringUtils.isBlank(msjError));
 
   }
@@ -80,7 +80,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion  extend
     String msjError = (String) outputData.get("_msjerror");
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-    Assert.assertFalse("El mensaje de error debe ser != 0", numError.equals("0"));
+    Assert.assertTrue("El mensaje de error debe ser = MC003", numError.equals("MC003"));
     Assert.assertFalse("Con Msje Error", StringUtils.isBlank(msjError));
 
   }

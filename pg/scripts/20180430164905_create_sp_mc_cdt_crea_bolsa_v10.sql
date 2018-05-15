@@ -18,7 +18,7 @@
 -- // create_sp_mc_cdt_crea_bolsa
 -- Migration SQL that makes the change goes here.
 
-  CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_bolsa
+  CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_bolsa_v10
   (
       IN _nombre             VARCHAR,
       IN _descripcion		     VARCHAR,
@@ -33,7 +33,7 @@
             _msj_error := '';
 
           IF TRIM(COALESCE(_nombre, '')) = '' THEN
-                _num_error := '1000';
+                _num_error := 'MC001';
               _msj_error := '[mc_cdt_crea_bolsa] El nombre de la Bolsa no puede ser vacio';
               RETURN;
             END IF;
@@ -65,4 +65,4 @@
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_bolsa
+  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_bolsa_v10(VARCHAR,VARCHAR);

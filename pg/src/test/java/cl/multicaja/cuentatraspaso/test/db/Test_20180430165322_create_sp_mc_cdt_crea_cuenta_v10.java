@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta extends TestDbBase {
+public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta_v10 extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
     /*
@@ -53,8 +53,8 @@ public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta extends TestDbBase
     String msjError = (String) outputData.get("_msjerror");
 
     Assert.assertTrue("NNumero de cuenta debe ser != 0", idCuenta == null || idCuenta.intValue() == 0 );
-    Assert.assertFalse("Numero de error != 0 ", numError.equals("0"));
-    Assert.assertFalse("Msj de no vacio", StringUtils.isBlank(msjError));
+    Assert.assertTrue("Numero de error = MC001", numError.equals("MC001"));
+    Assert.assertFalse("Msj  no vacio", StringUtils.isBlank(msjError));
 
     System.out.println("Id Cuenta: "+idCuenta+" NumError: "+numError +" MsjError: "+msjError);
 

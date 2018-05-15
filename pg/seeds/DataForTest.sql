@@ -76,7 +76,7 @@ INSERT INTO
     );
 
 --INSERT TIPO MOVIMIENTO
-INSERT INTO
+INSERT INTO -- ID 1
 	${schema}.cdt_fase_movimiento
 	(
         nombre,
@@ -98,7 +98,7 @@ INSERT INTO
     	LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 2
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -120,7 +120,7 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 3
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -142,7 +142,7 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 4
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -164,7 +164,7 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 5
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -186,7 +186,7 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 6
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -209,7 +209,7 @@ INSERT INTO
     );
 
 
-INSERT INTO
+INSERT INTO -- ID 7
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -224,15 +224,15 @@ INSERT INTO
     (
         'Reversa de Carga',
         'Reversa de Carga',
-        1,
-        'N',
+        -1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
 
 
-INSERT INTO
+INSERT INTO -- ID 8
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -255,7 +255,7 @@ INSERT INTO
     );
 
 
-INSERT INTO
+INSERT INTO -- ID 9
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -278,7 +278,7 @@ INSERT INTO
     );
 
 
-INSERT INTO
+INSERT INTO -- ID 10
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -300,7 +300,7 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 11
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -322,7 +322,7 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-INSERT INTO
+INSERT INTO -- ID 12
     ${schema}.cdt_fase_movimiento
     (
         nombre,
@@ -758,7 +758,25 @@ INSERT INTO
         LOCALTIMESTAMP
     );
 
-
+INSERT INTO
+    ${schema}.cdt_regla_acumulacion
+    (
+        id_categoria_movimiento,
+        periocidad,
+        codigo_operacion,
+        estado,
+        fecha_estado,
+        fecha_creacion
+    )
+    VALUES
+    (
+        3,
+        'SEM',
+        'SUM',
+        'ACTIVO',
+        LOCALTIMESTAMP,
+        LOCALTIMESTAMP
+    );
 
 INSERT INTO
     ${schema}.cdt_regla_acumulacion
@@ -1007,7 +1025,7 @@ INSERT INTO
     (
         3,
         1,
-        'DEBE SER MENOR O IGUAL QUE',
+        'CARGA MENSAUL NO DEBE SUPERAR ',
         1000000,
         'MENORQIG',
         'ACTIVO',

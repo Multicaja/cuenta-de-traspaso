@@ -14,7 +14,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
-public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos extends TestDbBase {
+public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos_v10 extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
 

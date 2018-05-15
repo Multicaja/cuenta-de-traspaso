@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_cuenta_acumulacion
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
+CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
 (
     IN _id_fase_movimiento      NUMERIC,
     IN _id_cuenta               NUMERIC,
@@ -39,19 +39,19 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
 
 
             IF COALESCE(_id_cuenta, 0) = 0 THEN
-                _num_error := '1001';
+                _num_error := 'MC001';
                 _msj_error := '[in_cdt_procesa_acumuladores] El Id Cuenta no puede ser 0';
                 RETURN;
             END IF;
 
             IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
-                _num_error := '1002';
+                _num_error := 'MC002';
                 _msj_error := '[in_cdt_procesa_acumuladores] El Id Movimiento no puede ser 0';
                 RETURN;
             END IF;
 
             IF COALESCE(_monto, 0) = 0 THEN
-                _num_error := '1003';
+                _num_error := 'MC003';
                 _msj_error := '[in_cdt_procesa_acumuladores] El Monto no puede ser 0';
                 RETURN;
             END IF;
@@ -106,16 +106,17 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
                             WHERE
-                                id_regla_acumulacion = _rec_regla_acum.id AND
                                 id_cuenta = _id_cuenta AND
                                 fecha_inicio = _fecha_ini AND
-                                fecha_fin = _fecha_fin;
+                                fecha_fin = _fecha_fin AND
+                                codigo_operacion = _rec_regla_acum.codigo_operacion;
                             IF NOT FOUND THEN
                                 INSERT INTO
                                     ${schema}.cdt_cuenta_acumulador
                                         (
                                             id_regla_acumulacion,
                                             id_cuenta,
+                                            codigo_operacion,
                                             monto,
                                             fecha_inicio,
                                             fecha_fin,
@@ -126,6 +127,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
                                         (
                                             _rec_regla_acum.id,
                                             _id_cuenta,
+                                            _rec_regla_acum.codigo_operacion,
                                             CASE
                                                 WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                     (_monto*_rec_cat_mov.movimiento_signo)
@@ -150,14 +152,17 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
                             WHERE
-                                id_regla_acumulacion =  _rec_regla_acum.id AND
-                                id_cuenta = _id_cuenta;
+                                id_cuenta = _id_cuenta AND
+                                fecha_inicio = to_date('01-01-1900', 'dd-MM-YYYY') AND
+                                fecha_fin = to_date('31-12-2100', 'dd-MM-YYYY') AND
+                                codigo_operacion = _rec_regla_acum.codigo_operacion;
                             IF NOT FOUND THEN
                                 INSERT INTO
                                     ${schema}.cdt_cuenta_acumulador
                                     (
                                         id_regla_acumulacion,
                                         id_cuenta,
+                                        codigo_operacion,
                                         monto,
                                         fecha_inicio,
                                         fecha_fin,
@@ -168,6 +173,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores
                                     (
                                         _rec_regla_acum.id,
                                         _id_cuenta,
+                                        _rec_regla_acum.codigo_operacion,
                                         CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                 (_monto*_rec_cat_mov.movimiento_signo)
@@ -201,6 +207,5 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-
- DROP FUNCTION IF EXISTS  ${schema}.in_cdt_procesa_acumuladores;
+ DROP FUNCTION IF EXISTS  ${schema}.in_cdt_procesa_acumuladores_v10(NUMERIC,NUMERIC,NUMERIC);
 

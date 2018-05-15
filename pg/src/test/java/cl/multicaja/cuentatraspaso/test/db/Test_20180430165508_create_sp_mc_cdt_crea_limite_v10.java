@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase {
+public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDbBase {
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
   /*
       IN _id_fase_movimiento      NUMERIC,
@@ -46,7 +46,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite extends TestDbBase
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
 
-    Assert.assertFalse("Num Error != 0", numError.equals("0"));
+    Assert.assertTrue("Num Error = MC001", numError.equals("MC001"));
     Assert.assertFalse("El Msj Error no es Vacio ", StringUtils.isBlank(msjError));
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);

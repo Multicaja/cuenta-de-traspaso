@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_limite
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite_v10
 (
     IN _id_fase_movimiento     NUMERIC,
     IN _id_regla_acumulacion   NUMERIC,
@@ -35,19 +35,19 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite
 	        _msj_error := '';
 
 		    IF COALESCE(_id_fase_movimiento, 0) = 0 THEN
-	          _num_error := '1001';
+	          _num_error := 'MC001';
 	        	_msj_error := '[mc_cdt_crea_limite] El Id Fase Movimiento no puede ser 0';
 	        	RETURN;
 	      END IF;
 
         IF COALESCE(_id_regla_acumulacion, 0) = 0 THEN
-	          _num_error := '1002';
+	          _num_error := 'MC002';
 	        	_msj_error := '[mc_cdt_crea_limite] El Id Regla Acumulacion no puede ser 0';
 	        	RETURN;
 	      END IF;
 
         IF COALESCE(_descripcion, '') = '' THEN
-            _num_error := '1003';
+            _num_error := 'MC003';
             _msj_error := '[mc_cdt_crea_limite] La descripcion no puede estar vacia';
             RETURN;
         END IF;
@@ -92,5 +92,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-
-  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_limite
+  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_limite_v10(NUMERIC,NUMERIC,VARCHAR,NUMERIC,VARCHAR);

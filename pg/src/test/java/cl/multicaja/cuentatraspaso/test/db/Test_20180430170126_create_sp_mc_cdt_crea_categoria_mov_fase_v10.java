@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180427092730_create_sp_mc_cdt_crea_categoria_mov_fase extends TestDbBase {
+public class Test_20180430170126_create_sp_mc_cdt_crea_categoria_mov_fase_v10 extends TestDbBase {
 
   private static String schema = ConfigUtils.getInstance().getProperty("schema");
 
@@ -44,7 +44,7 @@ public class Test_20180427092730_create_sp_mc_cdt_crea_categoria_mov_fase extend
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
-    Assert.assertFalse("Numero de error != 0", numError.equals("0"));
+    Assert.assertTrue("Numero de error = MC001", numError.equals("MC001"));
     Assert.assertFalse("Existe Msj Error", StringUtils.isBlank(msjError));
   }
 
@@ -59,7 +59,7 @@ public class Test_20180427092730_create_sp_mc_cdt_crea_categoria_mov_fase extend
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
-    Assert.assertFalse("Numero de error != 0", numError.equals("0"));
+    Assert.assertTrue("Numero de error != 0", numError.equals("MC002"));
     Assert.assertFalse("Existe Msj Error", StringUtils.isBlank(msjError));
 
   }
@@ -75,7 +75,7 @@ public class Test_20180427092730_create_sp_mc_cdt_crea_categoria_mov_fase extend
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
-    Assert.assertFalse("Numero de error != 0", numError.equals("0"));
+    Assert.assertFalse("Numero de error = MC001", numError.equals("0"));
     Assert.assertFalse("Existe Msj Error(Duplicate Key)", StringUtils.isBlank(msjError));
 
   }

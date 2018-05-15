@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_movimiento
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_fase_movimiento
+CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_fase_movimiento_v10
 (
     IN _nombre            VARCHAR,
     IN _descripcion       VARCHAR,
@@ -34,19 +34,19 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_fase_movimiento
 	        _msj_Error := '';
 
 		    IF TRIM(COALESCE(_nombre, '')) = '' THEN
-          _num_error := '1001';
+          _num_error := 'MC001';
           _msj_Error := '[mc_cdt_crea_fase_movimiento] El nombre de la fase movimiento no puede ser vacio';
           RETURN;
         END IF;
 
         IF COALESCE(_signo, 0) != -1 AND  COALESCE(_signo, 0) != 1 THEN
-          _num_error := '1002';
+          _num_error := 'MC002';
           _msj_Error := '[mc_cdt_crea_fase_movimiento] El Signo de la fase de movimiento debe ser 1 o -1';
           RETURN;
         END IF;
 
          IF TRIM(COALESCE(_ind_confirmacion, ''))  = '' THEN
-          _num_error := '1003';
+          _num_error := 'MC003';
           _msj_Error := '[mc_cdt_crea_fase_movimiento] El Indicador Confirmacion no puede ser vacio';
           RETURN;
         END IF;
@@ -83,5 +83,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_fase_movimiento;
+ DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_fase_movimiento_v10(VARCHAR,VARCHAR,NUMERIC,VARCHAR);
