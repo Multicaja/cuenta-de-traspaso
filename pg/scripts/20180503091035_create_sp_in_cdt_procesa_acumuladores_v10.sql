@@ -102,7 +102,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                (monto+(_monto*_rec_cat_mov.movimiento_signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                               (monto + 1)
+                                               (monto + (1*_rec_cat_mov.movimiento_signo))
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
                             WHERE
@@ -132,7 +132,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                                                 WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                     (_monto*_rec_cat_mov.movimiento_signo)
                                                 WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                                    1
+                                                    (1*_rec_cat_mov.movimiento_signo)
                                             END,
                                             _fecha_ini,
                                             _fecha_fin,
@@ -148,7 +148,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                (monto+(_monto*_rec_cat_mov.movimiento_signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                               (monto + 1)
+                                               (monto + (1*_rec_cat_mov.movimiento_signo))
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
                             WHERE
@@ -178,7 +178,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                 (_monto*_rec_cat_mov.movimiento_signo)
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                                1
+                                                (1*_rec_cat_mov.movimiento_signo)
                                         END,
                                         to_date('01-01-1900', 'dd-MM-YYYY'),
                                         to_date('31-12-2100', 'dd-MM-YYYY'),

@@ -5,7 +5,7 @@ import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Test_20180427092549_create_table_cdt_fase_movimiento extends TestDbBase {
+public class Test_20180427092540_create_table_cdt_fase_movimiento extends TestDbBase {
   /**********************************************
    *    id                    BIGSERIAL NOT NULL,
    *    nombre                VARCHAR(20) NOT NULL,

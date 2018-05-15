@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class Test_20180427092558_create_table_cdt_categoria_movimiento extends TestDbBase {
+public class Test_20180427092530_create_table_cdt_categoria_movimiento extends TestDbBase {
 
   /******************************************************
    *  id                 BIGSERIAL NOT NULL,

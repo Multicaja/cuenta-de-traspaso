@@ -14,23 +14,24 @@
 --    limitations under the License.
 --
 
--- // create_table_cdt_tipo_movimiento
+-- // create_table_cdt_limite
 -- Migration SQL that makes the change goes here.
 
 
-  CREATE TABLE ${schema}.cdt_categoria_movimiento(
-      id                 BIGSERIAL NOT NULL,
-      id_bolsa           BIGINT NOT NULL,
-      nombre             VARCHAR(50) NOT NULL,
-      descripcion        VARCHAR(100) NOT NULL,
-      estado             VARCHAR(10) NOT NULL,
-      fecha_estado       TIMESTAMP NOT NULL,
-      fecha_creacion     TIMESTAMP NOT NULL,
-      CONSTRAINT cdt_categoria_movimiento_pk PRIMARY KEY(id)
+  CREATE TABLE ${schema}.cdt_limite(
+      id                    BIGSERIAL NOT NULL,
+      id_fase_movimiento    BIGINT REFERENCES ${schema}.cdt_fase_movimiento(id),
+      id_regla_acumulacion  BIGINT NOT NULL,
+      descripcion           VARCHAR(100) NOT NULL,
+      valor                 NUMERIC NOT NULL,
+      cod_operacion         VARCHAR(10) NOT NULL,
+      estado                VARCHAR(10) NOT NULL,
+      fecha_estado          TIMESTAMP NOT NULL,
+      fecha_creacion        TIMESTAMP NOT NULL,
+      CONSTRAINT cdt_limite_pk PRIMARY KEY(id)
   );
 
-  CREATE INDEX cdt_categoria_movimiento_i1 ON ${schema}.cdt_categoria_movimiento (estado);
+  CREATE INDEX cdt_limite_i1 ON ${schema}.cdt_limite (estado);
 -- //@UNDO
 -- SQL to undo the change goes here.
-
-  DROP TABLE IF EXISTS ${schema}.cdt_categoria_movimiento;
+  DROP TABLE IF EXISTS  ${schema}.cdt_limite;

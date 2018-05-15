@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class Test_20180427092533_create_table_cdt_cuenta_acumulador extends TestDbBase {
+public class Test_20180427092635_create_table_cdt_cuenta_acumulador extends TestDbBase {
 
   /**********************************************************
   *       id                    BIGSERIAL NOT NULL,

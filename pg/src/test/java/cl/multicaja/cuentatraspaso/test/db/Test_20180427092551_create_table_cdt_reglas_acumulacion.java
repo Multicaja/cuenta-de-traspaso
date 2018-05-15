@@ -5,7 +5,7 @@ import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Test_20180427092630_create_table_cdt_reglas_acumulacion extends TestDbBase {
+public class Test_20180427092551_create_table_cdt_reglas_acumulacion extends TestDbBase {
   /**************************************************
    *
    *       id                         BIGSERIAL NOT NULL,

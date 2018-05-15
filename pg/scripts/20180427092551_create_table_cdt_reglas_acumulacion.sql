@@ -20,7 +20,7 @@
 
   CREATE TABLE ${schema}.cdt_regla_acumulacion (
       id                        BIGSERIAL NOT NULL,
-      id_categoria_movimiento   BIGINT  NOT NULL,
+      id_categoria_movimiento   BIGINT  REFERENCES ${schema}.cdt_categoria_movimiento(id),
       periocidad                VARCHAR(10) NOT NULL,
       codigo_operacion          VARCHAR(10) NOT NULL,
       estado                    VARCHAR(10) NOT NULL,

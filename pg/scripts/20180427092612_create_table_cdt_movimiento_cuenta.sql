@@ -22,8 +22,8 @@
 
   CREATE TABLE ${schema}.cdt_movimiento_cuenta(
       id                  BIGSERIAL NOT NULL,
-      id_cuenta           BIGINT NOT NULL,
-      id_fase_movimiento  BIGINT NOT NULL,
+      id_cuenta           BIGINT REFERENCES ${schema}.cdt_cuenta(id),
+      id_fase_movimiento  BIGINT REFERENCES ${schema}.cdt_fase_movimiento(id),
       id_mov_referencia   BIGINT NOT NULL,
       id_tx_externo       VARCHAR(50) NOT NULL,
       glosa               VARCHAR(100) NOT NULL,

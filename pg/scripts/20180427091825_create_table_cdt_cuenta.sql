@@ -26,7 +26,8 @@
       estado          VARCHAR(10) NOT NULL,
       fecha_estado    TIMESTAMP NOT NULL,
       fecha_creacion  TIMESTAMP NOT NULL,
-      CONSTRAINT cdt_cuenta_pk PRIMARY KEY(id,id_externo)
+      CONSTRAINT cdt_cuenta_pk PRIMARY KEY(id),
+      CONSTRAINT cdt_cuenta_u1 UNIQUE (id_externo)
   );
   CREATE INDEX cdt_cuenta_i1 ON ${schema}.cdt_cuenta (estado);
 

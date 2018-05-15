@@ -14,25 +14,23 @@
 --    limitations under the License.
 --
 
--- // create_table_cdt_cuenta_acumulador
+-- // create_table_cdt_tipo_movimiento
 -- Migration SQL that makes the change goes here.
 
 
-
-  CREATE TABLE ${schema}.cdt_cuenta_acumulador (
-      id                    BIGSERIAL NOT NULL,
-      id_regla_acumulacion  BIGINT    NOT NULL,
-      id_cuenta             BIGINT    NOT NULL,
-      codigo_operacion      VARCHAR   NOT NULL,
-      monto                 NUMERIC   NOT NULL,
-      fecha_inicio          TIMESTAMP NOT NULL,
-      fecha_fin             TIMESTAMP NOT NULL,
-      fecha_creacion        TIMESTAMP NOT NULL,
-      fecha_actualizacion   TIMESTAMP NOT NULL,
-      CONSTRAINT cdt_cuenta_acumulador_pk PRIMARY KEY(id)
+  CREATE TABLE ${schema}.cdt_categoria_movimiento(
+      id                 BIGSERIAL NOT NULL,
+      id_bolsa           BIGINT REFERENCES ${schema}.cdt_bolsa(id),
+      nombre             VARCHAR(50) NOT NULL,
+      descripcion        VARCHAR(100) NOT NULL,
+      estado             VARCHAR(10) NOT NULL,
+      fecha_estado       TIMESTAMP NOT NULL,
+      fecha_creacion     TIMESTAMP NOT NULL,
+      CONSTRAINT cdt_categoria_movimiento_pk PRIMARY KEY(id)
   );
---  CREATE INDEX cdt_cuenta_acumulador_i1 ON {schema}.cdt_cuenta_acumulador (estado);
 
+  CREATE INDEX cdt_categoria_movimiento_i1 ON ${schema}.cdt_categoria_movimiento (estado);
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS  ${schema}.cdt_cuenta_acumulador;
+
+  DROP TABLE IF EXISTS ${schema}.cdt_categoria_movimiento;
