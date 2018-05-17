@@ -20,10 +20,10 @@
 
 
 
-  CREATE TABLE ${schema}.cdt_movimiento_cuenta(
+  CREATE TABLE ${schema.cdt}.cdt_movimiento_cuenta(
       id                  BIGSERIAL NOT NULL,
-      id_cuenta           BIGINT REFERENCES ${schema}.cdt_cuenta(id),
-      id_fase_movimiento  BIGINT REFERENCES ${schema}.cdt_fase_movimiento(id),
+      id_cuenta           BIGINT REFERENCES ${schema.cdt}.cdt_cuenta(id),
+      id_fase_movimiento  BIGINT REFERENCES ${schema.cdt}.cdt_fase_movimiento(id),
       id_mov_referencia   BIGINT NOT NULL,
       id_tx_externo       VARCHAR(50) NOT NULL,
       glosa               VARCHAR(100) NOT NULL,
@@ -34,7 +34,7 @@
       CONSTRAINT cdt_movimiento_cuenta_pk PRIMARY KEY(id)
   );
 
-  CREATE INDEX cdt_movimiento_cuenta_i1 ON ${schema}.cdt_movimiento_cuenta (id_fase_movimiento);
+  CREATE INDEX cdt_movimiento_cuenta_i1 ON ${schema.cdt}.cdt_movimiento_cuenta (id_fase_movimiento);
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_movimiento_cuenta;
+  DROP TABLE IF EXISTS ${schema.cdt}.cdt_movimiento_cuenta;

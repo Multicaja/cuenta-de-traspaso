@@ -5,7 +5,7 @@ import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Test_20180427092551_create_table_cdt_reglas_acumulacion extends TestDbBase {
+public class Test_20180427092551_create_table_cdt_reglas_acumulacion extends TestDB {
   /**************************************************
    *
    *       id                         BIGSERIAL NOT NULL,
@@ -18,7 +18,7 @@ public class Test_20180427092551_create_table_cdt_reglas_acumulacion extends Tes
    *************************************************/
   @Test
   public void CheckTableReglaAcumulacion() {
-    boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.REGLA_ACUMULACION.getName(), true,
+    boolean exists = dbUtils.tableExists(getSchema(), Constants.Tables.REGLA_ACUMULACION.getName(), true,
       new ColumnInfo("id", "BIGSERIAL",19),
       new ColumnInfo("id_categoria_movimiento", "INT8", 19),
       new ColumnInfo("periocidad", "VARCHAR", 10),
@@ -26,6 +26,6 @@ public class Test_20180427092551_create_table_cdt_reglas_acumulacion extends Tes
       new ColumnInfo("estado", "VARCHAR", 10),
       new ColumnInfo("fecha_estado", "TIMESTAMP", 29),
       new ColumnInfo("fecha_creacion", "TIMESTAMP", 29));
-    Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.REGLA_ACUMULACION.getName(), true, exists);
+    Assert.assertEquals("Existe tabla "+getSchema()+"."+Constants.Tables.REGLA_ACUMULACION.getName(), true, exists);
   }
 }

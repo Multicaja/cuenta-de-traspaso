@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_cuenta_acumulacion
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
 (
     IN _id_fase_movimiento      NUMERIC,
     IN _id_cuenta               NUMERIC,
@@ -64,9 +64,9 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                     CMF.id_categoria_movimiento  AS id_categoria_movimiento,
                     CMO.nombre                   AS nombre_tipo_moviniento
                 FROM
-                    ${schema}.cdt_fase_movimiento MOV
-                INNER JOIN ${schema}.cdt_categoria_mov_fase CMF ON CMF.id_fase_movimiento = _id_fase_movimiento
-                INNER JOIN ${schema}.cdt_categoria_movimiento CMO ON CMO.id = CMF.id_categoria_movimiento
+                    ${schema.cdt}.cdt_fase_movimiento MOV
+                INNER JOIN ${schema.cdt}.cdt_categoria_mov_fase CMF ON CMF.id_fase_movimiento = _id_fase_movimiento
+                INNER JOIN ${schema.cdt}.cdt_categoria_movimiento CMO ON CMO.id = CMF.id_categoria_movimiento
                 WHERE
                     MOV.id = _id_fase_movimiento
             LOOP -- RECORRO Y VERIFICO ACUMULADORES
@@ -76,7 +76,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                         periocidad,
                         codigo_operacion
                     FROM
-                        ${schema}.cdt_regla_acumulacion
+                        ${schema.cdt}.cdt_regla_acumulacion
                     WHERE
                         id_categoria_movimiento = _rec_cat_mov.id_categoria_movimiento AND
                         estado = 'ACTIVO'
@@ -96,7 +96,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                             END CASE;
 
                             UPDATE
-                                ${schema}.cdt_cuenta_acumulador
+                                ${schema.cdt}.cdt_cuenta_acumulador
                             SET
                                 monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
@@ -112,7 +112,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                                 codigo_operacion = _rec_regla_acum.codigo_operacion;
                             IF NOT FOUND THEN
                                 INSERT INTO
-                                    ${schema}.cdt_cuenta_acumulador
+                                    ${schema.cdt}.cdt_cuenta_acumulador
                                         (
                                             id_regla_acumulacion,
                                             id_cuenta,
@@ -142,7 +142,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                             END IF;
                         ELSE
                             UPDATE
-                                ${schema}.cdt_cuenta_acumulador
+                                ${schema.cdt}.cdt_cuenta_acumulador
                             SET
                                 monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
@@ -158,7 +158,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_procesa_acumuladores_v10
                                 codigo_operacion = _rec_regla_acum.codigo_operacion;
                             IF NOT FOUND THEN
                                 INSERT INTO
-                                    ${schema}.cdt_cuenta_acumulador
+                                    ${schema.cdt}.cdt_cuenta_acumulador
                                     (
                                         id_regla_acumulacion,
                                         id_cuenta,
@@ -207,5 +207,5 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
- DROP FUNCTION IF EXISTS  ${schema}.in_cdt_procesa_acumuladores_v10(NUMERIC,NUMERIC,NUMERIC);
+ DROP FUNCTION IF EXISTS  ${schema.cdt}.in_cdt_procesa_acumuladores_v10(NUMERIC,NUMERIC,NUMERIC);
 

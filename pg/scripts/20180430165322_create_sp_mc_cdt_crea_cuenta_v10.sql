@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_cuenta
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_cuenta_v10
 (
     IN _id_externo         VARCHAR,
     IN _descripcion		     VARCHAR,
@@ -39,7 +39,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta_v10
           RETURN;
         END IF;
 
-        INSERT INTO ${schema}.cdt_cuenta (
+        INSERT INTO ${schema.cdt}.cdt_cuenta (
           id_externo,
           descripcion,
           estado,
@@ -53,7 +53,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_cuenta_v10
            timezone('utc', now()),
            timezone('utc', now())
         );
-      SELECT currval('${schema}.cdt_cuenta_id_seq') INTO _id_cuenta;
+      SELECT currval('${schema.cdt}.cdt_cuenta_id_seq') INTO _id_cuenta;
       EXCEPTION
           WHEN OTHERS THEN
               _num_error := SQLSTATE;
@@ -65,5 +65,5 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_cuenta_v10(VARCHAR, VARCHAR);
+  DROP FUNCTION IF EXISTS ${schema.cdt}.mc_cdt_crea_cuenta_v10(VARCHAR, VARCHAR);
 

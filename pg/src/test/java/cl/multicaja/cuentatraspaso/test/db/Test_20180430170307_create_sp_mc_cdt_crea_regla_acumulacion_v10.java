@@ -12,22 +12,13 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 extends TestDbBase {
-
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
-  /*
-    IN _id_categoria_movimiento  NUMERIC,
-    IN _periocidad          VARCHAR,
-    IN _codigo_operacion    VARCHAR,
-    OUT _NumError           VARCHAR,
-    OUT _MsjError           VARCHAR
-   */
+public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 extends TestDB {
 
   @Test
   public void spCreaReglaAcumulacion() throws SQLException {
 
     Object[] params = {1 ,"SEM","SUM" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -43,7 +34,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 ext
   public void spCreaReglaAcumulacionErrorTipoMov() throws SQLException {
 
     Object[] params = {new NullParam(Types.NUMERIC),"SEM","SUM" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -60,7 +51,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 ext
 
 
     Object[] params = {1,"","SUM" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -74,7 +65,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 ext
   public void spCreaReglaAcumulacionErrorCodOperacion() throws SQLException {
 
     Object[] params = {1,"SEM","" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");

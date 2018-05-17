@@ -1,7 +1,7 @@
 package cl.multicaja.cuentatraspaso.test.db;
 
 public class Constants {
-  public static final String SCHEMA= "cuentatraspaso";
+
   public enum Tables
   {
     CUENTA("cdt_cuenta"),

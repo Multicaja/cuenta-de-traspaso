@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_regla_acumulacion
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_regla_acumulacion_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_regla_acumulacion_v10
 (
     IN _id_categoria_movimiento  NUMERIC,
     IN _periocidad               VARCHAR,
@@ -50,7 +50,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_regla_acumulacion_v10
             RETURN;
          END IF;
 
-        	INSERT INTO ${schema}.cdt_regla_acumulacion
+        	INSERT INTO ${schema.cdt}.cdt_regla_acumulacion
 	    		(
 	    			id_categoria_movimiento,
             periocidad,
@@ -79,4 +79,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_regla_acumulacion_v10(NUMERIC,VARCHAR,VARCHAR);
+ DROP FUNCTION IF EXISTS ${schema.cdt}.mc_cdt_crea_regla_acumulacion_v10(NUMERIC,VARCHAR,VARCHAR);

@@ -17,7 +17,7 @@
 -- // create_sp_mc_crea_movimiento_cuenta
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_movimiento_cuenta_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_movimiento_cuenta_v10
 (
     IN _id_cuenta               VARCHAR,
     IN _id_fase_movimiento      NUMERIC,
@@ -58,15 +58,17 @@ BEGIN
     END IF;
 
      BEGIN
+
         -- BUSCA FASE MOVIMIENTO
         SELECT
           ind_confirmacion
         INTO
           _ind_confirmacion
         FROM
-          ${schema}.cdt_fase_movimiento
+          ${schema.cdt}.cdt_fase_movimiento
         WHERE
           id = _id_fase_movimiento;
+
 
         -- BUSCA LA CUENTA
         SELECT
@@ -74,12 +76,37 @@ BEGIN
         INTO
            _id_cuenta_interno
         FROM
-           ${schema}.cdt_cuenta
+           ${schema.cdt}.cdt_cuenta
         WHERE
            id_externo = _id_cuenta;
 
+
+        -- SI LA CUENTA NO EXISTE LA CREA MEDIANTE EL PROCEIMIENTO CREA CUENTA
+        IF (_id_cuenta_interno IS NULL OR _id_cuenta_interno = 0 ) THEN
+
+          SELECT
+            CCU._id_cuenta,
+            CCU._num_error,
+            CCU._msj_error
+          INTO
+            _id_cuenta_interno,
+            _num_error,
+            _msj_error
+          FROM
+            ${schema.cdt}.mc_cdt_crea_cuenta_v10
+            (
+              _id_cuenta,
+              _id_cuenta
+            ) CCU;
+          IF(_num_error != '0') THEN
+             RAISE EXCEPTION 'Error al crear cuenta usuario CDT'; -- RETORNA ERROR SI EXISTE ERROR EN SP mc_cdt_crea_cuenta_v10
+          END IF;
+
+        END IF;
+
+
         INSERT INTO
-            ${schema}.cdt_movimiento_cuenta
+            ${schema.cdt}.cdt_movimiento_cuenta
             (
                 id_cuenta,
                 id_fase_movimiento,
@@ -113,7 +140,7 @@ BEGIN
           _num_error,
           _msj_error
         FROM
-            ${schema}.in_cdt_procesa_acumuladores_v10
+            ${schema.cdt}.in_cdt_procesa_acumuladores_v10
             (
                 _id_fase_movimiento,
                 _id_cuenta_interno,
@@ -133,7 +160,7 @@ BEGIN
           _num_error,
           _msj_error
         FROM
-            ${schema}.in_cdt_verifica_limites_v10
+            ${schema.cdt}.in_cdt_verifica_limites_v10
             (
               _id_cuenta_interno,
               _id_fase_movimiento,
@@ -145,7 +172,7 @@ BEGIN
 
         IF(_ind_confirmacion = 'S') THEN
           INSERT INTO
-            ${schema}.cdt_confirmacion_movimiento
+            ${schema.cdt}.cdt_confirmacion_movimiento
             (
               id_mov_cuenta_origen,
               id_mov_cuenta_confirmacion
@@ -181,4 +208,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
- DROP FUNCTION IF EXISTS  ${schema}.mc_cdt_crea_movimiento_cuenta_v10(VARCHAR,NUMERIC,NUMERIC,VARCHAR,VARCHAR,NUMERIC);
+ DROP FUNCTION IF EXISTS  ${schema.cdt}.mc_cdt_crea_movimiento_cuenta_v10(VARCHAR,NUMERIC,NUMERIC,VARCHAR,VARCHAR,NUMERIC);

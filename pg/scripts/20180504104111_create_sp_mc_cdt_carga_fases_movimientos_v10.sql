@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_carga_movimientos
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_carga_fases_movimientos_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_carga_fases_movimientos_v10
 (
     IN  _nombre         VARCHAR,
     IN  _id_fase        NUMERIC,
@@ -38,7 +38,7 @@ BEGIN
             descripcion,
             signo
         FROM
-             ${schema}.cdt_fase_movimiento
+             ${schema.cdt}.cdt_fase_movimiento
         WHERE
             estado = 'ACTIVO' AND
             (TRIM(COALESCE(_NOMBRE,'')) = '' OR LOWER(nombre) LIKE '%'||LOWER(_NOMBRE)||'%') AND
@@ -55,4 +55,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-DROP FUNCTION IF EXISTS ${schema}.mc_cdt_carga_fases_movimientos_v10(VARCHAR, NUMERIC);
+DROP FUNCTION IF EXISTS ${schema.cdt}.mc_cdt_carga_fases_movimientos_v10(VARCHAR, NUMERIC);

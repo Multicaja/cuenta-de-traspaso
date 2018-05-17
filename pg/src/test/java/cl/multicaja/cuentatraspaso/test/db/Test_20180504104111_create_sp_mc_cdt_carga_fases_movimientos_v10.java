@@ -14,16 +14,14 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
-public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos_v10 extends TestDbBase {
-
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
+public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos_v10 extends TestDB {
 
 
   @Test
   public void spCargaFasesMovimiento() throws SQLException {
 
     Object[] params = {"Primera Carga" ,new NullParam(Types.NUMERIC),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
     List lstMovimientos = (List) outputData.get("_movimientos");
 
@@ -40,7 +38,7 @@ public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos_v10 ex
   public void spCargaFasesMovimientoParamInNull() throws SQLException {
 
     Object[] params = {new NullParam(Types.VARCHAR),new NullParam(Types.NUMERIC),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
     List lstMovimientos = (List) outputData.get("_movimientos");
 
@@ -57,7 +55,7 @@ public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos_v10 ex
   public void spCargaFasesMovimientoParamInVacio() throws SQLException {
 
     Object[] params = {"",0,new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
     List lstMovimientos = (List) outputData.get("_movimientos");
 

@@ -5,7 +5,7 @@ import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Test_20180427092555_create_table_cdt_limite extends TestDbBase {
+public class Test_20180427092555_create_table_cdt_limite extends TestDB {
 
   /********************************************************
    *       id                    BIGSERIAL NOT NULL,
@@ -22,7 +22,7 @@ public class Test_20180427092555_create_table_cdt_limite extends TestDbBase {
 
   @Test
   public void CheckTableLimite() {
-    boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.LIMITE.getName(), true,
+    boolean exists = dbUtils.tableExists(getSchema(), Constants.Tables.LIMITE.getName(), true,
       new ColumnInfo("id", "BIGSERIAL",19),
       new ColumnInfo("id_fase_movimiento", "INT8", 19),
       new ColumnInfo("id_regla_acumulacion", "INT8", 19),
@@ -32,7 +32,7 @@ public class Test_20180427092555_create_table_cdt_limite extends TestDbBase {
       new ColumnInfo("estado", "VARCHAR", 10),
       new ColumnInfo("fecha_estado", "TIMESTAMP", 29),
       new ColumnInfo("fecha_creacion", "TIMESTAMP", 29));
-      Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.LIMITE.getName(), true, exists);
+      Assert.assertEquals("Existe tabla "+getSchema()+"."+Constants.Tables.LIMITE.getName(), true, exists);
   }
 
 

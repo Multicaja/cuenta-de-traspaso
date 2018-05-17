@@ -18,9 +18,9 @@
 -- Migration SQL that makes the change goes here.
 
 
-  CREATE TABLE ${schema}.cdt_limite(
+  CREATE TABLE ${schema.cdt}.cdt_limite(
       id                    BIGSERIAL NOT NULL,
-      id_fase_movimiento    BIGINT REFERENCES ${schema}.cdt_fase_movimiento(id),
+      id_fase_movimiento    BIGINT REFERENCES ${schema.cdt}.cdt_fase_movimiento(id),
       id_regla_acumulacion  BIGINT NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
       valor                 NUMERIC NOT NULL,
@@ -31,7 +31,7 @@
       CONSTRAINT cdt_limite_pk PRIMARY KEY(id)
   );
 
-  CREATE INDEX cdt_limite_i1 ON ${schema}.cdt_limite (estado);
+  CREATE INDEX cdt_limite_i1 ON ${schema.cdt}.cdt_limite (estado);
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS  ${schema}.cdt_limite;
+  DROP TABLE IF EXISTS  ${schema.cdt}.cdt_limite;

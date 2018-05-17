@@ -12,23 +12,13 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta_v10 extends TestDbBase {
-
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
-    /*
-        IN _id_externo         VARCHAR,
-        IN _descripcion		     VARCHAR,
-        OUT _id_cuenta         NUMERIC,
-        OUT _NumError          VARCHAR,
-        OUT _MsjError          VARCHAR
-     */
-
+public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta_v10 extends TestDB {
 
   @Test
   public void spCreaCuentaOk() throws SQLException {
 
     Object[] params = {"PREPAGO_175959289","Prepago RUT 175959289",new OutParam("_id_cuenta",Types.NUMERIC),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_CUENTA.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_CUENTA.getName(),params);
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");
@@ -46,7 +36,7 @@ public class Test_20180430165322_create_sp_mc_cdt_crea_cuenta_v10 extends TestDb
   public void spCreaCuentaErrorIdCuentaExterno() throws SQLException {
 
     Object[] params = {"","",new OutParam("_id_cuenta",Types.NUMERIC),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object>  outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_CUENTA.getName(),params);
+    Map<String,Object>  outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_CUENTA.getName(),params);
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");

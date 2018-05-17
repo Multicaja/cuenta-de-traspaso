@@ -14,10 +14,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
-public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 extends TestDbBase {
-
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
-
+public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 extends TestDB{
 
   /***********************************************
    * NUEVO USUARIO PREPAGO
@@ -25,12 +22,11 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
    * VERIFICACION DE LIMITES
    * @throws SQLException
    **********************************************/
-
+  private JdbcTemplate jdbcTempate = dbUtils.getJdbcTemplate();
   @Test
   public void nuevoUsuarioPrimeraCarga() throws SQLException {
 
 
-       JdbcTemplate jdbcTempate = dbUtils.getJdbcTemplate();
 
       //================================================================================
       // CREA CUENTA
@@ -42,7 +38,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
       Object[] params = {cuentaUsuario, descCuenta, new OutParam("_id_cuenta", Types.NUMERIC), new OutParam("_numerror", Types.VARCHAR), new OutParam("_msjerror", Types.VARCHAR)};
 
-      Map<String, Object> outputData = dbUtils.execute( schema + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
+      Map<String, Object> outputData = dbUtils.execute( getSchema() + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
 
       BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
       String numError = (String) outputData.get("_numerror");
@@ -86,17 +82,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       Assert.assertTrue("NumError != 0", respuestaMovimiento.getNumError().equals("10003"));
       Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
-      List lstAcumuladores = jdbcTempate.queryForList(
-                          "SELECT " +
-                            "     CAC.id AS ID, " +
-                            "     CAC.monto AS MONTO , "+
-                            "     RAC.codigo_operacion AS CODOPE "+
-                            " FROM " +
-                            "   "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName() +" CAC "+
-                            " INNER JOIN "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+" RAC ON CAC.id_regla_acumulacion = RAC.id "+
-                            " WHERE " +
-                            " id_cuenta = "+idCuenta
-      );
+      List lstAcumuladores = getCuentaAcumulador(idCuenta);
 
       //================================================================================
       // 4 -Verifica los Acumuladores
@@ -125,9 +111,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
   @Test
   public void usaurioN2CargaWeb() throws SQLException {
 
-    JdbcTemplate jdbcTempate = dbUtils.getJdbcTemplate();
-
-    int idFaseMovimiento = 3; // Solicitud Carga Web
+  int idFaseMovimiento = 3; // Solicitud Carga Web
 
     //================================================================================
     // CREA CUENTA
@@ -137,7 +121,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
     Object[] params = {cuentaUsuario, descCuenta, new OutParam("_id_cuenta", Types.NUMERIC), new OutParam("_numerror", Types.VARCHAR), new OutParam("_msjerror", Types.VARCHAR)};
 
-    Map<String, Object> outputData = dbUtils.execute( schema + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
+    Map<String, Object> outputData = dbUtils.execute( getSchema() + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");
@@ -177,17 +161,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       Assert.assertTrue("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
 
-      List lstAcumuladores = jdbcTempate.queryForList(
-        " SELECT " +
-          "     CAC.id AS ID, " +
-          "     CAC.monto AS MONTO , " +
-          "     RAC.codigo_operacion AS CODOPE " +
-          " FROM " +
-          "   " + schema + "." + Constants.Tables.CUENTA_ACUMULADOR.getName() + " CAC " +
-          " INNER JOIN " + schema + "." + Constants.Tables.REGLA_ACUMULACION.getName() + " RAC ON CAC.id_regla_acumulacion = RAC.id " +
-          " WHERE " +
-          " id_cuenta = "+idCuenta
-      );
+      List lstAcumuladores =  getCuentaAcumulador(idCuenta);
       //================================================================================
       // 4 -Verifica los acumuladores luego de la primera carga
       //================================================================================
@@ -221,8 +195,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
   @Test
   public void usaurioN2CargaPos() throws SQLException {
 
-    JdbcTemplate jdbcTempate = dbUtils.getJdbcTemplate();
-
     int idFaseMovimiento = 5; // Solicitud Carga Pos
 
     //================================================================================
@@ -233,7 +205,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
     Object[] params = {cuentaUsuario, descCuenta, new OutParam("_id_cuenta", Types.NUMERIC), new OutParam("_numerror", Types.VARCHAR), new OutParam("_msjerror", Types.VARCHAR)};
 
-    Map<String, Object> outputData = dbUtils.execute( schema + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
+    Map<String, Object> outputData = dbUtils.execute( getSchema() + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");
@@ -273,17 +245,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       Assert.assertTrue("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
 
-      List lstAcumuladores = jdbcTempate.queryForList(
-        " SELECT " +
-          "     CAC.id AS ID, " +
-          "     CAC.monto AS MONTO , " +
-          "     RAC.codigo_operacion AS CODOPE " +
-          " FROM " +
-          "   " + schema + "." + Constants.Tables.CUENTA_ACUMULADOR.getName() + " CAC " +
-          " INNER JOIN " + schema + "." + Constants.Tables.REGLA_ACUMULACION.getName() + " RAC ON CAC.id_regla_acumulacion = RAC.id " +
-          " WHERE " +
-          " id_cuenta = "+idCuenta
-      );
+      List lstAcumuladores = getCuentaAcumulador(idCuenta);
       //================================================================================
       // 4 -Verifica los acumuladores luego de la primera carga
       //================================================================================
@@ -317,8 +279,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
   @Test
   public void pruebaDobleConfirmacion()throws Exception {
 
-    JdbcTemplate jdbcTempate = dbUtils.getJdbcTemplate();
-
     int idFaseMovimiento = 3; // Solicitud Carga Web
 
     //================================================================================
@@ -329,7 +289,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
     Object[] params = {cuentaUsuario, descCuenta, new OutParam("_id_cuenta", Types.NUMERIC), new OutParam("_numerror", Types.VARCHAR), new OutParam("_msjerror", Types.VARCHAR)};
 
-    Map<String, Object> outputData = dbUtils.execute( schema + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
+    Map<String, Object> outputData = dbUtils.execute( getSchema() + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
 
     BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
     String numError = (String) outputData.get("_numerror");
@@ -350,17 +310,8 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     Assert.assertTrue("[Movimiento 1] NumError == 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[Movimiento 1] MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
-    List lstAcumuladores = jdbcTempate.queryForList(
-      " SELECT " +
-        "     CAC.id AS ID, " +
-        "     CAC.monto AS MONTO , "+
-        "     RAC.codigo_operacion AS CODOPE "+
-        " FROM " +
-        "   "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName() +" CAC "+
-        " INNER JOIN "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+" RAC ON CAC.id_regla_acumulacion = RAC.id "+
-        " WHERE " +
-        " id_cuenta = "+idCuenta
-    );
+    List lstAcumuladores = getCuentaAcumulador(idCuenta);
+
     for(Object data : lstAcumuladores) {
       Map<String,Object> aData = (Map<String, Object>) data;
       if(((String) aData.get("CODOPE")).equalsIgnoreCase("SUM")) {
@@ -397,17 +348,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     Assert.assertFalse("[Reversa Pos Confirmacion] NumError != 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertFalse("[Reversa Pos Confirmacion] MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
-    lstAcumuladores = jdbcTempate.queryForList(
-      " SELECT " +
-        "     CAC.id AS ID, " +
-        "     CAC.monto AS MONTO , "+
-        "     RAC.codigo_operacion AS CODOPE "+
-        " FROM " +
-        "   "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName() +" CAC "+
-        " INNER JOIN "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+" RAC ON CAC.id_regla_acumulacion = RAC.id "+
-        " WHERE " +
-        " id_cuenta = "+idCuenta
-    );
+    lstAcumuladores = getCuentaAcumulador(idCuenta);
     for(Object data : lstAcumuladores) {
       Map<String,Object> aData = (Map<String, Object>) data;
       if(((String) aData.get("CODOPE")).equalsIgnoreCase("SUM")) {
@@ -430,17 +371,8 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     idMovimientoOriginal = respuestaMovimiento.getIdMovimiento();
 
     System.out.println("!!!!!! MOVIMIENTO ORIGINAL : "+idMovimientoOriginal);
-    lstAcumuladores = jdbcTempate.queryForList(
-      " SELECT " +
-        "     CAC.id AS ID, " +
-        "     CAC.monto AS MONTO , "+
-        "     RAC.codigo_operacion AS CODOPE "+
-        " FROM " +
-        "   "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName() +" CAC "+
-        " INNER JOIN "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+" RAC ON CAC.id_regla_acumulacion = RAC.id "+
-        " WHERE " +
-        " id_cuenta = "+idCuenta
-    );
+    lstAcumuladores  = getCuentaAcumulador(idCuenta);
+
     for(Object data : lstAcumuladores) {
       Map<String,Object> aData = (Map<String, Object>) data;
       if(((String) aData.get("CODOPE")).equalsIgnoreCase("SUM")) {
@@ -457,17 +389,8 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     Assert.assertTrue("[REVERSA CARGA] NumError = 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[REVERSA CARGA] MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
-    lstAcumuladores = jdbcTempate.queryForList(
-      " SELECT " +
-        "     CAC.id AS ID, " +
-        "     CAC.monto AS MONTO , "+
-        "     RAC.codigo_operacion AS CODOPE "+
-        " FROM " +
-        "   "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName() +" CAC "+
-        " INNER JOIN "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+" RAC ON CAC.id_regla_acumulacion = RAC.id "+
-        " WHERE " +
-        " id_cuenta = "+idCuenta
-    );
+    lstAcumuladores  = getCuentaAcumulador(idCuenta);
+
     for(Object data : lstAcumuladores) {
       Map<String,Object> aData = (Map<String, Object>) data;
       if(((String) aData.get("CODOPE")).equalsIgnoreCase("SUM")) {
@@ -479,29 +402,39 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       }
     }
   }
+  private List getCuentaAcumulador(BigDecimal idCuenta) {
+    return jdbcTempate.queryForList(
+      " SELECT " +
+        "     CAC.id AS ID, " +
+        "     CAC.monto AS MONTO , "+
+        "     RAC.codigo_operacion AS CODOPE "+
+        " FROM " +
+        "   "+getSchema()+"."+Constants.Tables.CUENTA_ACUMULADOR.getName() +" CAC "+
+        " INNER JOIN "+getSchema()+"."+Constants.Tables.REGLA_ACUMULACION.getName()+" RAC ON CAC.id_regla_acumulacion = RAC.id "+
+        " WHERE " +
+        " id_cuenta = "+idCuenta
+    );
+  }
 
   private  Movimiento callCreaMovimientoCuenta(String idCuenta, int idFaseMovimiento, int idFaseMovimientoRef,String idExterno, String glosa, BigDecimal monto ) throws SQLException{
-
     Movimiento movimiento = new Movimiento();
-
     Object[] params = {idCuenta, idFaseMovimiento,idFaseMovimientoRef,idExterno,glosa,monto, new OutParam("_id_movimiento_cuenta", Types.NUMERIC), new OutParam("_numerror", Types.VARCHAR), new OutParam("_msjerror", Types.VARCHAR)};
 
-    Map<String, Object> outputData = dbUtils.execute( schema + Constants.Procedures.SP_CREA_MOVIMIENTO_CUENTA.getName(), params);
+    Map<String, Object> outputData = dbUtils.execute( getSchema() + Constants.Procedures.SP_CREA_MOVIMIENTO_CUENTA.getName(), params);
 
     BigDecimal id_movimiento_cuenta = (BigDecimal) outputData.get("_id_movimiento_cuenta");
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
+
     System.out.println("[MOVIMIENTO_CUENTA/CALL_CREA_MOVIMIENTO_CUENTA] NumError: "+numError +" MsjError: "+msjError);
     movimiento.setNumError(numError);
     movimiento.setMsjError(msjError);
 
     if (numError.equals("0")) {
       movimiento.setIdMovimiento(id_movimiento_cuenta.intValue());
-
     }
     else {
       movimiento.setIdMovimiento(0);
-
     }
     return movimiento;
   }

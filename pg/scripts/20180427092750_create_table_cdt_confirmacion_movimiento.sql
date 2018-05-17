@@ -16,13 +16,13 @@
 
 -- // create_table_cdt_confirmacion_movimiento
 -- Migration SQL that makes the change goes here.
-  CREATE TABLE ${schema}.cdt_confirmacion_movimiento (
-      id_mov_cuenta_origen          BIGINT REFERENCES ${schema}.cdt_movimiento_cuenta(id) ,
-      id_mov_cuenta_confirmacion    BIGINT REFERENCES ${schema}.cdt_movimiento_cuenta(id),
+  CREATE TABLE ${schema.cdt}.cdt_confirmacion_movimiento (
+      id_mov_cuenta_origen          BIGINT REFERENCES ${schema.cdt}.cdt_movimiento_cuenta(id) ,
+      id_mov_cuenta_confirmacion    BIGINT REFERENCES ${schema.cdt}.cdt_movimiento_cuenta(id),
       CONSTRAINT cdt_confirmacion_movimiento_pk PRIMARY KEY(id_mov_cuenta_origen,id_mov_cuenta_confirmacion),
       CONSTRAINT cdt_confirmacion_movimiento_u1 UNIQUE (id_mov_cuenta_origen)
   );
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_confirmacion_movimiento;
+  DROP TABLE IF EXISTS ${schema.cdt}.cdt_confirmacion_movimiento;

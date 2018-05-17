@@ -17,12 +17,12 @@
 -- // create_table_cdt_categoria_mov_fase
 -- Migration SQL that makes the change goes here.
 
-  CREATE TABLE ${schema}.cdt_categoria_mov_fase (
-      id_fase_movimiento        BIGINT REFERENCES ${schema}.cdt_fase_movimiento(id) ,
-      id_categoria_movimiento   BIGINT REFERENCES ${schema}.cdt_categoria_movimiento(id),
+  CREATE TABLE ${schema.cdt}.cdt_categoria_mov_fase (
+      id_fase_movimiento        BIGINT REFERENCES ${schema.cdt}.cdt_fase_movimiento(id) ,
+      id_categoria_movimiento   BIGINT REFERENCES ${schema.cdt}.cdt_categoria_movimiento(id),
       CONSTRAINT cdt_categoria_mov_fase_pk PRIMARY KEY(id_fase_movimiento,id_categoria_movimiento)
   );
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_categoria_mov_fase;
+  DROP TABLE IF EXISTS ${schema.cdt}.cdt_categoria_mov_fase;

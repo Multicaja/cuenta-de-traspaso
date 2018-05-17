@@ -5,7 +5,7 @@ import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Test_20180427092612_create_table_cdt_movimiento_cuenta  extends TestDbBase {
+public class Test_20180427092612_create_table_cdt_movimiento_cuenta  extends TestDB{
   /**********************************************************
    *
    *       id                 BIGSERIAL NOT NULL,
@@ -23,7 +23,7 @@ public class Test_20180427092612_create_table_cdt_movimiento_cuenta  extends Tes
   @Test
   public void CheckTableMovimientoCuenta() {
 
-      boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.MOVIMIENTO_CUENTA.getName(), true,
+      boolean exists = dbUtils.tableExists(getSchema(), Constants.Tables.MOVIMIENTO_CUENTA.getName(), true,
       new ColumnInfo("id", "BIGSERIAL",19),
       new ColumnInfo("id_cuenta", "INT8", 19),
       new ColumnInfo("id_fase_movimiento", "INT8", 19),
@@ -34,6 +34,6 @@ public class Test_20180427092612_create_table_cdt_movimiento_cuenta  extends Tes
       new ColumnInfo("fecha_registro", "TIMESTAMP", 29),
       new ColumnInfo("estado", "VARCHAR", 10),
       new ColumnInfo("fecha_estado", "TIMESTAMP", 29));
-      Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName(), true, exists);
+      Assert.assertEquals("Existe tabla "+getSchema()+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName(), true, exists);
   }
 }

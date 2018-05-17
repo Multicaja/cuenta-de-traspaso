@@ -19,7 +19,7 @@
 
 
 
-  CREATE TABLE ${schema}.cdt_bolsa (
+  CREATE TABLE ${schema.cdt}.cdt_bolsa (
       id              BIGSERIAL NOT NULL,
       nombre          VARCHAR(50) NOT NULL,
       descripcion     VARCHAR(100) NOT NULL,
@@ -28,8 +28,8 @@
       fecha_creacion  TIMESTAMP NOT NULL,
       CONSTRAINT cdt_bolsa_pk PRIMARY KEY(id)
   );
-  CREATE INDEX cdt_bolsa_i1 ON ${schema}.cdt_bolsa (estado);
+  CREATE INDEX cdt_bolsa_i1 ON ${schema.cdt}.cdt_bolsa (estado);
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_bolsa;
+  DROP TABLE IF EXISTS ${schema.cdt}.cdt_bolsa;

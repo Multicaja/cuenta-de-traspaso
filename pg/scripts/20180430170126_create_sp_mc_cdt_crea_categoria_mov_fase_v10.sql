@@ -18,7 +18,7 @@
 -- Migration SQL that makes the change goes here.
 
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_mov_fase_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_categoria_mov_fase_v10
 (
     IN _id_fase_movimiento       NUMERIC,
     IN _id_categoria_movimiento  NUMERIC,
@@ -44,7 +44,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_mov_fase_v10
               RETURN;
           END IF;
 
-        	INSERT INTO ${schema}.cdt_categoria_mov_fase
+        	INSERT INTO ${schema.cdt}.cdt_categoria_mov_fase
 	    		(
             id_fase_movimiento,
 	    		  id_categoria_movimiento
@@ -66,5 +66,5 @@ LANGUAGE 'plpgsql';
 -- //@UNDO
 -- SQL to undo the change goes here.
 
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_categoria_mov_fase_v10(NUMERIC,NUMERIC);
+ DROP FUNCTION IF EXISTS ${schema.cdt}.mc_cdt_crea_categoria_mov_fase_v10(NUMERIC,NUMERIC);
 

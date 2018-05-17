@@ -18,7 +18,7 @@
 -- Migration SQL that makes the change goes here.
 
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_movimiento_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_categoria_movimiento_v10
 (
     IN _id_bolsa        NUMERIC,
     IN _nombre          VARCHAR,
@@ -46,7 +46,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_categoria_movimiento_v10
             END IF;
 
 
-        	INSERT INTO ${schema}.cdt_categoria_movimiento
+        	INSERT INTO ${schema.cdt}.cdt_categoria_movimiento
 	    		(
 	    			id_bolsa,
             nombre,
@@ -78,5 +78,5 @@ LANGUAGE 'plpgsql';
 -- SQL to undo the change goes here.
 
 
- DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_categoria_movimiento_v10(NUMERIC,VARCHAR,VARCHAR);
+ DROP FUNCTION IF EXISTS ${schema.cdt}.mc_cdt_crea_categoria_movimiento_v10(NUMERIC,VARCHAR,VARCHAR);
 

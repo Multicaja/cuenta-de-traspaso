@@ -11,22 +11,13 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDbBase {
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
-  /*
-      IN _id_fase_movimiento      NUMERIC,
-      IN _id_regla_acumulacion    NUMERIC,
-      IN _descripcion             VARCHAR,
-      IN _valor    		            DECIMAL,
-      IN _cod_operacion           VARCHAR,
-      OUT _NumError               VARCHAR,
-      OUT _MsjError               VARCHAR
-   */
+public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB {
+
   @Test
   public void spCreaLimiteSinReglaOk() throws SQLException {
 
     Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -41,7 +32,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDb
   public void spCreaLimiteErrorIdMovimiento() throws SQLException {
 
     Object[] params = {0,-1,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -56,7 +47,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDb
   public void spCreaLimiteErrorIdReglaAcum() throws SQLException {
 
     Object[] params = {2,0,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -72,7 +63,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDb
   public void spCreaLimiteErrorDescripcion() throws SQLException {
 
     Object[] params = {2,-1,"",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -87,7 +78,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDb
   public void spCreaLimiteErrorCodOperacion() throws SQLException {
 
     Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");

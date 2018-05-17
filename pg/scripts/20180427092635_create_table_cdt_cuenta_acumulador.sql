@@ -19,10 +19,10 @@
 
 
 
-  CREATE TABLE ${schema}.cdt_cuenta_acumulador (
+  CREATE TABLE ${schema.cdt}.cdt_cuenta_acumulador (
       id                    BIGSERIAL NOT NULL,
-      id_regla_acumulacion  BIGINT  REFERENCES ${schema}.cdt_regla_acumulacion(id),
-      id_cuenta             BIGINT  REFERENCES ${schema}.cdt_cuenta(id),
+      id_regla_acumulacion  BIGINT  REFERENCES ${schema.cdt}.cdt_regla_acumulacion(id),
+      id_cuenta             BIGINT  REFERENCES ${schema.cdt}.cdt_cuenta(id),
       codigo_operacion      VARCHAR   NOT NULL,
       monto                 NUMERIC   NOT NULL,
       fecha_inicio          TIMESTAMP NOT NULL,
@@ -35,4 +35,4 @@
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS  ${schema}.cdt_cuenta_acumulador;
+  DROP TABLE IF EXISTS  ${schema.cdt}.cdt_cuenta_acumulador;

@@ -17,7 +17,7 @@
 -- // create_sp_mc_cdt_crea_limite
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_limite_v10
 (
     IN _id_fase_movimiento     NUMERIC,
     IN _id_regla_acumulacion   NUMERIC,
@@ -59,7 +59,7 @@ CREATE OR REPLACE FUNCTION ${schema}.mc_cdt_crea_limite_v10
             RETURN;
         END IF;
 
-        INSERT INTO ${schema}.cdt_limite
+        INSERT INTO ${schema.cdt}.cdt_limite
         (
           id_fase_movimiento,
           id_regla_acumulacion,
@@ -92,4 +92,4 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP FUNCTION IF EXISTS ${schema}.mc_cdt_crea_limite_v10(NUMERIC,NUMERIC,VARCHAR,NUMERIC,VARCHAR);
+  DROP FUNCTION IF EXISTS ${schema.cdt}.mc_cdt_crea_limite_v10(NUMERIC,NUMERIC,VARCHAR,NUMERIC,VARCHAR);

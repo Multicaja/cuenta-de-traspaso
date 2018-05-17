@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class Test_20180427092635_create_table_cdt_cuenta_acumulador extends TestDbBase {
+public class Test_20180427092635_create_table_cdt_cuenta_acumulador extends TestDB {
 
   /**********************************************************
   *       id                    BIGSERIAL NOT NULL,
@@ -23,7 +23,7 @@ public class Test_20180427092635_create_table_cdt_cuenta_acumulador extends Test
   @Test
   public void CheckTableCuentaAcumulador() {
 
-      boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.CUENTA_ACUMULADOR.getName(), false,
+      boolean exists = dbUtils.tableExists(getSchema(), Constants.Tables.CUENTA_ACUMULADOR.getName(), false,
       new ColumnInfo("id", "BIGSERIAL",19),
       new ColumnInfo("id_regla_acumulacion", "INT8", 19),
       new ColumnInfo("id_cuenta", "INT8", 19),
@@ -32,7 +32,7 @@ public class Test_20180427092635_create_table_cdt_cuenta_acumulador extends Test
       new ColumnInfo("fecha_fin", "TIMESTAMP", 29),
       new ColumnInfo("fecha_creacion", "TIMESTAMP", 29),
       new ColumnInfo("fecha_actualizacion", "TIMESTAMP", 29));
-      Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.CUENTA_ACUMULADOR.getName(), true, exists);
+      Assert.assertEquals("Existe tabla "+getSchema()+"."+Constants.Tables.CUENTA_ACUMULADOR.getName(), true, exists);
   }
 
 

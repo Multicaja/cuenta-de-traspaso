@@ -5,7 +5,7 @@ import cl.multicaja.core.utils.db.ColumnInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Test_20180427093010_create_table_cdt_categoria_mov_fase extends TestDbBase {
+public class Test_20180427093010_create_table_cdt_categoria_mov_fase extends TestDB {
   /*************************************************
    *    id_fase_movimiento        BIGSERIAL NOT NULL,
    *    id_categoria_movimiento   BIGSERIAL NOT NULL,
@@ -13,9 +13,9 @@ public class Test_20180427093010_create_table_cdt_categoria_mov_fase extends Tes
    *************************************************/
   @Test
   public void Ch() {
-    boolean exists = dbUtils.tableExists(Constants.SCHEMA, Constants.Tables.CATEGORIA_MOV_FASE.getName(), true,
+    boolean exists = dbUtils.tableExists(getSchema(), Constants.Tables.CATEGORIA_MOV_FASE.getName(), true,
       new ColumnInfo("id_fase_movimiento", "INT8",19),
       new ColumnInfo("id_categoria_movimiento", "INT8", 19));
-    Assert.assertEquals("Existe tabla "+Constants.SCHEMA+"."+Constants.Tables.CATEGORIA_MOV_FASE.getName(), true, exists);
+    Assert.assertEquals("Existe tabla "+getSchema()+"."+Constants.Tables.CATEGORIA_MOV_FASE.getName(), true, exists);
   }
 }

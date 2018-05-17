@@ -18,9 +18,9 @@
 -- Migration SQL that makes the change goes here.
 
 
-  CREATE TABLE ${schema}.cdt_regla_acumulacion (
+  CREATE TABLE ${schema.cdt}.cdt_regla_acumulacion (
       id                        BIGSERIAL NOT NULL,
-      id_categoria_movimiento   BIGINT  REFERENCES ${schema}.cdt_categoria_movimiento(id),
+      id_categoria_movimiento   BIGINT  REFERENCES ${schema.cdt}.cdt_categoria_movimiento(id),
       periocidad                VARCHAR(10) NOT NULL,
       codigo_operacion          VARCHAR(10) NOT NULL,
       estado                    VARCHAR(10) NOT NULL,
@@ -29,8 +29,8 @@
       CONSTRAINT cdt_regla_acumulacion_pk PRIMARY KEY(id)
   );
 
-  CREATE INDEX cdt_regla_acumulacion_i1 ON ${schema}.cdt_regla_acumulacion (estado);
-  CREATE INDEX cdt_regla_acumulacion_i2 ON ${schema}.cdt_regla_acumulacion (estado,id_categoria_movimiento);
+  CREATE INDEX cdt_regla_acumulacion_i1 ON ${schema.cdt}.cdt_regla_acumulacion (estado);
+  CREATE INDEX cdt_regla_acumulacion_i2 ON ${schema.cdt}.cdt_regla_acumulacion (estado,id_categoria_movimiento);
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_regla_acumulacion;
+  DROP TABLE IF EXISTS ${schema.cdt}.cdt_regla_acumulacion;

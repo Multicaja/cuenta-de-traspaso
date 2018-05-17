@@ -12,22 +12,14 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 extends TestDbBase {
+public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 extends TestDB {
 
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
 
-  /*
-    IN _nombre          VARCHAR,
-    IN _descripcion     VARCHAR,
-    IN _signo           NUMERIC,
-    OUT _NumError       VARCHAR,
-    OUT _MsjError       VARCHAR
-   */
   @Test
   public void spCreaFaseMovimientoOK() throws SQLException {
 
     Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", 1  ,"N", new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -42,7 +34,7 @@ public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 exten
   public void spCreaFaseMovimientoErrorSinNombre() throws SQLException {
 
     Object[] params = {"","Carga de Tarjeta Test", 1  , "N",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -57,7 +49,7 @@ public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 exten
   public void spCreaFaseMovimientoErrorSigno() throws SQLException {
 
     Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", new NullParam(Types.NUMERIC),  "N",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
@@ -72,7 +64,7 @@ public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 exten
   public void spCreaFaseMovimientoErrorIndConfirmacion() throws SQLException {
 
     Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", 1 , "", new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");

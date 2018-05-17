@@ -29,14 +29,14 @@ public class TestSuite extends TestSuiteBase {
 
   private static Log log = LogFactory.getLog(TestSuite.class);
   private static DBUtils mDbutils = DBUtils.getInstance();
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
+  private static String schema = ConfigUtils.getInstance().getProperty("schema.cdt");
 
   @BeforeClass
   public static void setUp() throws Exception {
 
     deleteAllFromDB();
     String sData = Utils.readFile(new File("./seeds/DataForTest.sql"));
-    sData = sData.replaceAll("\\$\\{schema}",schema);
+    sData = sData.replaceAll("\\$\\{schema.cdt}",schema);
     ScriptUtils.executeSqlScript(mDbutils.getConnection(),new ByteArrayResource(sData.getBytes("UTF-8")));
 
   }

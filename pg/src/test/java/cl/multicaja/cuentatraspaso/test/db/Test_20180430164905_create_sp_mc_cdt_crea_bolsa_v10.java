@@ -11,9 +11,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa_v10 extends TestDbBase {
+public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa_v10 extends TestDB {
 
-  private static String schema = ConfigUtils.getInstance().getProperty("schema");
 
   /*
     IN _nombre character varying,
@@ -25,7 +24,7 @@ public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa_v10 extends TestDbB
   public void spCreaCuentaOk() throws SQLException {
 
       Object[] params = {"Bolsa Test","Bolsta para casos Prueba",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-      Map<String,Object>  outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
+      Map<String,Object>  outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
       String numError = (String) outputData.get("_numerror");
       String msjError = (String) outputData.get("_msjerror");
       Assert.assertEquals("Numero de error 0 creacion correcta",true,numError.equals("0"));
@@ -36,7 +35,7 @@ public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa_v10 extends TestDbB
   @Test
   public void spCreaBolsaErrorSp() throws SQLException {
     Object[] params = {""," ",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object>  outputData = dbUtils.execute(schema+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
+    Map<String,Object>  outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
     Assert.assertTrue("Error en SP NumError = MC001",numError.equals("MC001"));

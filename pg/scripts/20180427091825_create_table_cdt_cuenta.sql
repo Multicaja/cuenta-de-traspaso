@@ -16,10 +16,10 @@
 
 -- // create_table_cdt_cuenta
 -- Migration SQL that makes the change goes here.
-  CREATE SCHEMA IF NOT EXISTS ${schema};
+  CREATE SCHEMA IF NOT EXISTS ${schema.cdt};
 
 
-  CREATE TABLE ${schema}.cdt_cuenta (
+  CREATE TABLE ${schema.cdt}.cdt_cuenta (
       id              BIGSERIAL NOT NULL,
       id_externo      VARCHAR(50) NOT NULL,
       descripcion     VARCHAR(100) NOT NULL,
@@ -29,11 +29,11 @@
       CONSTRAINT cdt_cuenta_pk PRIMARY KEY(id),
       CONSTRAINT cdt_cuenta_u1 UNIQUE (id_externo)
   );
-  CREATE INDEX cdt_cuenta_i1 ON ${schema}.cdt_cuenta (estado);
+  CREATE INDEX cdt_cuenta_i1 ON ${schema.cdt}.cdt_cuenta (estado);
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-  DROP TABLE IF EXISTS ${schema}.cdt_cuenta;
+  DROP TABLE IF EXISTS ${schema.cdt}.cdt_cuenta;
 
-  DROP SCHEMA IF EXISTS ${schema};
+  DROP SCHEMA IF EXISTS ${schema.cdt};
 

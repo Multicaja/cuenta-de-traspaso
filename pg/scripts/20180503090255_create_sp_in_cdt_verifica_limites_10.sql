@@ -17,7 +17,7 @@
 -- // create_sp_verifica_limite
 -- Migration SQL that makes the change goes here.
 
-CREATE OR REPLACE FUNCTION ${schema}.in_cdt_verifica_limites_v10
+CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_verifica_limites_v10
 (
     IN _id_cuenta               NUMERIC,
     IN _id_fase_movimiento      NUMERIC,
@@ -54,7 +54,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_verifica_limites_v10
                         valor,
                         cod_operacion
                     FROM
-                         ${schema}.cdt_limite
+                         ${schema.cdt}.cdt_limite
                     WHERE
                         id_fase_movimiento = _id_fase_movimiento AND
                         estado = 'ACTIVO'
@@ -97,7 +97,7 @@ CREATE OR REPLACE FUNCTION ${schema}.in_cdt_verifica_limites_v10
                                 INTO
                                     _monto_acumulado
                                 FROM
-                                     ${schema}.cdt_cuenta_acumulador
+                                     ${schema.cdt}.cdt_cuenta_acumulador
                                 WHERE
                                     id_regla_acumulacion = _limite.id_regla_acumulacion AND
                                     id_cuenta = _id_cuenta AND
@@ -151,5 +151,5 @@ LANGUAGE 'plpgsql';
 
 -- //@UNDO
 -- SQL to undo the change goes here.
-DROP FUNCTION IF EXISTS ${schema}.in_cdt_verifica_limites_v10(NUMERIC,NUMERIC,NUMERIC);
+DROP FUNCTION IF EXISTS ${schema.cdt}.in_cdt_verifica_limites_v10(NUMERIC,NUMERIC,NUMERIC);
 

@@ -1,6 +1,6 @@
 -- INSERT PARA BOLSA
 
-INSERT INTO ${schema}.cdt_bolsa
+INSERT INTO ${schema.cdt}.cdt_bolsa
 (
     nombre,
     descripcion,
@@ -19,7 +19,7 @@ VALUES
 
 
 
-INSERT INTO ${schema}.cdt_bolsa
+INSERT INTO ${schema.cdt}.cdt_bolsa
 (
     nombre,
     descripcion,
@@ -38,7 +38,7 @@ VALUES
 
 
 
-INSERT INTO ${schema}.cdt_bolsa
+INSERT INTO ${schema.cdt}.cdt_bolsa
 (
     nombre,
     descripcion,
@@ -58,7 +58,7 @@ VALUES
 -- INSERT PARA CUENTA CLIENTE
 
 INSERT INTO
-	${schema}.cdt_cuenta
+	${schema.cdt}.cdt_cuenta
 	(
     	id_externo,
     	descripcion,
@@ -77,7 +77,7 @@ INSERT INTO
 
 --INSERT TIPO MOVIMIENTO
 INSERT INTO -- ID 1
-	${schema}.cdt_fase_movimiento
+	${schema.cdt}.cdt_fase_movimiento
 	(
         nombre,
         descripcion,
@@ -99,7 +99,7 @@ INSERT INTO -- ID 1
     );
 
 INSERT INTO -- ID 2
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -121,7 +121,7 @@ INSERT INTO -- ID 2
     );
 
 INSERT INTO -- ID 3
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -143,7 +143,7 @@ INSERT INTO -- ID 3
     );
 
 INSERT INTO -- ID 4
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -165,7 +165,7 @@ INSERT INTO -- ID 4
     );
 
 INSERT INTO -- ID 5
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -187,7 +187,7 @@ INSERT INTO -- ID 5
     );
 
 INSERT INTO -- ID 6
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -210,7 +210,7 @@ INSERT INTO -- ID 6
 
 
 INSERT INTO -- ID 7
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -233,7 +233,7 @@ INSERT INTO -- ID 7
 
 
 INSERT INTO -- ID 8
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -256,7 +256,7 @@ INSERT INTO -- ID 8
 
 
 INSERT INTO -- ID 9
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -279,7 +279,7 @@ INSERT INTO -- ID 9
 
 
 INSERT INTO -- ID 10
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -301,7 +301,7 @@ INSERT INTO -- ID 10
     );
 
 INSERT INTO -- ID 11
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -323,7 +323,7 @@ INSERT INTO -- ID 11
     );
 
 INSERT INTO -- ID 12
-    ${schema}.cdt_fase_movimiento
+    ${schema.cdt}.cdt_fase_movimiento
     (
         nombre,
         descripcion,
@@ -347,7 +347,7 @@ INSERT INTO -- ID 12
 
 -- INSERT TIPO MOVIMIENTO
 INSERT INTO
-	${schema}.cdt_categoria_movimiento
+	${schema.cdt}.cdt_categoria_movimiento
 	(
         id_bolsa,
         nombre,
@@ -367,7 +367,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_movimiento
+    ${schema.cdt}.cdt_categoria_movimiento
     (
         id_bolsa,
         nombre,
@@ -387,7 +387,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_movimiento
+    ${schema.cdt}.cdt_categoria_movimiento
     (
         id_bolsa,
         nombre,
@@ -407,7 +407,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_movimiento
+    ${schema.cdt}.cdt_categoria_movimiento
     (
         id_bolsa,
         nombre,
@@ -427,7 +427,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_movimiento
+    ${schema.cdt}.cdt_categoria_movimiento
     (
         id_bolsa,
         nombre,
@@ -448,7 +448,7 @@ VALUES
 
 
 INSERT INTO
-    ${schema}.cdt_categoria_movimiento
+    ${schema.cdt}.cdt_categoria_movimiento
     (
         id_bolsa,
         nombre,
@@ -469,7 +469,7 @@ VALUES
 
 
 INSERT INTO
-    ${schema}.cdt_categoria_movimiento
+    ${schema.cdt}.cdt_categoria_movimiento
     (
         id_bolsa,
         nombre,
@@ -490,7 +490,7 @@ VALUES
 
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -502,7 +502,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -514,7 +514,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -526,7 +526,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -538,7 +538,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -550,7 +550,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -562,7 +562,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -574,7 +574,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -586,7 +586,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -598,7 +598,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -610,7 +610,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -622,7 +622,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -634,7 +634,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -646,7 +646,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -658,7 +658,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -670,7 +670,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -682,7 +682,7 @@ VALUES
     );
 
 INSERT INTO
-    ${schema}.cdt_categoria_mov_fase
+    ${schema.cdt}.cdt_categoria_mov_fase
     (
         id_fase_movimiento,
         id_categoria_movimiento
@@ -696,7 +696,7 @@ VALUES
 --REGLAS DE ACUMULACION
 
 INSERT INTO
-	${schema}.cdt_regla_acumulacion
+	${schema.cdt}.cdt_regla_acumulacion
 	(
         id_categoria_movimiento,
         periocidad,
@@ -717,7 +717,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -739,7 +739,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -759,7 +759,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -779,7 +779,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -800,7 +800,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -821,7 +821,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -842,7 +842,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_regla_acumulacion
+    ${schema.cdt}.cdt_regla_acumulacion
     (
         id_categoria_movimiento,
         periocidad,
@@ -865,7 +865,7 @@ INSERT INTO
 
 -- LIMITES
 INSERT INTO
-	${schema}.cdt_limite
+	${schema.cdt}.cdt_limite
 	(
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -889,7 +889,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -914,7 +914,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -938,7 +938,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -962,7 +962,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -986,7 +986,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1010,7 +1010,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1034,7 +1034,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1058,7 +1058,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1082,7 +1082,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1106,7 +1106,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1130,7 +1130,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1155,7 +1155,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1180,7 +1180,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1204,7 +1204,7 @@ INSERT INTO
     );
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
@@ -1229,7 +1229,7 @@ INSERT INTO
 
 
 INSERT INTO
-    ${schema}.cdt_limite
+    ${schema.cdt}.cdt_limite
     (
         id_fase_movimiento,
         id_regla_acumulacion,
