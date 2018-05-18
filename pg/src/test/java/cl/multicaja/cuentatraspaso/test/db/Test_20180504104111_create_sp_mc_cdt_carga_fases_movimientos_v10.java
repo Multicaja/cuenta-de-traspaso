@@ -20,52 +20,34 @@ public class Test_20180504104111_create_sp_mc_cdt_carga_fases_movimientos_v10 ex
   @Test
   public void spCargaFasesMovimiento() throws SQLException {
 
-    Object[] params = {"Primera Carga" ,new NullParam(Types.NUMERIC),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"Primera Carga" ,new NullParam(Types.NUMERIC)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
-
-    List lstMovimientos = (List) outputData.get("_movimientos");
-
-    String numError = (String) outputData.get("_numerror");
-    String msjError = (String) outputData.get("_msjerror");
+    List lstMovimientos = (List) outputData.get("result");
     System.out.println(" Se encontraron: "+lstMovimientos.size()+" movimientos");
-    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-
-    Assert.assertTrue("Numero de error = 0 OK", numError.equals("0"));
-    Assert.assertTrue("Sin Msje Error", StringUtils.isBlank(msjError));
-
+    Assert.assertNotNull("Lista no nula",lstMovimientos);
+    Assert.assertTrue("Lista != 0",lstMovimientos.size()>0);
   }
   @Test
   public void spCargaFasesMovimientoParamInNull() throws SQLException {
 
-    Object[] params = {new NullParam(Types.VARCHAR),new NullParam(Types.NUMERIC),new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {new NullParam(Types.VARCHAR),new NullParam(Types.NUMERIC)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
-    List lstMovimientos = (List) outputData.get("_movimientos");
-
-    String numError = (String) outputData.get("_numerror");
-    String msjError = (String) outputData.get("_msjerror");
+    List lstMovimientos = (List) outputData.get("result");
     System.out.println(" Se encontraron: "+lstMovimientos.size()+" movimientos");
-    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-
-    Assert.assertTrue("Numero de error = 0 OK", numError.equals("0"));
-    Assert.assertTrue("Sin Msje Error", StringUtils.isBlank(msjError));
+    Assert.assertNotNull("Lista no nula",lstMovimientos);
+    Assert.assertTrue("Lista != 0",lstMovimientos.size()>0);
 
   }
   @Test
   public void spCargaFasesMovimientoParamInVacio() throws SQLException {
 
-    Object[] params = {"",0,new OutParam("_movimientos",Types.OTHER),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"",0};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CARGA_FASES_MOVIMIENTOS.getName(),params);
 
-    List lstMovimientos = (List) outputData.get("_movimientos");
-
-    String numError = (String) outputData.get("_numerror");
-    String msjError = (String) outputData.get("_msjerror");
+    List lstMovimientos = (List) outputData.get("result");
     System.out.println(" Se encontraron: "+lstMovimientos.size()+" movimientos");
-    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-
-    Assert.assertTrue("Numero de error = 0 OK", numError.equals("0"));
-    Assert.assertTrue("Sin Msje Error", StringUtils.isBlank(msjError));
-
+    Assert.assertNotNull("Lista no nula",lstMovimientos);
+    Assert.assertTrue("Lista != 0",lstMovimientos.size()>0);
   }
 }

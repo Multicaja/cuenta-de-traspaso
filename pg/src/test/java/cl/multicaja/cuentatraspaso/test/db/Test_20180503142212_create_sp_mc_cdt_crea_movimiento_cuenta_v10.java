@@ -1,7 +1,5 @@
 package cl.multicaja.cuentatraspaso.test.db;
 
-import cl.multicaja.core.test.TestDbBase;
-import cl.multicaja.core.utils.ConfigUtils;
 import cl.multicaja.core.utils.db.OutParam;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
