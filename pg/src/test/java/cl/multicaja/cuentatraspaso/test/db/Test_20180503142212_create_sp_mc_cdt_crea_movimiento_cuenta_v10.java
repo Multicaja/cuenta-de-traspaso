@@ -51,7 +51,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       //================================================================================
       // 1 -Monto	$1000    // Deberia fallar limite Monto debe ser mayor a $3.000
       //================================================================================
-      Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,"Primera Carga Prepago rut 1-9",new BigDecimal(1000));
+      Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),"Primera Carga Prepago rut 1-9",new BigDecimal(1000));
       Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
       Assert.assertTrue("NumError == 10002", respuestaMovimiento.getNumError().equals("10002"));
       Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -59,7 +59,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       //================================================================================
       // 2 -Monto	$55000   // Deberia fallar limite Monto carga ser menor a $50.000
       //================================================================================
-      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,"Primera Carga Prepago rut 1-9",new BigDecimal(55000));
+      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),"Primera Carga Prepago rut 1-9",new BigDecimal(55000));
       Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
       Assert.assertTrue("NumError == 10001", respuestaMovimiento.getNumError().equals("10001"));
       Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -67,7 +67,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       //================================================================================
       // 3 -Monto 	$45000   // Deberia pasar sin errores.
       //================================================================================
-      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,"Primera Carga Prepago rut 1-9",new BigDecimal(45000));
+      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),"Primera Carga Prepago rut 1-9",new BigDecimal(45000));
       Assert.assertTrue("Id Movimiento Cta debe ser > 0", respuestaMovimiento.getIdMovimiento() > 0);
       Assert.assertTrue("NumError = 0", respuestaMovimiento.getNumError().equals("0"));
       Assert.assertTrue("MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -75,7 +75,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       //================================================================================
       // 4 -Monto 	$45000   // Deberia fallar xq cantidad de primeras cargas es >1
       //================================================================================
-      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,"Primera Carga Prepago rut 1-9",new BigDecimal(45000));
+      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),"Primera Carga Prepago rut 1-9",new BigDecimal(45000));
       Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
       Assert.assertTrue("NumError != 0", respuestaMovimiento.getNumError().equals("10003"));
       Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -135,7 +135,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     // 1 -Monto	$1000    // Deberia fallar limite Monto debe ser mayor a $3.000
     //================================================================================
-    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(2999));
+    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(2999));
     Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertFalse("NumError == 10009", respuestaMovimiento.getNumError().equals("10009"));
     Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -143,7 +143,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     // 2 -Monto	$55000   // Deberia fallar limite Monto carga ser menor a $500.000
     //================================================================================
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(500010));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(500010));
     Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertFalse("NumError == 10008", respuestaMovimiento.getNumError().equals("10008"));
     Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -153,7 +153,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       //================================================================================
       // Monto	$200.000   // Deberia Pasar OK y sumar Acumuladores
       //================================================================================
-      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario, idFaseMovimiento, 0, descCuenta, descCuenta, new BigDecimal(200000));
+      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario, idFaseMovimiento, 0, ""+getUniqueLong(), descCuenta, new BigDecimal(200000));
       Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() > 0);
       Assert.assertTrue("NumError != 0", respuestaMovimiento.getNumError().equals("0"));
       Assert.assertTrue("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -177,7 +177,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     // 10 Deberia fallar por el limite mensual de 1000000
     //================================================================================
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(3000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(3000));
     Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertTrue("NumError == 10007", respuestaMovimiento.getNumError().equals("10007"));
     Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -219,7 +219,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     // 1 -Monto	$1000    // Deberia fallar limite Monto debe ser mayor a $3.000
     //================================================================================
-    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(2999));
+    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(2999));
     Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertTrue("NumError == 10006", respuestaMovimiento.getNumError().equals("10009"));
     Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -227,7 +227,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     // 2 -Monto	$100.000   // Deberia fallar limite Monto carga ser menor a $100.000
     //================================================================================
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(100010));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(100010));
     Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertTrue("NumError == 10008", respuestaMovimiento.getNumError().equals("10008"));
     Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -237,7 +237,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       //================================================================================
       // 3 -Monto	 $100.000 // DEBERIA PASAR (TOTAL = 1000000)
       //================================================================================
-      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario, idFaseMovimiento, 0, descCuenta, descCuenta, new BigDecimal(100000));
+      respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario, idFaseMovimiento, 0, ""+getUniqueLong(), descCuenta, new BigDecimal(100000));
       Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() > 0);
       Assert.assertTrue("NumError != 0", respuestaMovimiento.getNumError().equals("0"));
       Assert.assertTrue("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -261,7 +261,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     // 3 -Deberia Fallar por Monto supera el 1000000 mensual
     //================================================================================
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario, idFaseMovimiento, 0, descCuenta, descCuenta, new BigDecimal(30000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario, idFaseMovimiento, 0, ""+getUniqueLong(), descCuenta, new BigDecimal(30000));
     Assert.assertTrue("Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertTrue("NumError == 10010", respuestaMovimiento.getNumError().equals("10010"));
     Assert.assertFalse("MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -303,7 +303,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     // VERIFICACION DE DOBLE CONFIRMACION
     //================================================================================
 
-    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(45000));
+    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(45000));
     Assert.assertTrue("[Movimiento 1] Id Movimiento Cta debe ser > 0", respuestaMovimiento.getIdMovimiento() > 0);
     Assert.assertTrue("[Movimiento 1] NumError == 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[Movimiento 1] MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -325,7 +325,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
 
     //Movimiento correcto aceptado
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(45000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(45000));
     Assert.assertTrue("[Movimiento 2] Id Movimiento Cta debe > 0", respuestaMovimiento.getIdMovimiento() > 0);
     Assert.assertTrue("[Movimiento 2] NumError = 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[Movimiento 2] MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -334,14 +334,14 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
     // CONFIRMACION DE MOVIMIENTO DEBERIA PASAR OK
     idFaseMovimiento = 4;// CONFIRMACION CARGA
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,idMovimientoOriginal,descCuenta,descCuenta,new BigDecimal(45000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,idMovimientoOriginal,""+getUniqueLong(),descCuenta,new BigDecimal(45000));
     Assert.assertTrue("[Confirmacion Carga] Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() > 0);
     Assert.assertTrue("[Confirmacion Carga] NumError == 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[Confirmacion Carga] MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
 
     // REVERSA DE CARGA EJECUTADA AL MISMO TIEMPO QUE LA CONFIRMACION,  DEBERIA FALLAS
     idFaseMovimiento = 7; // REVERSA CARGA
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,idMovimientoOriginal,descCuenta,descCuenta,new BigDecimal(45000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,idMovimientoOriginal,""+getUniqueLong(),descCuenta,new BigDecimal(45000));
     Assert.assertTrue("[Reversa Pos Confirmacion] Id Movimiento Cta debe ser 0", respuestaMovimiento.getIdMovimiento() == 0);
     Assert.assertFalse("[Reversa Pos Confirmacion] NumError != 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertFalse("[Reversa Pos Confirmacion] MsjError != vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -362,7 +362,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     //================================================================================
     idFaseMovimiento=3;// Carga
     //Movimiento correcto aceptado
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,descCuenta,descCuenta,new BigDecimal(45000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,""+getUniqueLong(),descCuenta,new BigDecimal(45000));
     Assert.assertTrue("[Movimiento 3]  Id Movimiento Cta debe > 0", respuestaMovimiento.getIdMovimiento() > 0);
     Assert.assertTrue("[Movimiento 3]  NumError = 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[Movimiento 3]  MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -382,7 +382,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     }
     // REVERSA DE CARGA EJECUTADA  CORRECTAMENTE
     idFaseMovimiento = 7; // REVERSA CARGA
-    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,idMovimientoOriginal,descCuenta,descCuenta,new BigDecimal(45000));
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,idMovimientoOriginal,""+getUniqueLong(),descCuenta,new BigDecimal(45000));
     Assert.assertTrue("[REVERSA CARGA] Id Movimiento Cta debe > 0", respuestaMovimiento.getIdMovimiento() > 0);
     Assert.assertTrue("[REVERSA CARGA] NumError = 0", respuestaMovimiento.getNumError().equals("0"));
     Assert.assertTrue("[REVERSA CARGA] MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
@@ -399,6 +399,61 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
         Assert.assertTrue("Contador deberia ser = 3", Math.round(((BigDecimal) aData.get("MONTO")).doubleValue()) == 3);
       }
     }
+  }
+  @Test
+  public void pruebaTxExternaDuplicada()throws Exception {
+
+    int idFaseMovimiento = 3; // Solicitud Carga Web
+
+    //================================================================================
+    // CREA CUENTA
+    //================================================================================
+    String cuentaUsuario = "PREPAGO"+getUniqueRutNumber();
+    String descCuenta = "Nueva cuenta "+cuentaUsuario;
+
+    Object[] params = {cuentaUsuario, descCuenta, new OutParam("_id_cuenta", Types.NUMERIC), new OutParam("_numerror", Types.VARCHAR), new OutParam("_msjerror", Types.VARCHAR)};
+
+    Map<String, Object> outputData = dbUtils.execute( getSchema() + Constants.Procedures.SP_CREA_CUENTA.getName(), params);
+
+    BigDecimal idCuenta = (BigDecimal) outputData.get("_id_cuenta");
+    String numError = (String) outputData.get("_numerror");
+    String msjError = (String) outputData.get("_msjerror");
+    System.out.println("[MOVIMIENTO_CUENTA/CREA_CUENTA] NumError: "+numError +" MsjError: "+msjError);
+
+    // Pruebas de Creacion de Cuenta.
+    Assert.assertTrue("[Crea Cuenta] Numero de cuenta debe ser < 0", idCuenta.intValue() > 0);
+    Assert.assertTrue("[Crea Cuenta] Numero de error 0 creacion correcta", numError.equals("0"));
+    Assert.assertTrue("[Crea Cuenta] Msj de error vacio creacion correcta", StringUtils.isBlank(msjError));
+
+    //================================================================================
+    // VERIFICACION TX DUPLICADA
+    //================================================================================
+
+    Movimiento respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,"TX123",descCuenta,new BigDecimal(45000));
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", respuestaMovimiento.getIdMovimiento() > 0);
+    Assert.assertTrue("NumError == 0", respuestaMovimiento.getNumError().equals("0"));
+    Assert.assertTrue("sjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
+
+    List lstAcumuladores = getCuentaAcumulador(idCuenta);
+
+    for(Object data : lstAcumuladores) {
+      Map<String,Object> aData = (Map<String, Object>) data;
+      if(((String) aData.get("CODOPE")).equalsIgnoreCase("SUM")) {
+        Assert.assertTrue("Monto == $45.000", Math.round(((BigDecimal)aData.get("MONTO")).doubleValue()) == 45000);
+      }
+      else if (((String) aData.get("CODOPE")).equalsIgnoreCase("COUNT")) {
+        Assert.assertTrue("Count == 1", Math.round(((BigDecimal) aData.get("MONTO")).doubleValue()) == 1);
+      }
+    }
+
+    respuestaMovimiento = callCreaMovimientoCuenta(cuentaUsuario,idFaseMovimiento,0,"TX123",descCuenta,new BigDecimal(45000));
+    Assert.assertNotNull("Debe traer respuesta.",respuestaMovimiento);
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", respuestaMovimiento.getIdMovimiento() == 0);
+    Assert.assertFalse("NumError != 0", respuestaMovimiento.getNumError().equals("0"));
+    Assert.assertFalse("MsjError = vacio", StringUtils.isBlank(respuestaMovimiento.getMsjError()));
+
+
+
   }
   private List getCuentaAcumulador(BigDecimal idCuenta) {
     return jdbcTempate.queryForList(

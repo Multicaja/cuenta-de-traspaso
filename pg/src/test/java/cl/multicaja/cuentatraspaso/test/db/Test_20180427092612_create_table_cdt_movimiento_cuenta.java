@@ -1,7 +1,7 @@
 package cl.multicaja.cuentatraspaso.test.db;
 
-import cl.multicaja.core.test.TestDbBase;
 import cl.multicaja.core.utils.db.ColumnInfo;
+import cl.multicaja.core.utils.db.SqlType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,7 +33,8 @@ public class Test_20180427092612_create_table_cdt_movimiento_cuenta  extends Tes
       new ColumnInfo("monto", "NUMERIC", 131089),
       new ColumnInfo("fecha_registro", "TIMESTAMP", 29),
       new ColumnInfo("estado", "VARCHAR", 10),
-      new ColumnInfo("fecha_estado", "TIMESTAMP", 29));
+      new ColumnInfo("fecha_estado", "TIMESTAMP", 29),
+      new ColumnInfo("fecha_tx",SqlType.DATE.getGetJavaType(),13));
       Assert.assertEquals("Existe tabla "+getSchema()+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName(), true, exists);
   }
 }
