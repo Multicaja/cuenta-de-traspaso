@@ -555,7 +555,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
         Assert.assertTrue("La Cantidad debe ser igual a", ((BigDecimal) aData.get("MONTO")).doubleValue() == 8);
       }
     }
-
   }
 
 
