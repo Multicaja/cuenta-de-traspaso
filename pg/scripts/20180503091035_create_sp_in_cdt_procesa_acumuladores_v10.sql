@@ -74,7 +74,8 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                     SELECT
                         id,
                         periocidad,
-                        codigo_operacion
+                        codigo_operacion,
+                        id_categoria_movimiento
                     FROM
                         ${schema.cdt}.cdt_regla_acumulacion
                     WHERE
@@ -96,20 +97,23 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                             END CASE;
 
                             UPDATE
-                                ${schema.cdt}.cdt_cuenta_acumulador
+                                ${schema.cdt}.cdt_cuenta_acumulador cac
                             SET
-                                monto = CASE
+                                cac.monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
                                                (monto+(_monto*_rec_cat_mov.movimiento_signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
                                                (monto + (1*_rec_cat_mov.movimiento_signo))
                                         END,
-                                fecha_actualizacion = LOCALTIMESTAMP
+                                cac.fecha_actualizacion = LOCALTIMESTAMP
+                            FROM
+                              ${schema.cdt}.cdt_regla_acumulacion
                             WHERE
-                                id_cuenta = _id_cuenta AND
-                                fecha_inicio = _fecha_ini AND
-                                fecha_fin = _fecha_fin AND
-                                codigo_operacion = _rec_regla_acum.codigo_operacion;
+                                cac.id_cuenta = _id_cuenta AND
+                                cac.fecha_inicio = _fecha_ini AND
+                                cac.fecha_fin = _fecha_fin AND
+                                cac.codigo_operacion = _rec_regla_acum.codigo_operacion AND
+                                ${schema.cdt}.cdt_regla_acumulacion.id_categoria_movimiento = _rec_regla_acum.id_categoria_movimiento;
                             IF NOT FOUND THEN
                                 INSERT INTO
                                     ${schema.cdt}.cdt_cuenta_acumulador
