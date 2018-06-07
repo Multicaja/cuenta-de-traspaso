@@ -157,7 +157,7 @@ INSERT INTO -- ID 4
     (
         'Confirmación Carga Web',
         'Confirmación Carga Web',
-        1,
+        -1,
         'S',
         'ACTIVO',
         LOCALTIMESTAMP,
@@ -201,7 +201,7 @@ INSERT INTO -- ID 6
     (
         'Confirmación Carga POS',
         'Confirmación Carga POS',
-        1,
+        -1,
         'S',
         'ACTIVO',
         LOCALTIMESTAMP,
@@ -254,7 +254,6 @@ INSERT INTO -- ID 8
         LOCALTIMESTAMP
     );
 
-
 INSERT INTO -- ID 9
     ${schema.cdt}.cdt_fase_movimiento
     (
@@ -268,10 +267,10 @@ INSERT INTO -- ID 9
     )
     VALUES
     (
-        'Solicitud Retiro POS',
-        'Solicitud Retiro POS',
-        1,
-        'N',
+        'Confirmación Retiro Web',
+        'Confirmación Retiro Web',
+        -1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -291,14 +290,15 @@ INSERT INTO -- ID 10
     )
     VALUES
     (
-        'Confirmación Retiro POS',
-        'Confirmación Retiro POS',
+        'Solicitud Retiro POS',
+        'Solicitud Retiro POS',
         1,
-        'S',
+        'N',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
+
 
 INSERT INTO -- ID 11
     ${schema.cdt}.cdt_fase_movimiento
@@ -313,10 +313,10 @@ INSERT INTO -- ID 11
     )
     VALUES
     (
-        'Solicitud Reversa de Retiro',
-        'Solicitud Reversa de Retiro',
-        1,
-        'N',
+        'Confirmación Retiro POS',
+        'Confirmación Retiro POS',
+        -1,
+        'S',
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -335,9 +335,9 @@ INSERT INTO -- ID 12
     )
     VALUES
     (
-        'Confirmación Reversa de Retiro',
-        'Confirmación Reversa de Retiro',
-        1,
+        'Reversa de Retiro',
+        'Reversa de Retiro',
+        -1,
         'S',
         'ACTIVO',
         LOCALTIMESTAMP,
@@ -533,6 +533,18 @@ INSERT INTO
     )
 VALUES
     (
+        2,
+        7
+    );
+
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+    (
         3,
         1
     );
@@ -560,7 +572,17 @@ VALUES
         4,
         2
     );
-
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+    (
+        4,
+        7
+    );
 INSERT INTO
     ${schema.cdt}.cdt_categoria_mov_fase
     (
@@ -597,6 +619,17 @@ VALUES
         2
     );
 
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+    (
+        6,
+        7
+    );
 INSERT INTO
     ${schema.cdt}.cdt_categoria_mov_fase
     (
@@ -653,8 +686,8 @@ INSERT INTO
     )
 VALUES
     (
-        10,
-        4
+        9,
+        7
     );
 
 INSERT INTO
@@ -666,6 +699,18 @@ INSERT INTO
 VALUES
     (
         10,
+        4
+    );
+
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+   (
+       10,
         7
     );
 
@@ -689,10 +734,44 @@ INSERT INTO
     )
 VALUES
     (
+        11,
+        7
+    );
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+    (
         12,
         6
     );
 
+-- PARA PRUEBAS DE REVERSA
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+    (
+        7,
+        1
+    );
+INSERT INTO
+    ${schema.cdt}.cdt_categoria_mov_fase
+    (
+        id_fase_movimiento,
+        id_categoria_movimiento
+    )
+VALUES
+    (
+        7,
+        7
+    );
 --REGLAS DE ACUMULACION
 
 INSERT INTO
@@ -872,6 +951,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -880,9 +960,10 @@ INSERT INTO
     (
     	1,
     	-1,
-    	'Primera carga debe ser menor o igual a ',
+    	'La carga supera el monto máximo de primera carga',
     	50000,
       'MENORQIG',
+      108206,
       'ACTIVO',
       LOCALTIMESTAMP,
       LOCALTIMESTAMP
@@ -896,6 +977,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -904,9 +986,10 @@ INSERT INTO
     (
         1,
         -1,
-        'Primera carga debe ser mayor o igual a ',
+        'La carga es menor al mínimo de carga',
         3000,
         'MAYORQIG',
+        108203,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -921,6 +1004,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -929,9 +1013,10 @@ INSERT INTO
     (
         1,
         1,
-        'Carga debe ser menor o igual a ',
+        'La carga supera el monto máximo de primera carga',
         50000,
         'MENORQIG',
+        108205,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -945,6 +1030,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -953,9 +1039,10 @@ INSERT INTO
     (
         1,
         2,
-        'Contador Primera carga debe ser = a',
+        'Contador Primera carga debe ser = a 1',
         1,
         'IGUAL',
+        108001,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -969,6 +1056,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -977,9 +1065,10 @@ INSERT INTO
     (
         3,
         -1,
-        'DEBE SER MENOR O IGUAL QUE',
+        'La carga supera el monto máximo de carga web',
         500000,
         'MENORQIG',
+        108201,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -993,6 +1082,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1001,9 +1091,10 @@ INSERT INTO
     (
         3,
         -1,
-        'DEBE SER MAYOR O IGUAL QUE',
+        'La carga es menor al mínimo de carga',
         3000,
         'MAYORQIG',
+        108203,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1017,6 +1108,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1025,9 +1117,10 @@ INSERT INTO
     (
         3,
         1,
-        'CARGA MENSAUL NO DEBE SUPERAR ',
+        'La carga supera el monto máximo de cargas mensuales',
         1000000,
         'MENORQIG',
+        108204,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1041,6 +1134,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1049,9 +1143,10 @@ INSERT INTO
     (
         5,
         -1,
-        'DEBE SER MENOR O IGUAL QUE',
+        'La carga supera el monto máximo de carga pos',
         100000,
         'MENORQIG',
+        108202,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1065,6 +1160,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1073,9 +1169,10 @@ INSERT INTO
     (
         5,
         -1,
-        'DEBE SER MAYOR O IGUAL QUE',
+        'La carga es menor al mínimo de carga',
         3000,
         'MAYORQIG',
+        108203,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1089,6 +1186,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1097,9 +1195,10 @@ INSERT INTO
     (
         5,
         1,
-        'DEBE SER MENOR O IGUAL QUE',
+        'La carga supera el monto máximo de cargas mensuales',
         1000000,
         'MENORQIG',
+        108204,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1113,6 +1212,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1121,9 +1221,10 @@ INSERT INTO
     (
         8,
         -1,
-        'Primera carga debe ser menor o igual a ',
-        50000,
+        'El retiro supera el monto máximo de un retiro web',
+        500000,
         'MENORQIG',
+        108301,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1137,6 +1238,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1145,9 +1247,10 @@ INSERT INTO
     (
         8,
         -1,
-        'DEBE SER MAYOR O IGUAL QUE',
+        'El monto de retiro es menor al monto mínimo de retiros',
         1000,
         'MAYORQIG',
+        108303,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1162,6 +1265,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1170,38 +1274,15 @@ INSERT INTO
     (
         8,
         4,
-        'DEBE SER MENOR O IGUAL QUE',
-        1000000,
-        'MENORQIGU',
-        'ACTIVO',
-        LOCALTIMESTAMP,
-        LOCALTIMESTAMP
-    );
-
-
-INSERT INTO
-    ${schema.cdt}.cdt_limite
-    (
-        id_fase_movimiento,
-        id_regla_acumulacion,
-        descripcion,
-        valor,
-        cod_operacion,
-        estado,
-        fecha_estado,
-        fecha_creacion
-    )
-    VALUES
-    (
-        8,
-        -1,
-        'DEBE SER MENOR O IGUAL QUE',
+        'El retiro supera el monto máximo de retiros mensuales',
         1000000,
         'MENORQIG',
+        108304,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
     );
+
 
 INSERT INTO
     ${schema.cdt}.cdt_limite
@@ -1211,6 +1292,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1219,9 +1301,36 @@ INSERT INTO
     (
         10,
         -1,
-        'DEBE SER MAYOR O IGUAL QUE',
+        'El retiro supera el monto máximo de un retiro pos',
+        100000,
+        'MENORQIG',
+        108302,
+        'ACTIVO',
+        LOCALTIMESTAMP,
+        LOCALTIMESTAMP
+    );
+
+INSERT INTO
+    ${schema.cdt}.cdt_limite
+    (
+        id_fase_movimiento,
+        id_regla_acumulacion,
+        descripcion,
+        valor,
+        cod_operacion,
+        cod_error,
+        estado,
+        fecha_estado,
+        fecha_creacion
+    )
+    VALUES
+    (
+        10,
+        -1,
+        'El monto de retiro es menor al monto mínimo de retiros',
         1000,
         'MAYORQIG',
+        108303,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP
@@ -1236,6 +1345,7 @@ INSERT INTO
         descripcion,
         valor,
         cod_operacion,
+        cod_error,
         estado,
         fecha_estado,
         fecha_creacion
@@ -1244,9 +1354,10 @@ INSERT INTO
     (
         10,
         4,
-        'DEBE SER MENOR O IGUAL QUE',
+        'El retiro supera el monto máximo de retiros mensuales',
         1000000,
-        'MENORQIGU',
+        'MENORQIG',
+        108304,
         'ACTIVO',
         LOCALTIMESTAMP,
         LOCALTIMESTAMP

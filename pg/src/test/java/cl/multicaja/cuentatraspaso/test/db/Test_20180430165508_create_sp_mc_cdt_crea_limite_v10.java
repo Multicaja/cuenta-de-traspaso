@@ -16,7 +16,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB
   @Test
   public void spCreaLimiteSinReglaOk() throws SQLException {
 
-    Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",999,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -31,7 +31,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB
   @Test
   public void spCreaLimiteErrorIdMovimiento() throws SQLException {
 
-    Object[] params = {0,-1,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {0,-1,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",999,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -46,7 +46,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB
   @Test
   public void spCreaLimiteErrorIdReglaAcum() throws SQLException {
 
-    Object[] params = {2,0,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {2,0,"Mto Debe ser Mayor a 3000",3000,"MAYORQIG",999,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -62,7 +62,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB
   @Test
   public void spCreaLimiteErrorDescripcion() throws SQLException {
 
-    Object[] params = {2,-1,"",3000,"MAYORQIG",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {2,-1,"",3000,"MAYORQIG",999,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -77,7 +77,7 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB
   @Test
   public void spCreaLimiteErrorCodOperacion() throws SQLException {
 
-    Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"",999,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -89,5 +89,22 @@ public class Test_20180430165508_create_sp_mc_cdt_crea_limite_v10 extends TestDB
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
 
   }
+  @Test
+  public void spCreaLimiteErrorCodError() throws SQLException {
+
+    Object[] params = {2,-1,"Mto Debe ser Mayor a 3000",3000,"",0,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_LIMITE.getName(),params);
+
+    String numError = (String) outputData.get("_numerror");
+    String msjError = (String) outputData.get("_msjerror");
+
+    Assert.assertFalse("Num Error != 0", numError.equals("0"));
+    Assert.assertTrue("El Msj Error no es Vacio", msjError.equals("[mc_cdt_crea_limite] El Codigo de operacion no puede estar vacio"));
+
+    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
+
+  }
+
+
 
 }

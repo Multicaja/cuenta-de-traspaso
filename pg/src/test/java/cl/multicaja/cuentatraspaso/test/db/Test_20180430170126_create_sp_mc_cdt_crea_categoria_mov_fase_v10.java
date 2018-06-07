@@ -16,22 +16,6 @@ public class Test_20180430170126_create_sp_mc_cdt_crea_categoria_mov_fase_v10 ex
 
 
   @Test
-  public void spCreaMovTipoMovOk() throws SQLException {
-
-    Object[] params = { 7 , 7 ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_MOV_TIPO_MOV.getName(),params);
-
-    String numError = (String) outputData.get("_numerror");
-    String msjError = (String) outputData.get("_msjerror");
-
-    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-
-    Assert.assertTrue("Numero de error = 0 OK", numError.equals("0"));
-    Assert.assertTrue("Sin Msje Error", StringUtils.isBlank(msjError));
-
-  }
-
-  @Test
   public void spCreaMovTipoMovErrorIdMov() throws SQLException {
 
     Object[] params = {new NullParam(Types.NUMERIC), 1 ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};

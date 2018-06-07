@@ -62,7 +62,7 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                     MOV.nombre                   AS nombre_movimiento,
                     MOV.signo                    AS movimiento_signo,
                     CMF.id_categoria_movimiento  AS id_categoria_movimiento,
-                    CMO.nombre                   AS nombre_tipo_moviniento
+                    CMO.nombre                   AS nombre_tipo_movimiento
                 FROM
                     ${schema.cdt}.cdt_fase_movimiento MOV
                 INNER JOIN ${schema.cdt}.cdt_categoria_mov_fase CMF ON CMF.id_fase_movimiento = _id_fase_movimiento
@@ -106,14 +106,11 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                                                (monto + (1*_rec_cat_mov.movimiento_signo))
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
-                            FROM
-                              ${schema.cdt}.cdt_regla_acumulacion
                             WHERE
                                 id_cuenta = _id_cuenta AND
                                 fecha_inicio = _fecha_ini AND
                                 fecha_fin = _fecha_fin AND
-                                ${schema.cdt}.cdt_cuenta_acumulador.codigo_operacion = _rec_regla_acum.codigo_operacion AND
-                                ${schema.cdt}.cdt_regla_acumulacion.id_categoria_movimiento = _rec_regla_acum.id_categoria_movimiento;
+                                id_regla_acumulacion = _rec_regla_acum.id;
                             IF NOT FOUND THEN
                                 INSERT INTO
                                     ${schema.cdt}.cdt_cuenta_acumulador
@@ -155,14 +152,11 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                                                (monto + (1*_rec_cat_mov.movimiento_signo))
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
-                            FROM
-                              ${schema.cdt}.cdt_regla_acumulacion
                             WHERE
                                 id_cuenta = _id_cuenta AND
                                 fecha_inicio = to_date('01-01-1900', 'dd-MM-YYYY') AND
                                 fecha_fin = to_date('31-12-2100', 'dd-MM-YYYY') AND
-                                ${schema.cdt}.cdt_cuenta_acumulador.codigo_operacion = _rec_regla_acum.codigo_operacion AND
-                                ${schema.cdt}.cdt_regla_acumulacion.id_categoria_movimiento = _rec_regla_acum.id_categoria_movimiento;
+                                id_regla_acumulacion = _rec_regla_acum.id;
                             IF NOT FOUND THEN
                                 INSERT INTO
                                     ${schema.cdt}.cdt_cuenta_acumulador

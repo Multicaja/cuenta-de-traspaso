@@ -29,6 +29,7 @@ public class Test_20180427092555_create_table_cdt_limite extends TestDB {
       new ColumnInfo("descripcion", "VARCHAR", 100),
       new ColumnInfo("valor", "NUMERIC", 131089),
       new ColumnInfo("cod_operacion", "VARCHAR", 10),
+      new ColumnInfo("cod_error", "NUMERIC", 10),
       new ColumnInfo("estado", "VARCHAR", 10),
       new ColumnInfo("fecha_estado", "TIMESTAMP", 29),
       new ColumnInfo("fecha_creacion", "TIMESTAMP", 29));
