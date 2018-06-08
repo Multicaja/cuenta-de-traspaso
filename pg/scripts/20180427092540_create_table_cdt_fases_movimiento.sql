@@ -23,7 +23,6 @@
       id                    BIGSERIAL  NOT NULL,
       nombre                VARCHAR(50) NOT NULL,
       descripcion           VARCHAR(100) NOT NULL,
-      signo                 NUMERIC NOT NULL,
       ind_confirmacion      VARCHAR(1) NOT NULL,
       estado                VARCHAR(10) NOT NULL,
       fecha_estado          TIMESTAMP NOT NULL,

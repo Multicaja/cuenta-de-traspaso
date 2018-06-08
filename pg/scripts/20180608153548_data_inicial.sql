@@ -1,3 +1,21 @@
+--
+--    Copyright 2010-2016 the original author or authors.
+--
+--    Licensed under the Apache License, Version 2.0 (the "License");
+--    you may not use this file except in compliance with the License.
+--    You may obtain a copy of the License at
+--
+--       http://www.apache.org/licenses/LICENSE-2.0
+--
+--    Unless required by applicable law or agreed to in writing, software
+--    distributed under the License is distributed on an "AS IS" BASIS,
+--    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+--    See the License for the specific language governing permissions and
+--    limitations under the License.
+--
+
+-- // data_inicial
+-- Migration SQL that makes the change goes here.
 
 -------
 -- BOLSAS
@@ -322,3 +340,19 @@ VALUES(15, 9, 1);
 INSERT INTO ${schema.cdt}.cdt_fase_acumulador
 (id_fase_movimiento, id_regla_acumulacion, signo)
 VALUES(16, 9, -1);
+
+-- //@UNDO
+-- SQL to undo the change goes here.
+DELETE FROM  ${schema.cdt}.cdt_fase_acumulador;
+
+DELETE FROM  ${schema.cdt}.cdt_limite;
+ALTER SEQUENCE ${schema.cdt}.cdt_limite_id_seq RESTART WITH 1;
+
+DELETE FROM  ${schema.cdt}.cdt_fase_movimiento;
+ALTER SEQUENCE ${schema.cdt}.cdt_fase_movimiento_id_seq RESTART WITH 1;
+
+DELETE FROM  ${schema.cdt}.cdt_regla_acumulacion;
+ALTER SEQUENCE ${schema.cdt}.cdt_regla_acumulacion_id_seq RESTART WITH 1;
+
+DELETE FROM  ${schema.cdt}.cdt_bolsa;
+ALTER SEQUENCE ${schema.cdt}.cdt_bolsa_id_seq RESTART WITH 1;

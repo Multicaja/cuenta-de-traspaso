@@ -35,10 +35,9 @@ public class TestSuite extends TestSuiteBase {
   public static void setUp() throws Exception {
 
     deleteAllFromDB();
-    String sData = Utils.readFile(new File("./seeds/DataForTest.sql"));
+   /* String sData = Utils.readFile(new File("./seeds/DataForTest.sql"));
     sData = sData.replaceAll("\\$\\{schema.cdt}",schema);
-    ScriptUtils.executeSqlScript(mDbutils.getConnection(),new ByteArrayResource(sData.getBytes("UTF-8")));
-
+    ScriptUtils.executeSqlScript(mDbutils.getConnection(),new ByteArrayResource(sData.getBytes("UTF-8")));*/
   }
 
 
@@ -50,14 +49,6 @@ public class TestSuite extends TestSuiteBase {
   private static void deleteAllFromDB() {
     JdbcTemplate template = mDbutils.getJdbcTemplate();
 
-
-    //DROP TABLE CONFIRMACION_MOVIMIENTO_CUENTA
-    template.execute("DELETE FROM "+schema+"."+Constants.Tables.CONFIRMACION_MOV.getName());
-
-    // DROP TABLE MOVIMIENTO CATEGORIA MOVIMIENTO
-    template.execute("DELETE FROM "+schema+"."+Constants.Tables.CATEGORIA_MOV_FASE.getName());
-
-
     // DROP TABLE MOVIMIENTO CUENTA
     template.execute("DELETE FROM  "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName());
     template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.MOVIMIENTO_CUENTA.getName()+"_id_seq RESTART WITH 1;");
@@ -65,31 +56,6 @@ public class TestSuite extends TestSuiteBase {
     // DROP TABLE CUENTA ACUMULADOR
     template.execute("DELETE FROM "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName());
     template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.CUENTA_ACUMULADOR.getName()+"_id_seq RESTART WITH 1;");
-
-
-    // DROP TABLE LIMITE
-    template.execute("DELETE FROM "+schema+"."+Constants.Tables.LIMITE.getName());
-    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.LIMITE.getName()+"_id_seq RESTART WITH 1;");
-
-
-    // DROP TABLE REGLA ACUMULACION
-    template.execute("DELETE FROM "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName());
-    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.REGLA_ACUMULACION.getName()+"_id_seq RESTART WITH 1;");
-
-    // DROP TABLE FASE MOVIMIENTO
-    template.execute("DELETE FROM "+schema+"."+Constants.Tables.FASE_MOVIMIENTO.getName());
-    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.FASE_MOVIMIENTO.getName()+"_id_seq RESTART WITH 1;");
-
-    // DROP TABLE CATEGORIA MOVIMIENTO
-    template.execute("DELETE FROM  "+schema+"."+Constants.Tables.CATEGORIA_MOVIMIENTO.getName());
-    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.CATEGORIA_MOVIMIENTO.getName()+"_id_seq RESTART WITH 1;");
-
-
-
-    // DROP TABLE BOLSA
-    template.execute("DELETE FROM "+schema+"."+Constants.Tables.BOLSA.getName());
-    template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.BOLSA.getName()+"_id_seq RESTART WITH 1;");
-
     // DROP TABLE CUENTA
     template.execute("DELETE FROM "+schema+"."+Constants.Tables.CUENTA.getName());
     template.execute("ALTER SEQUENCE "+schema+"."+Constants.Tables.CUENTA.getName()+"_id_seq RESTART WITH 1;");

@@ -186,20 +186,6 @@ BEGIN
           RAISE EXCEPTION 'Error en Verificacion de Limites';
         END IF;
 
-        IF(_ind_confirmacion = 'S') THEN
-          INSERT INTO
-            ${schema.cdt}.cdt_confirmacion_movimiento
-            (
-              id_mov_cuenta_origen,
-              id_mov_cuenta_confirmacion
-            )
-          VALUES
-            (
-              _id_mov_referencia,
-              _id_movimiento_cuenta
-            );
-        END IF;
-
       IF(_num_error = '0' AND _ind_simulacion = 'S') THEN
          _num_error = '999999';
          RAISE EXCEPTION 'Simulacion'; -- RETORNA ERROR SI EXISTE ERROR EN SP mc_cdt_crea_cuenta_v10

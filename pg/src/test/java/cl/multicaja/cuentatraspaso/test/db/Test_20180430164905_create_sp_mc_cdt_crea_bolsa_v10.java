@@ -21,15 +21,16 @@ public class Test_20180430164905_create_sp_mc_cdt_crea_bolsa_v10 extends TestDB 
     OUT _msjerror character varying)
    */
   @Test
-  public void spCreaCuentaOk() throws SQLException {
+  public void spCreaBolsaOK() throws SQLException {
 
-      Object[] params = {"Bolsa Test","Bolsta para casos Prueba",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+      Object[] params = {getRandomString(10),getRandomString(20),new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
       Map<String,Object>  outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_BOLSA.getName(),params);
       String numError = (String) outputData.get("_numerror");
       String msjError = (String) outputData.get("_msjerror");
-      Assert.assertEquals("Numero de error 0 creacion correcta",true,numError.equals("0"));
-      Assert.assertEquals("Msj de error vacio creacion correcta",true,StringUtils.isBlank(msjError));
-      System.out.println("NumError: "+numError +"MsjError"+msjError);
+     System.out.println("NumError: "+numError +"MsjError"+msjError);
+
+      Assert.assertTrue("Numero de error 0 creacion correcta",numError.equals("0"));
+      Assert.assertTrue("Msj de error vacio creacion correcta",StringUtils.isBlank(msjError));
   }
 
   @Test
