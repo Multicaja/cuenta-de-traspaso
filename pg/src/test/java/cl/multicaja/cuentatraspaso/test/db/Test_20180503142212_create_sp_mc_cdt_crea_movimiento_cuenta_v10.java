@@ -61,7 +61,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
     Assert.assertTrue("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
     // CONFIRMACION PRIMERA CARGA
     movimiento.setIdFaseMovimiento(CONFIRMACIÓN_PRIMERA_CARGA);
-    movimiento.setIdExterno(movimiento.getIdExterno() + "_CONF");
     movimiento.setGlosa("Confirmacion Primera Carga");
     movimiento = callCreaMovimientoCuenta(movimiento);
     Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() > 0);
@@ -126,7 +125,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       // Monto	$200.000   // Deberia Pasar OK y sumar Acumuladores (CONFIRMACION)
       //================================================================================
       movimiento.setIdFaseMovimiento(CONFIRMACIÓN_CARGA_WEB);
-      movimiento.setIdExterno(movimiento.getIdExterno() + "_CONF");
       movimiento = callCreaMovimientoCuenta(movimiento);
       Assert.assertTrue("Id Movimiento Cta debe ser 0", movimiento.getIdMovimientoRef() > 0);
       Assert.assertTrue("NumError != 0", movimiento.getNumError().equals("0"));
@@ -195,7 +193,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       Assert.assertTrue("MsjError != vacio", StringUtils.isBlank(movimiento.getMsjError()));
       // CONFIRMACION SOLICITUD
       movimiento.setIdFaseMovimiento(CONFIRMACIÓN_CARGA_POS);
-      movimiento.setIdExterno(movimiento.getIdExterno() + "_CONF");
       movimiento = callCreaMovimientoCuenta(movimiento);
       Assert.assertTrue("Id Movimiento Cta debe ser 0", movimiento.getIdMovimientoRef() > 0);
       Assert.assertTrue("NumError != 0", movimiento.getNumError().equals("0"));
@@ -299,7 +296,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       // Monto	$200.000   // Deberia Pasar OK y sumar Acumuladores (CONFIRMACION)
       //================================================================================
       movimiento.setIdFaseMovimiento(CONFIRMACIÓN_CARGA_WEB);
-      movimiento.setIdExterno(movimiento.getIdExterno() + "_CONF");
       movimiento = callCreaMovimientoCuenta(movimiento);
       Assert.assertTrue("Id Movimiento Cta debe ser 0", movimiento.getIdMovimientoRef() > 0);
       Assert.assertTrue("NumError != 0", movimiento.getNumError().equals("0"));
@@ -376,7 +372,6 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
       // Monto	$200.000   // Deberia Pasar OK y sumar Acumuladores (CONFIRMACION)
       //================================================================================
       movimiento.setIdFaseMovimiento(CONFIRMACIÓN_CARGA_WEB);
-      movimiento.setIdExterno(movimiento.getIdExterno() + "_CONF");
       movimiento = callCreaMovimientoCuenta(movimiento);
       Assert.assertTrue("Id Movimiento Cta debe ser 0", movimiento.getIdMovimientoRef() > 0);
       Assert.assertTrue("NumError != 0", movimiento.getNumError().equals("0"));
@@ -560,6 +555,105 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
   }
 
+
+  /***********************************************
+   * PRUENA DOBLE CONFIRMACION PMC
+   * PRIMERA CARGA
+   * VERIFICACION DE LIMITES
+   * @throws SQLException
+   **********************************************/
+  @Test
+  public void dobleConfirmacionPrimeraCarga() throws SQLException {
+    Movimiento movimiento;
+    CuentaUsuarioCdt cuentaUsuario = creaCuentaUsuarioCdt();
+    //================================================================================
+    // 3 -Monto 	$45000   // Deberia pasar sin errores.
+    //================================================================================
+    movimiento = new Movimiento(SOLICITUD_PRIMERA_CARGA, cuentaUsuario.getIdCuentaExterno(), 0, getRandomNumericString(20), "Solicitud primera carga", new BigDecimal(45000), false);
+    movimiento = callCreaMovimientoCuenta(movimiento);
+    int idMovOriginal = movimiento.getIdMovimientoRef();
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() > 0);
+    Assert.assertTrue("NumError = 0", movimiento.getNumError().equals("0"));
+    Assert.assertTrue("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+    // CONFIRMACION PRIMERA CARGA
+    movimiento.setIdFaseMovimiento(CONFIRMACIÓN_PRIMERA_CARGA);
+    movimiento.setGlosa("Confirmacion Primera Carga");
+    movimiento = callCreaMovimientoCuenta(movimiento);
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() > 0);
+    Assert.assertTrue("NumError = 0", movimiento.getNumError().equals("0"));
+    Assert.assertTrue("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+
+    // CONFIRMACION PRIMERA CARGA REPETIDA
+    movimiento.setIdMovimientoRef(idMovOriginal);
+    movimiento = callCreaMovimientoCuenta(movimiento);
+    System.out.println("dobleConfirmacionPrimeraCarga: "+movimiento.getMsjError());
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() == 0);
+    Assert.assertFalse("NumError = 0", movimiento.getNumError().equals("0"));
+    Assert.assertFalse("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+
+    // Verificar Acumuladores Primera Carga
+    verificaAcumuladores(cuentaUsuario.getIdCuentaInterno(), SOLICITUD_PRIMERA_CARGA, 45000L, 1L, 0L);
+  }
+
+  /***********************************************
+   *Test confirmación seguido de reversa
+   * PRIMERA CARGA
+   * VERIFICACION DE LIMITES
+   * @throws SQLException
+   **********************************************/
+  @Test
+  public void confirmacionPrimeraCargaConfReversa() throws SQLException {
+    Movimiento movimiento;
+    CuentaUsuarioCdt cuentaUsuario = creaCuentaUsuarioCdt();
+    //================================================================================
+    // 3 -Monto 	$45000   // Deberia pasar sin errores.
+    //================================================================================
+    movimiento = new Movimiento(SOLICITUD_PRIMERA_CARGA, cuentaUsuario.getIdCuentaExterno(), 0, getRandomNumericString(20), "Solicitud primera carga", new BigDecimal(45000), false);
+    movimiento = callCreaMovimientoCuenta(movimiento);
+    int idMovOriginal = movimiento.getIdMovimientoRef();
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() > 0);
+    Assert.assertTrue("NumError = 0", movimiento.getNumError().equals("0"));
+    Assert.assertTrue("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+    // CONFIRMACION PRIMERA CARGA
+    movimiento.setIdFaseMovimiento(CONFIRMACIÓN_PRIMERA_CARGA);
+    movimiento.setGlosa("Confirmacion Primera Carga");
+    movimiento = callCreaMovimientoCuenta(movimiento);
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() > 0);
+    Assert.assertTrue("NumError = 0", movimiento.getNumError().equals("0"));
+    Assert.assertTrue("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+
+    // CONFIRMACION PRIMERA CARGA REPETIDA
+    movimiento.setIdFaseMovimiento(CONFIRMACIÓN_REVERSA_CARGA);
+    movimiento.setIdMovimientoRef(idMovOriginal);
+    movimiento = callCreaMovimientoCuenta(movimiento);
+    System.out.println("confirmacionPrimeraCargaConfReversa: "+movimiento.getMsjError());
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() == 0);
+    Assert.assertFalse("NumError = 0", movimiento.getNumError().equals("0"));
+    Assert.assertFalse("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+
+    // Verificar Acumuladores Primera Carga
+    verificaAcumuladores(cuentaUsuario.getIdCuentaInterno(), SOLICITUD_PRIMERA_CARGA, 45000L, 1L, 0L);
+  }
+
+  /***********************************************
+   *ID Externo Vacio
+   * PRIMERA CARGA
+   * VERIFICACION DE LIMITES
+   * @throws SQLException
+   **********************************************/
+  @Test
+  public void idExternoVacio() throws SQLException {
+    Movimiento movimiento;
+    CuentaUsuarioCdt cuentaUsuario = creaCuentaUsuarioCdt();
+
+    movimiento = new Movimiento(SOLICITUD_PRIMERA_CARGA, cuentaUsuario.getIdCuentaExterno(), 0, "", "Solicitud primera carga", new BigDecimal(45000), false);
+    movimiento = callCreaMovimientoCuenta(movimiento);
+
+    Assert.assertTrue("Id Movimiento Cta debe ser > 0", movimiento.getIdMovimientoRef() == 0);
+    Assert.assertTrue("NumError = MC003", movimiento.getNumError().equals("MC003"));
+    Assert.assertFalse("MsjError = vacio", StringUtils.isBlank(movimiento.getMsjError()));
+
+  }
 
   private void verificaAcumuladores(long idCuenta, long idFaseMovimiento, long montoSuma, long countMovimientos, long montoTx) {
     List lstAcumuladores = getCuentaAcumulador(idCuenta, idFaseMovimiento);

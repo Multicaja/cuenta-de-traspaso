@@ -19,6 +19,7 @@
 
 CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
 (
+    IN _id_fase_padre     NUMERIC,
     IN _nombre            VARCHAR,
     IN _descripcion       VARCHAR,
     IN _ind_confirmacion  VARCHAR,
@@ -32,20 +33,28 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
 	        _num_error := '0';
 	        _msj_Error := '';
 
+
 		    IF TRIM(COALESCE(_nombre, '')) = '' THEN
           _num_error := 'MC001';
           _msj_Error := '[mc_cdt_crea_fase_movimiento] El nombre de la fase movimiento no puede ser vacio';
           RETURN;
         END IF;
 
-         IF TRIM(COALESCE(_ind_confirmacion, ''))  = '' THEN
-          _num_error := 'MC003';
+        IF TRIM(COALESCE(_ind_confirmacion, ''))  = '' THEN
+          _num_error := 'MC002';
           _msj_Error := '[mc_cdt_crea_fase_movimiento] El Indicador Confirmacion no puede ser vacio';
+          RETURN;
+        END IF;
+
+        IF _ind_confirmacion = 'S' AND _id_fase_padre = 0  THEN
+          _num_error := 'MC003';
+          _msj_Error := '[mc_cdt_crea_fase_movimiento] Una confirmacion debe tener un padre';
           RETURN;
         END IF;
 
         INSERT INTO ${schema.cdt}.cdt_fase_movimiento
         (
+          id_fase_padre,
           nombre,
           descripcion,
           ind_confirmacion,
@@ -55,6 +64,7 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
         )
         VALUES
           (
+            _id_fase_padre,
             _nombre,
             _descripcion,
             _ind_confirmacion,
