@@ -173,7 +173,7 @@ VALUES(5, -1, 'La carga es menor al mínimo de carga', 3000, 'MAYORQIG', 108203,
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
-VALUES(5, 1, 'La carga supera el monto máximo de cargas mensuales', 1000000, 'MENORQIG', 108204, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
+VALUES(5, 3, 'La carga supera el monto máximo de cargas mensuales', 1000000, 'MENORQIG', 108204, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
@@ -185,7 +185,7 @@ VALUES(7, -1, 'La carga es menor al mínimo de carga', 3000, 'MAYORQIG', 108203,
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
-VALUES(7, 1, 'La carga supera el monto máximo de cargas mensuales', 1000000, 'MENORQIG', 108204, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
+VALUES(7, 3, 'La carga supera el monto máximo de cargas mensuales', 1000000, 'MENORQIG', 108204, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
@@ -197,7 +197,7 @@ VALUES(11, -1, 'El monto de retiro es menor al monto mínimo de retiros', 1000, 
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
-VALUES(11, 4, 'El retiro supera el monto máximo de retiros mensuales', 1000000, 'MENORQIG', 108304, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
+VALUES(11, 5, 'El retiro supera el monto máximo de retiros mensuales', 1000000, 'MENORQIG', 108304, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
@@ -209,7 +209,7 @@ VALUES(13, -1, 'El monto de retiro es menor al monto mínimo de retiros', 1000, 
 
 INSERT INTO ${schema.cdt}.cdt_limite
 (id_fase_movimiento, id_regla_acumulacion, descripcion, valor, cod_operacion, cod_error, estado, fecha_estado, fecha_creacion)
-VALUES(13, 4, 'El retiro supera el monto máximo de retiros mensuales', 1000000, 'MENORQIG', 108304, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
+VALUES(13, 5, 'El retiro supera el monto máximo de retiros mensuales', 1000000, 'MENORQIG', 108304, 'ACTIVO',  LOCALTIMESTAMP,LOCALTIMESTAMP);
 
 
 

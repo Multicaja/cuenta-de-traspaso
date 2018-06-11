@@ -136,7 +136,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
       iMonto = iMonto + 200000;
     }
-
+     verificaAcumuladores(cuentaUsuario.getIdCuentaInterno(), SOLICITUD_CARGA_WEB, 1000000, 5, 0);
     //================================================================================
     // 10 Deberia fallar por el limite mensual de 1000000
     //================================================================================
@@ -205,7 +205,7 @@ public class Test_20180503142212_create_sp_mc_cdt_crea_movimiento_cuenta_v10 ext
 
       iMonto = iMonto + 100000;
     }
-
+    verificaAcumuladores(cuentaUsuario.getIdCuentaInterno(), SOLICITUD_CARGA_POS, 1000000, 10, 0);
     //================================================================================
     // 3 -Deberia Fallar por Monto supera el 1000000 mensual
     //================================================================================
