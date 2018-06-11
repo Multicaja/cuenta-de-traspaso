@@ -21,7 +21,6 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
 (
     IN _nombre            VARCHAR,
     IN _descripcion       VARCHAR,
-    IN _signo             NUMERIC,
     IN _ind_confirmacion  VARCHAR,
     OUT _num_error        VARCHAR,
     OUT _msj_Error        VARCHAR
@@ -39,12 +38,6 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
           RETURN;
         END IF;
 
-        IF COALESCE(_signo, 0) != -1 AND  COALESCE(_signo, 0) != 1 THEN
-          _num_error := 'MC002';
-          _msj_Error := '[mc_cdt_crea_fase_movimiento] El Signo de la fase de movimiento debe ser 1 o -1';
-          RETURN;
-        END IF;
-
          IF TRIM(COALESCE(_ind_confirmacion, ''))  = '' THEN
           _num_error := 'MC003';
           _msj_Error := '[mc_cdt_crea_fase_movimiento] El Indicador Confirmacion no puede ser vacio';
@@ -55,7 +48,6 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
         (
           nombre,
           descripcion,
-          signo,
           ind_confirmacion,
           estado,
           fecha_estado,
@@ -65,7 +57,6 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.mc_cdt_crea_fase_movimiento_v10
           (
             _nombre,
             _descripcion,
-            _signo,
             _ind_confirmacion,
             'ACTIVO',
             timezone('utc', now()),

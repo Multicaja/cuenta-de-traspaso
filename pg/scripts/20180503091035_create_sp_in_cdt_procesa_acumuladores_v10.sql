@@ -26,7 +26,6 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
     OUT _msj_error               VARCHAR
 )AS $$
         DECLARE
-            _rec_cat_mov RECORD;
             _rec_regla_acum RECORD;
             _current_date DATE;
             _fecha_ini TIMESTAMP;
@@ -56,31 +55,20 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                 RETURN;
             END IF;
 
-            FOR _rec_cat_mov IN
-                SELECT
-                    MOV.id                       AS id_fase_movimiento,
-                    MOV.nombre                   AS nombre_movimiento,
-                    MOV.signo                    AS movimiento_signo,
-                    CMF.id_categoria_movimiento  AS id_categoria_movimiento,
-                    CMO.nombre                   AS nombre_tipo_movimiento
-                FROM
-                    ${schema.cdt}.cdt_fase_movimiento MOV
-                INNER JOIN ${schema.cdt}.cdt_categoria_mov_fase CMF ON CMF.id_fase_movimiento = _id_fase_movimiento
-                INNER JOIN ${schema.cdt}.cdt_categoria_movimiento CMO ON CMO.id = CMF.id_categoria_movimiento
-                WHERE
-                    MOV.id = _id_fase_movimiento
-            LOOP -- RECORRO Y VERIFICO ACUMULADORES
+
                 FOR _rec_regla_acum IN
-                    SELECT
-                        id,
-                        periocidad,
-                        codigo_operacion,
-                        id_categoria_movimiento
-                    FROM
-                        ${schema.cdt}.cdt_regla_acumulacion
-                    WHERE
-                        id_categoria_movimiento = _rec_cat_mov.id_categoria_movimiento AND
-                        estado = 'ACTIVO'
+                  select
+                    RAC.id as id,
+                    FAC.signo as signo,
+                    RAC.descripcion as descripcion,
+                    RAC.periocidad as periocidad,
+                    RAC.codigo_operacion as codigo_operacion
+                  from
+                    ${schema.cdt}.cdt_fase_acumulador	FAC
+                  INNER JOIN ${schema.cdt}.cdt_regla_acumulacion  RAC ON RAC.id = FAC.id_regla_acumulacion
+                  WHERE
+                    FAC.id_fase_movimiento = _id_fase_movimiento AND
+                    RAC.estado = 'ACTIVO'
                 LOOP
                     BEGIN
                         IF (_rec_regla_acum.periocidad != 'VIDA') THEN
@@ -101,9 +89,9 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                             SET
                                 monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                               (monto+(_monto*_rec_cat_mov.movimiento_signo))
+                                               (monto+(_monto*_rec_regla_acum.signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                               (monto + (1*_rec_cat_mov.movimiento_signo))
+                                               (monto + (1*_rec_regla_acum.signo))
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
                             WHERE
@@ -117,6 +105,7 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                                         (
                                             id_regla_acumulacion,
                                             id_cuenta,
+                                            descripcion,
                                             codigo_operacion,
                                             monto,
                                             fecha_inicio,
@@ -128,12 +117,13 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                                         (
                                             _rec_regla_acum.id,
                                             _id_cuenta,
+                                            _rec_regla_acum.descripcion,
                                             _rec_regla_acum.codigo_operacion,
                                             CASE
                                                 WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                                    (_monto*_rec_cat_mov.movimiento_signo)
+                                                    (_monto*_rec_regla_acum.signo)
                                                 WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                                    (1*_rec_cat_mov.movimiento_signo)
+                                                    (1*_rec_regla_acum.signo)
                                             END,
                                             _fecha_ini,
                                             _fecha_fin,
@@ -147,9 +137,9 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                             SET
                                 monto = CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                               (monto+(_monto*_rec_cat_mov.movimiento_signo))
+                                               (monto+(_monto*_rec_regla_acum.signo))
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                               (monto + (1*_rec_cat_mov.movimiento_signo))
+                                               (monto + (1*_rec_regla_acum.signo))
                                         END,
                                 fecha_actualizacion = LOCALTIMESTAMP
                             WHERE
@@ -163,6 +153,7 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                                     (
                                         id_regla_acumulacion,
                                         id_cuenta,
+                                        descripcion,
                                         codigo_operacion,
                                         monto,
                                         fecha_inicio,
@@ -174,12 +165,13 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                                     (
                                         _rec_regla_acum.id,
                                         _id_cuenta,
+                                         _rec_regla_acum.descripcion,
                                         _rec_regla_acum.codigo_operacion,
                                         CASE
                                             WHEN _rec_regla_acum.codigo_operacion = 'SUM' THEN
-                                                (_monto*_rec_cat_mov.movimiento_signo)
+                                                (_monto*_rec_regla_acum.signo)
                                             WHEN _rec_regla_acum.codigo_operacion = 'COUNT' THEN
-                                                (1*_rec_cat_mov.movimiento_signo)
+                                                (1*_rec_regla_acum.signo)
                                         END,
                                         to_date('01-01-1900', 'dd-MM-YYYY'),
                                         to_date('31-12-2100', 'dd-MM-YYYY'),
@@ -195,7 +187,6 @@ CREATE OR REPLACE FUNCTION ${schema.cdt}.in_cdt_procesa_acumuladores_v10
                         RETURN;
                     END;
                 END LOOP;-- END LOOP REGLA ACUMULACION
-            END LOOP; -- END LOOP TIPO MOVIMIENTO
 
     EXCEPTION
         WHEN OTHERS THEN

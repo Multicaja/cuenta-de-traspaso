@@ -18,7 +18,7 @@ public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 exten
   @Test
   public void spCreaFaseMovimientoOK() throws SQLException {
 
-    Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", 1  ,"N", new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test" ,"N", new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -33,7 +33,7 @@ public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 exten
   @Test
   public void spCreaFaseMovimientoErrorSinNombre() throws SQLException {
 
-    Object[] params = {"","Carga de Tarjeta Test", 1  , "N",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"","Carga de Tarjeta Test" , "N",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -45,25 +45,11 @@ public class Test_20180430170002_create_sp_mc_cdt_crea_fase_movimiento_v10 exten
     Assert.assertFalse("Existe Msj Error", StringUtils.isBlank(msjError));
 
   }
-  @Test
-  public void spCreaFaseMovimientoErrorSigno() throws SQLException {
-
-    Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", new NullParam(Types.NUMERIC),  "N",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
-
-    String numError = (String) outputData.get("_numerror");
-    String msjError = (String) outputData.get("_msjerror");
-    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-
-    Assert.assertTrue("Num Error = MC002", numError.equals("MC002"));
-    Assert.assertFalse("Existe Msj Error", StringUtils.isBlank(msjError));
-
-  }
 
   @Test
   public void spCreaFaseMovimientoErrorIndConfirmacion() throws SQLException {
 
-    Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", 1 , "", new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"Movimiento de Carga Test","Carga de Tarjeta Test", "", new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_FASE_MOVIMIENTO.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
