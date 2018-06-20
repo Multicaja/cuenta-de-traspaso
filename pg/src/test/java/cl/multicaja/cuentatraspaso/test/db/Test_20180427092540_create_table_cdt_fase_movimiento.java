@@ -2,6 +2,7 @@ package cl.multicaja.cuentatraspaso.test.db;
 
 import cl.multicaja.core.test.TestDbBase;
 import cl.multicaja.core.utils.db.ColumnInfo;
+import cl.multicaja.core.utils.db.SqlType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,9 +20,9 @@ public class Test_20180427092540_create_table_cdt_fase_movimiento extends TestDB
   public void CheckTableMovimiento() {
     boolean exists = dbUtils.tableExists(getSchema(), Constants.Tables.FASE_MOVIMIENTO.getName(), true,
       new ColumnInfo("id", "BIGSERIAL",19),
+      new ColumnInfo("id_fase_padre", SqlType.BIGINT.getGetJavaType()),
       new ColumnInfo("nombre", "VARCHAR", 50),
       new ColumnInfo("descripcion", "VARCHAR", 100),
-      new ColumnInfo("signo", "NUMERIC", 131089),
       new ColumnInfo("ind_confirmacion","VARCHAR",1),
       new ColumnInfo("estado", "VARCHAR", 10),
       new ColumnInfo("fecha_estado", "TIMESTAMP",29),

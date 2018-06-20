@@ -17,7 +17,7 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 ext
   @Test
   public void spCreaReglaAcumulacion() throws SQLException {
 
-    Object[] params = {1 ,"SEM","SUM" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"SEM","SUM" ,"REGLA ACUM TEST 1",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
@@ -31,47 +31,31 @@ public class Test_20180430170307_create_sp_mc_cdt_crea_regla_acumulacion_v10 ext
   }
 
   @Test
-  public void spCreaReglaAcumulacionErrorTipoMov() throws SQLException {
-
-    Object[] params = {new NullParam(Types.NUMERIC),"SEM","SUM" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
-    Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
-
-    String numError = (String) outputData.get("_numerror");
-    String msjError = (String) outputData.get("_msjerror");
-
-    System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-
-    Assert.assertTrue("El mensaje de error debe ser = MC001", numError.equals("MC001"));
-    Assert.assertFalse("Con Msje Error", StringUtils.isBlank(msjError));
-
-  }
-
-  @Test
   public void spCreaReglaAcumulacionErrorPeriocidad() throws SQLException {
 
 
-    Object[] params = {1,"","SUM" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"","SUM" ,"REGLA ACUM TEST 2",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-    Assert.assertTrue("El mensaje de error debe ser = MC001", numError.equals("MC002"));
+    Assert.assertTrue("El mensaje de error debe ser = MC001", numError.equals("MC001"));
     Assert.assertFalse("Con Msje Error", StringUtils.isBlank(msjError));
 
   }
   @Test
   public void spCreaReglaAcumulacionErrorCodOperacion() throws SQLException {
 
-    Object[] params = {1,"SEM","" ,new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
+    Object[] params = {"SEM","" ,"REGLA ACUM TEST 3",new OutParam("_numerror",Types.VARCHAR),new OutParam("_msjerror",Types.VARCHAR)};
     Map<String,Object> outputData = dbUtils.execute(getSchema()+Constants.Procedures.SP_CREA_REGLA_ACUMULACION.getName(),params);
 
     String numError = (String) outputData.get("_numerror");
     String msjError = (String) outputData.get("_msjerror");
 
     System.out.println(" NumError: "+numError +" MsjError: "+msjError);
-    Assert.assertTrue("El mensaje de error debe ser = MC003", numError.equals("MC003"));
+    Assert.assertTrue("El mensaje de error debe ser = MC002", numError.equals("MC002"));
     Assert.assertFalse("Con Msje Error", StringUtils.isBlank(msjError));
 
   }
